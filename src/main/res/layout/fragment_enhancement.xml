@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back"
+    android:padding="16dp">
+
+    <!-- 제목 텍스트 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강화"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:gravity="center"
+     />
+
+    <!-- 동그라미 버튼을 위쪽 3개 배치하는 LinearLayout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/enhanceButton1"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/attack1"
+                android:scaleType="centerInside"
+                android:background="@drawable/circle_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기본 공격"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/enhanceCostText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강화 비용 1"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/enhanceButton2"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/attack1"
+                android:scaleType="centerInside"
+                android:background="@drawable/circle_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기술 명 2"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/enhanceCostText2"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강화 비용 2"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="invisible"
+
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/enhanceButton3"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/attack1"
+                android:scaleType="centerInside"
+                android:background="@drawable/circle_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기술 명 3"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/enhanceCostText3"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강화 비용 3"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 동그라미 버튼을 아래쪽 3개 배치하는 LinearLayout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="invisible"
+
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/enhanceButton4"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/attack1"
+                android:scaleType="centerInside"
+                android:background="@drawable/circle_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기술 명 4"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/enhanceCostText4"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강화 비용 4"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="invisible"
+
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/enhanceButton5"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/attack1"
+                android:scaleType="centerInside"
+                android:background="@drawable/circle_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기술 명 5"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/enhanceCostText5"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강화 비용 5"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="invisible"
+
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/enhanceButton6"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/attack1"
+                android:scaleType="centerInside"
+                android:background="@drawable/circle_button"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기술 명 6"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/enhanceCostText6"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강화 비용 6"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

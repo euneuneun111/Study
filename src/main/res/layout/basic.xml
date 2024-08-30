@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 첫 번째 레이아웃 (1/10) -->
+    <LinearLayout
+        android:id="@+id/firstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:orientation="horizontal"
+        android:background="@drawable/border">
+
+        <TextView
+            android:id="@+id/currentFloorText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="현재 층:"
+            android:textSize="15sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/currentFloorValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text=""
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/availableMethodsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="보유 메소:"
+            android:textSize="15sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/availableMethodsValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text=""
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+
+    <!-- 두 번째 레이아웃 (체력바 및 GIF) -->
+    <LinearLayout
+        android:id="@+id/secondLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
+
+        <!-- 체력바 컨테이너 -->
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="#FF0000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- 체력바 텍스트를 포함하는 LinearLayout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <!-- "HP:" 텍스트 -->
+                <TextView
+                    android:id="@+id/healthBarLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="HP: "
+                    android:textColor="#FFFFFF"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginEnd="4dp"/> <!-- "HP:"와 숫자 사이의 여백 추가 -->
+
+                <!-- 체력 숫자 텍스트 -->
+                <TextView
+                    android:id="@+id/healthBarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- 몬스터와 공격 GIF를 겹쳐서 배치할 FrameLayout -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp">
+
+            <!-- 몬스터를 위한 ImageView -->
+            <ImageView
+                android:id="@+id/monsterImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                 /> <!-- 처음에는 보이지 않도록 설정 -->
+
+            <!-- 공격 GIF를 위한 ImageView -->
+            <ImageView
+                android:id="@+id/attackGif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:src="@drawable/attack1" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- 세 번째 레이아웃 (4/10) -->
+    <FrameLayout
+        android:id="@+id/thirdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:background="@drawable/back"
+        android:padding="16dp"> <!-- 여백 추가 -->
+
+        <!-- 여기에 기존의 LinearLayout 내용을 추가 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/back"
+            android:padding="16dp">
+
+            <!-- 캐릭터 닉네임 -->
+            <TextView
+                android:id="@+id/characterNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="닉네임: 캐릭터 이름"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- 캐릭터 레벨 -->
+            <LinearLayout
+                android:id="@+id/characterLevelLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/characterLevelLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="레벨: "
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:id="@+id/characterLevelValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="start"/>
+            </LinearLayout>
+
+            <!-- 경험치 바 및 퍼센트 텍스트 -->
+            <LinearLayout
+                android:id="@+id/characterExpLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <!-- 경험치 바 -->
+                <ProgressBar
+                    android:id="@+id/experienceBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:progress="50"
+                    android:max="100"
+                    android:progressTint="#FFFF00"
+                    android:backgroundTint="#808080"/>
+
+                <!-- 경험치 퍼센트 텍스트 -->
+                <TextView
+                    android:id="@+id/experiencePercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- 캐릭터 공격력 -->
+            <LinearLayout
+                android:id="@+id/characterAttackLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/characterAttackLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공격력: "
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:id="@+id/characterAttackValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="start"/>
+            </LinearLayout>
+
+            <!-- 장착중인 장비 레이블 -->
+            <TextView
+                android:id="@+id/equippedItemsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장착중인 장비:"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:visibility="invisible"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- 장비 슬롯 레이아웃 -->
+            <LinearLayout
+                android:visibility="invisible"
+                android:id="@+id/equippedItemsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <!-- 무기 이미지 -->
+                <ImageView
+                    android:id="@+id/equippedWeapon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/border"
+                    android:contentDescription="무기 슬롯"/>
+
+                <!-- 방어구 이미지 -->
+                <ImageView
+                    android:id="@+id/equippedArmor"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/border"
+                    android:contentDescription="방어구 슬롯"/>
+
+                <!-- 추가 장비 슬롯을 여기에 추가할 수 있습니다 -->
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- 네 번째 레이아웃 (2/10) -->
+    <LinearLayout
+        android:id="@+id/fourthLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:orientation="horizontal"
+        android:background="@drawable/border">
+
+        <!-- 메뉴 항목 추가 -->
+        <Button
+            android:id="@+id/menuItem1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="강화"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/menuItem2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="장비"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/menuItem3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="업적"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/menuItem4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="상점"
+            android:textColor="#FFFFFF" />
+
+        <!-- 필요한 만큼 더 추가 -->
+    </LinearLayout>
+</LinearLayout>
