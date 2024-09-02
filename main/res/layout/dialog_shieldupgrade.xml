@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/back">
+
+    <!-- 장비 이미지 및 정보 섹션 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/equipmentImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/shield1"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="16dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/equipmentNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:text="+1 방패"
+                android:textColor="#ffffff"
+                android:textSize="45sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 강화 옵션 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/box_background"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/upgradeOptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강화 옵션"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/upgradeStatsChangeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="메소 획득 x1"
+            android:textColor="#00ff00"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <!-- 강화 확률 섹션 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/upgradeChanceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강화 확률:"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/upgradeChanceValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#ffff00"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <!-- 강화 비용 섹션 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강화 비용:"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/upgradeCostTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200 메소"
+            android:textColor="#ffff00"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <!-- 강화 버튼 -->
+    <Button
+        android:id="@+id/upgradeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:text="강화하기"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:padding="12dp"/>
+
+    <!-- 취소 버튼 -->
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="취소"
+        android:background="#00000000"
+        android:textColor="#00ff00"
+        android:textSize="16sp"
+        android:paddingTop="16dp"/>
+
+</LinearLayout>

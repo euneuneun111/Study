@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back"
+    android:padding="16dp">
+
+    <!-- 장비 UI의 콘텐츠 추가 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="장비"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:paddingBottom="16dp"/>
+
+    <!-- 5개의 장비 아이콘과 레이블을 가로로 배치 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- 첫 번째 장비 아이콘과 레이블 -->
+        <LinearLayout
+            android:id="@+id/weaponLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/weaponImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/weapon1"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="무기"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+
+        <!-- 두 번째 장비 아이콘과 레이블 -->
+        <LinearLayout
+            android:id="@+id/shieldLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/shieldImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/shield1"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="방패"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+
+        <!-- 세 번째 장비 아이콘과 레이블 -->
+        <LinearLayout
+            android:id="@+id/hatLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/box_background"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="모자"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+
+        <!-- 네 번째 장비 아이콘과 레이블 -->
+        <LinearLayout
+            android:id="@+id/clothesLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/box_background"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="옷"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+
+        <!-- 다섯 번째 장비 아이콘과 레이블 -->
+        <LinearLayout
+            android:id="@+id/shoesLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/box_background"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신발"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
