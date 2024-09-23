@@ -12,7 +12,7 @@ plt.rcParams['font.family'] = 'Malgun Gothic'
 # 채팅 기록 파일 경로
 file_paths = ['KakaoTalk_1.txt', 'KakaoTalk_2.txt', 'KakaoTalk_3.txt', 'KakaoTalk_4.txt']
 
-# 본인의 이름 (채팅에서 본인 이름으로 변경하세요)
+# 이름
 my_name = '은광'
 
 # 채팅 데이터 읽기 함수
@@ -59,33 +59,34 @@ def extract_hour(timestamp):
     if timestamp is None:
         return None  # None 값이 들어오면 None 반환
     try:
-        time_part = timestamp.split(' ')[-1]
-        period = 'AM' if '오전' in time_part else 'PM'
-        time_str = time_part.replace('오전', '').replace('오후', '').strip()
 
+        # '오전' 또는 '오후'를 포함하는 시간 부분 추출
+        if '오전' in timestamp:
+            period = 'AM'
+            time_str = timestamp.split('오전')[-1].strip()  # '10:30' 형식 추출
+        elif '오후' in timestamp:
+            period = 'PM'
+            time_str = timestamp.split('오후')[-1].strip()  # '3:45' 형식 추출
+        else:
+            return None  # '오전' 또는 '오후'가 없는 경우 처리하지 않음
 
         # '오전'과 '오후'에 따라 시간 처리
-        if period == 'AM':
-            dt = pd.to_datetime(time_str, format='%I:%M')
-            hour = dt.hour
-            if hour == 12:
-                hour = 0  # 오전 12시는 0으로 처리
-                print(f"Timestamp: {timestamp}, Hour: {hour}")  # 추가s
-        else:
-            dt = pd.to_datetime(time_str, format='%I:%M')
-            hour = dt.hour
-            if hour != 12:
-                hour += 12  # 오후 12시는 그대로 두고, 나머지 시간은 12 더함
+        dt = pd.to_datetime(time_str, format='%I:%M')
+        hour = dt.hour
+        if period == 'AM' and hour == 12:
+            hour = 0  # 오전 12시는 0으로 처리
+        elif period == 'PM' and hour != 12:
+            hour += 12  # 오후 12시는 그대로 두고, 나머지 시간은 12 더함
 
-
+        print(f"Timestamp: {timestamp}, Hour: {hour}")
         return hour
     except Exception as e:
         print(f"시간 추출 실패: {timestamp}, 오류: {e}")
         return None
 
-
-
+# 'Hour' 열에 대한 디버깅 출력
 df['Hour'] = df['Timestamp'].apply(extract_hour)
+
 
 # 본인의 채팅만 추출
 my_chat_df = df[df['User'] == my_name].copy()
@@ -186,6 +187,7 @@ with pd.ExcelWriter('my_chat_analysis.xlsx', engine='openpyxl', mode='a') as wri
 
 print("N-gram 분석 결과 엑셀 파일로 저장 완료: my_chat_analysis.xlsx")
 
+
 # BERT 기반 감정 분석 파이프라인 로드
 sentiment_analyzer = pipeline('sentiment-analysis')
 
@@ -211,3 +213,32 @@ plt.savefig('bert_sentiment_analysis_plot.png')
 plt.show()
 
 print("BERT 기반 감정 분석 결과 그래프 저장 완료: bert_sentiment_analysis_plot.png")
+
+
+
+# 특정 키워드에 대한 반응 분석
+def analyze_keyword_reactions(df, keyword):
+    keyword_reactions = df[df['Message'].str.contains(keyword, na=False)]
+    return keyword_reactions
+
+# 키워드에 대한 반응 분석 실행
+keyword = ('날씨')  # 원하는 키워드로 변경
+keyword_reactions_df = analyze_keyword_reactions(my_chat_df, keyword)
+
+# 가장 많이 등장하는 5개의 메시지 추출
+top_5_messages = keyword_reactions_df['Message'].value_counts().head(5)
+
+# 결과를 시각화
+plt.figure(figsize=(12, 8))
+sns.barplot(x=top_5_messages.values, y=top_5_messages.index, palette='coolwarm')
+plt.title(f"키워드 '{keyword}'에 대한 상위 5개 메시지")
+plt.xlabel('Count')
+plt.ylabel('Message')
+
+plt.tight_layout()
+plt.savefig(f'keyword_reaction_top5_analysis_{keyword}.png')
+plt.show()
+
+print(f"키워드 '{keyword}'에 대한 상위 5개 메시지 분석 결과 PNG로 저장 완료: keyword_reaction_top5_analysis_{keyword}.png")
+
+
