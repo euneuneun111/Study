@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <!-- 회원가입 제목 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textSize="55sp"
+        android:layout_gravity="left"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp" />
+
+    <!-- ID 입력 필드 (수평 레이아웃) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID "
+            android:textSize="16sp" />
+
+        <!-- ID 입력 -->
+        <EditText
+            android:id="@+id/inputId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="아이디를 입력하세요."
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- 중복확인 버튼 -->
+        <Button
+            android:id="@+id/checkDuplicateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중복확인"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- PW 입력 필드 (수평 레이아웃) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PW "
+            android:textSize="16sp" />
+
+        <!-- PW 입력 -->
+        <EditText
+            android:id="@+id/inputPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="비밀번호를 입력하세요."
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지역  "
+            android:textSize="16sp" />
+
+
+        <!-- 지역 선택 -->
+        <Spinner
+            android:id="@+id/regionSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:entries="@array/region_array" />
+
+    </LinearLayout>
+
+
+
+    <!-- 의료진 확인 (체크박스) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <CheckBox
+            android:id="@+id/checkMedical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="의료진 확인" />
+
+        <EditText
+            android:id="@+id/medicalNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="고유번호 입력"
+            android:layout_marginStart="10dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- 확인 버튼 -->
+        <Button
+            android:id="@+id/confirmMedicalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="확인"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- 회원가입 버튼 -->
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회원가입 완료"
+        android:background="@android:drawable/edit_text"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/black"
+        android:layout_marginTop="30dp" />
+
+</LinearLayout>
