@@ -29,6 +29,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Brain Disease 버튼 클릭됨", Toast.LENGTH_SHORT).show();
             }
-        });
+        }); ///11111
     }
 }
