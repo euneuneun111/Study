@@ -12,16 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+
+        <!-- MainActivity 선언 -->
         <activity
             android:name=".BoardActivity"
 
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- ProfileActivity 선언 -->
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true">
+        </activity>
+
+
+
     </application>
 
 </manifest>
