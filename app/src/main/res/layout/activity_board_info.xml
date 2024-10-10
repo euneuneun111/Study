@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iv_arrow_left_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_left_board"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="30dp">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제목"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_arrow_left_board"
+        app:layout_constraintTop_toTopOf="@+id/iv_arrow_left_board"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_arrow_left_board">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/iv_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line"
+        android:layout_marginTop="9dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/iv_text_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rectangle_contents"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_top_line">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/iv_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/iv_text_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_content_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내용을 입력하세요."
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_bottom_line">
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="( 000 / 100 자 )"
+        android:textColor="#BCBCBC"
+        android:layout_marginRight="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_save_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_save_btn">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/iv_save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rectangle_save"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_content_text_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_content_text_title">
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작성"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/iv_save_btn"
+        app:layout_constraintEnd_toEndOf="@+id/iv_save_btn"
+        app:layout_constraintTop_toTopOf="@+id/iv_save_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_save_btn">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/iv_bottom_best_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/iv_save_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_content_text_best"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Best 댓글"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_bottom_best_line">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_content_best_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내용을 입력하세요."
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_text_best">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/tv_content_best_title_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_best_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_great"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아요"
+        android:layout_marginRight="20dp"
+        app:layout_constraintStart_toStartOf="@+id/iv_save_btn"
+        app:layout_constraintEnd_toEndOf="@+id/iv_save_btn"
+        app:layout_constraintBottom_toTopOf="@+id/tv_content_best_title">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_great_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_great"
+        app:layout_constraintTop_toTopOf="@+id/tv_great"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_great">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_author_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작성자 : "
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_content_best_title">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="person"
+        app:layout_constraintStart_toEndOf="@+id/tv_author_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_author_title"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_author_title">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2024.10.08"
+        app:layout_constraintEnd_toEndOf="@+id/tv_great_count"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_author">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_content_best_title_02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내용을 입력하세요."
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_best_title_2">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/tv_content_best_title_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_best_title_02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_author_title_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작성자 : "
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_content_best_title_02">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_author_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="person2"
+        app:layout_constraintStart_toEndOf="@+id/tv_author_title_3"
+        app:layout_constraintTop_toTopOf="@+id/tv_author_title_3"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_author_title_3">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_date_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2024.10.08"
+        app:layout_constraintEnd_toEndOf="@+id/tv_great_count"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_author">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_great_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아요"
+        android:layout_marginRight="20dp"
+        app:layout_constraintStart_toStartOf="@+id/iv_save_btn"
+        app:layout_constraintEnd_toEndOf="@+id/iv_save_btn"
+        app:layout_constraintBottom_toTopOf="@+id/tv_content_best_title_02">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_great_count_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_great"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_great_02">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_date_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2024.10.08"
+        app:layout_constraintEnd_toEndOf="@+id/tv_great_count_02"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_author_3">
+    </TextView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
