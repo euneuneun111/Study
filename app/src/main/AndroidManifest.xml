@@ -15,7 +15,7 @@
 
         <!-- MainActivity 선언 -->
         <activity
-            android:name=".BoardActivity"
+            android:name=".MainActivity"
 
             android:exported="true">
             <intent-filter>
@@ -27,6 +27,16 @@
         <!-- ProfileActivity 선언 -->
         <activity
             android:name=".ProfileActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".LungActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".BrainActivity"
             android:exported="true">
         </activity>
 

@@ -1,6 +1,15 @@
 package com.example.myapplication;
 
-public class LungActivity {
+import android.os.Bundle;
 
-    ///1122233333
+import androidx.appcompat.app.AppCompatActivity;
+
+public class LungActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lung);
+
+    }
 }

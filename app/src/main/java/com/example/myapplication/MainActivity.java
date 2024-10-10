@@ -25,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Golf Massage 버튼 클릭됨", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, LungActivity.class);
+                startActivity(intent);
             }
+
         });
 
         // 뇌질환 버튼 클릭 리스너
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Brain Disease 버튼 클릭됨", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, BrainActivity.class);
+                startActivity(intent);
             }
         });
 
