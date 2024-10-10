@@ -73,8 +73,7 @@
             android:text="이미지 첨부"
             android:textSize="16dp"
             android:textColor="@color/black"
-            android:background="#D3D3D3"
-            />
+            android:background="#D3D3D3" />
 
         <ImageButton
             android:layout_width="wrap_content"
