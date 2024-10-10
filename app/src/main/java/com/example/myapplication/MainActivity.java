@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         MRI_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("MainActivity", "MRI_add clicked");
                 openGallery();
             }
         });
