@@ -2,19 +2,16 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
-
-
-
 android {
     namespace = "com.example.myapplication"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapplication" /// 1111
+        applicationId = "com.example.myapplication"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0" //222222///2222
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -43,4 +39,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("org.tensorflow:tensorflow-lite:2.9.0")
 }
