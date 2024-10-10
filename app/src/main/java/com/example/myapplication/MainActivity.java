@@ -1,10 +1,16 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +35,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Brain Disease 버튼 클릭됨", Toast.LENGTH_SHORT).show();
             }
-        }); ///11233
+        });
+
+        // BottomNavigationView 설정
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        // 리스너 추가하여 메뉴 선택 시 동작 정의
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.nav_book) {
+                    // 책 아이템 클릭 시 처리
+                    return true;
+                } else if (id == R.id.nav_home) {
+                    // 홈 아이템 클릭 시 처리
+                    return true;
+                } else if (id == R.id.nav_profile) {
+                    // 프로필 아이템 클릭 시 ProfileActivity로 전환
+                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
     }
 }
