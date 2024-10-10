@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_book"
-        android:icon="@drawable/ic_book"
+        android:id="@+id/nav_board"
+        android:icon="@drawable/ic_board"
         android:title="" />
     <item
         android:id="@+id/nav_home"

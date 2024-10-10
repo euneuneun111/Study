@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                if (id == R.id.nav_book) {
+                if (id == R.id.nav_board) {
+                    Intent intent = new Intent(MainActivity.this, BoardActivity.class);
+                    startActivity(intent);
                     // 책 아이템 클릭 시 처리
                     return true;
                 } else if (id == R.id.nav_home) {
