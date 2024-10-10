@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- 게시글 이미지 -->
+    <ImageView
+        android:id="@+id/post_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="게시글 이미지" />
+
+    <!-- 텍스트들을 감쌀 레이아웃 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- 게시글 제목 -->
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시글 제목"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- 작성자 이름 및 작성 시간 묶음 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <!-- 작성자 이름 -->
+            <TextView
+                android:id="@+id/post_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성자"
+                android:textSize="14sp" />
+
+            <!-- 작성 시간 -->
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024-10-10"
+                android:textSize="14sp"
+                android:layout_marginStart="16dp" />
+
+        </LinearLayout>
+
+        <!-- 게시글 미리보기 내용 -->
+
+    </LinearLayout>
+
+</LinearLayout>
