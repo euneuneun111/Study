@@ -23,10 +23,9 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <!-- 이미지 업로드 버튼 -->
-            <ImageButton
-                android:id="@+id/uploadButton"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="이미지 추가"
                 android:src="@drawable/ic_add" />
