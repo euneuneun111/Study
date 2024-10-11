@@ -81,6 +81,19 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        ImageView listButton = findViewById(R.id.disease_list);
+
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, DiseaselistActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void initializeClassNames() {
