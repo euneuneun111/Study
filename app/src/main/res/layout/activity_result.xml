@@ -16,185 +16,26 @@
 
             <!-- MRI 사진을 담을 이미지뷰 -->
             <ImageView
-                android:id="@+id/mriImageView"
+                android:id="@+id/result_image_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="300dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="16dp"
                 android:scaleType="centerCrop"
-                android:contentDescription="MRI 이미지"
-                android:paddingBottom="16dp"
-                android:background="#e0e0e0" />
+                android:contentDescription="Selected Image" />
 
             <!-- 높은 확률의 질병 리스트 -->
             <TextView
-                android:id="@+id/topDiseasesTextView"
+                android:id="@+id/result_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="높은 확률의 질병"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"
-                android:paddingBottom="8dp" />
+                android:layout_below="@+id/result_image_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="결과가 여기에 표시됩니다."
+                android:textSize="18sp" />
 
-            <LinearLayout
-                android:id="@+id/topDiseasesListLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp">
 
-                <!-- 질병 이름과 정의를 보여주는 TextView들 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- 질병 1 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:id="@+id/disease1TextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="질병 1"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/disease1PercentageTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="00%"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/disease1DefinitionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="질병 1에 대한 정의"
-                        android:textSize="14sp" />
-
-                    <!-- 질병 2 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:id="@+id/disease2TextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="질병 2"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/disease2PercentageTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="00%"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/disease2DefinitionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="질병 2에 대한 정의"
-                        android:textSize="14sp" />
-
-                    <!-- 질병 3 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:id="@+id/disease3TextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="질병 3"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/disease3PercentageTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="00%"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/disease3DefinitionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="질병 3에 대한 정의"
-                        android:textSize="14sp" />
-
-                    <!-- 질병 4 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:id="@+id/disease4TextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="질병 4"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/disease4PercentageTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="00%"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/disease4DefinitionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="질병 4에 대한 정의"
-                        android:textSize="14sp" />
-
-                    <!-- 질병 5 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:id="@+id/disease5TextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="질병 5"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/disease5PercentageTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="00%"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/disease5DefinitionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="질병 5에 대한 정의"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lung_add"

@@ -25,7 +25,7 @@ public class InfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 클릭 시 실행할 작업을 여기에 작성
 
-                Intent intent = new Intent(InfoActivity.this, MainActivity.class);
+                Intent intent = new Intent(InfoActivity.this, ClassifyActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class InfoActivity extends AppCompatActivity {
                     startActivity(new Intent(InfoActivity.this, BoardActivity.class));
                     return true;
                 } else if (id == R.id.nav_home) {
-                    startActivity(new Intent(InfoActivity.this, MainActivity.class));
+                    startActivity(new Intent(InfoActivity.this, ClassifyActivity.class));
                     return true;
                 } else if (id == R.id.nav_profile) {
                     startActivity(new Intent(InfoActivity.this, ProfileActivity.class));

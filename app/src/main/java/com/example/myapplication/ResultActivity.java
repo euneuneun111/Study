@@ -1,12 +1,10 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +24,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_info);
 
         // Intent로부터 데이터 가져오기
         Intent intent = getIntent();
@@ -66,7 +64,7 @@ public class ResultActivity extends AppCompatActivity {
                     startActivity(new Intent(ResultActivity.this, BoardActivity.class));
                     return true;
                 } else if (id == R.id.nav_home) {
-                    startActivity(new Intent(ResultActivity.this, MainActivity.class));
+                    startActivity(new Intent(ResultActivity.this, ClassifyActivity.class));
                     return true;
                 } else if (id == R.id.nav_profile) {
                     startActivity(new Intent(ResultActivity.this, ProfileActivity.class));
