@@ -40,18 +40,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_result); // 사용 중인 레이아웃 파일
 
         // UI 컴포넌트 초기화
         LinearLayout MRI_add = findViewById(R.id.mri_add);
 
-        MRI_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("MainActivity", "MRI_add clicked");
-                openGallery();
-            }
-        });
+        // NullPointerException 방지 코드 추가
+        if (MRI_add != null) {
+            MRI_add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("MainActivity", "MRI_add clicked");
+                    openGallery();
+                }
+            });
+        } else {
+            Log.e("MainActivity", "mri_add LinearLayout not found");
+        }
 
         initializeClassNames(); // 클래스 이름 초기화
         initializeDiseaseDescriptions(); // 질병 설명 초기화
@@ -202,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MappedByteBuffer loadModelFile() throws IOException {
         Log.d("ModelLoader", "모델을 로드하는 중: " + getModelPath());
-        AssetFileDescriptor fileDescriptor = this.getAssets().openFd(getModelPath());
+                AssetFileDescriptor fileDescriptor = this.getAssets().openFd(getModelPath());
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
@@ -211,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getModelPath() {
-        return "your_model.tflite"; // 모델 파일 경로
+        return "RealMDimodel2.tflite"; // 모델 파일 경로
     }
 
     private static class Prediction {
