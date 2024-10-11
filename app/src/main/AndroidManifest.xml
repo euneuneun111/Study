@@ -15,7 +15,7 @@
 
         <!-- MainActivity 선언 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
 
             android:exported="true">
             <intent-filter>
@@ -31,16 +31,6 @@
         </activity>
 
         <activity
-            android:name=".LungActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".BrainActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
             android:name=".BoardActivity"
             android:exported="true">
         </activity>
@@ -50,10 +40,7 @@
             android:exported="true">
         </activity>
 
-        <activity
-            android:name=".LungClassifyActivity"
-            android:exported="true">
-        </activity>
+
         <activity
             android:name=".ResultActivity"
             android:exported="true">
