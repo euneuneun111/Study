@@ -53,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageView disease_List = findViewById(R.id.disease_list);
+
+        disease_List.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DiseaselistActivity.class);
+                startActivity(intent);
+            }
+        });
+
         initializeClassNames(); // 클래스 이름 초기화
         initializeDiseaseDescriptions(); // 질병 설명 초기화
 
