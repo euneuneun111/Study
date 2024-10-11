@@ -31,6 +31,9 @@ import java.util.Comparator;
 
 public class ResultActivity extends AppCompatActivity {
 
+
+    private static final int PICK_IMAGE = 1;
+
     private ImageView resultImageView;
     private TextView resultTextView;
     private Interpreter tflite;
@@ -41,6 +44,17 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+
+        LinearLayout reloadButton = findViewById(R.id.uploadButton);
+        reloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 클릭 시 실행할 작업을 여기에 작성
+
+                openGallery();
+            }
+        });
 
         LinearLayout infoButton = findViewById(R.id.mri_check);
 
@@ -73,7 +87,6 @@ public class ResultActivity extends AppCompatActivity {
                 return false;
             }
         });
-
 
         resultImageView = findViewById(R.id.mriImageView);
         resultTextView = findViewById(R.id.result_text_view);
@@ -226,4 +239,9 @@ public class ResultActivity extends AppCompatActivity {
             this.probability = probability;
         }
     }
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE);
+    }
+
 }
