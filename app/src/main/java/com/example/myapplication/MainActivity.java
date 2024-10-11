@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getModelPath() {
-        return "your_model.tflite"; // 모델 파일 경로
+        return "RealMDimodel2.tflite"; // 모델 파일 경로
     }
 
     private static class Prediction {
