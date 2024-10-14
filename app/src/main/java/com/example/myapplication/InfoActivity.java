@@ -38,7 +38,7 @@ public class InfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 클릭 시 실행할 작업을 여기에 작성
 
-                Intent intent = new Intent(InfoActivity.this, ClassifyActivity.class);
+                Intent intent = new Intent(InfoActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

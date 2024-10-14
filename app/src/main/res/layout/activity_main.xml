@@ -6,28 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <!-- 애플리케이션 타이틀 -->
-        <TextView
-            android:id="@+id/app_title"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="애플리케이션 타이틀"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="12dp"
-            android:gravity="center"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/app_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:text="애플리케이션 타이틀"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/disease_list"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_book" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/mri_add"

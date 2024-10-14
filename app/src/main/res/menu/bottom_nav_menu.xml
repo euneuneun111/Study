@@ -2,6 +2,7 @@
     <item
         android:id="@+id/nav_board"
         android:icon="@drawable/ic_board"
+
         android:title="" />
     <item
         android:id="@+id/nav_home"
