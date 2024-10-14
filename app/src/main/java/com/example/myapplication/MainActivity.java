@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         float[][] output = new float[1][15];
-        tflite.run(inputBuffer, output);
+        tflite.run(inputBuffer, output); ///11
 
         // 예측 결과를 정렬
         Prediction[] predictions = new Prediction[15];
