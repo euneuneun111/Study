@@ -27,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
         regionSpinner = findViewById(R.id.regionSpinner);
         Button checkDuplicateButton = findViewById(R.id.checkDuplicateButton);
         Button confirmMedicalButton = findViewById(R.id.confirmMedicalButton);
-        Button signupButton = findViewById(R.id.signupButton);
+        Button signupButton = findViewById(R.id.signupButton); ///ㅋㅌㅌ
 
         // 중복확인 버튼 클릭 리스너
         checkDuplicateButton.setOnClickListener(new View.OnClickListener() {
