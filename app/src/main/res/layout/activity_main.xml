@@ -26,16 +26,19 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:text="애플리케이션 타이틀"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:text="X - RayCare"
+                android:textColor="@android:color/holo_blue_dark"
+
+                android:textSize="28sp"
+                android:textStyle="italic|bold" />
 
             <ImageView
                 android:id="@+id/disease_list"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:tint="@android:color/holo_blue_dark"
                 android:layout_marginTop="16dp"
+                android:layout_marginRight="14dp"
                 android:src="@drawable/ic_book" />
 
         </LinearLayout>
@@ -52,6 +55,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:tint="@android:color/holo_blue_dark"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="이미지 추가"
                 android:src="@drawable/ic_add" />
