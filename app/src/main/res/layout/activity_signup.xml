@@ -15,6 +15,7 @@
         android:textSize="55sp"
         android:layout_gravity="left"
         android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_dark"
         android:layout_marginBottom="40dp" />
 
     <!-- ID 입력 필드 (수평 레이아웃) -->
@@ -139,9 +140,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="회원가입 완료"
-        android:background="@android:drawable/edit_text"
+        android:background="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
-        android:backgroundTint="@android:color/black"
         android:layout_marginTop="30dp" />
 
 </LinearLayout>
