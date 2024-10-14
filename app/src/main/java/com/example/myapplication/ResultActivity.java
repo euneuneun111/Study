@@ -96,7 +96,7 @@ public class ResultActivity extends AppCompatActivity {
                     startActivity(new Intent(ResultActivity.this, BoardActivity.class));
                     return true;
                 } else if (id == R.id.nav_home) {
-                    startActivity(new Intent(ResultActivity.this, ClassifyActivity.class));
+                    startActivity(new Intent(ResultActivity.this, MainActivity.class));
                     return true;
                 } else if (id == R.id.nav_profile) {
                     startActivity(new Intent(ResultActivity.this, ProfileActivity.class));

@@ -52,7 +52,7 @@ public class InfoActivity extends AppCompatActivity {
                     startActivity(new Intent(InfoActivity.this, BoardActivity.class));
                     return true;
                 } else if (id == R.id.nav_home) {
-                    startActivity(new Intent(InfoActivity.this, ClassifyActivity.class));
+                    startActivity(new Intent(InfoActivity.this,   MainActivity.class));
                     return true;
                 } else if (id == R.id.nav_profile) {
                     startActivity(new Intent(InfoActivity.this, ProfileActivity.class));
