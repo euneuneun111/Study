@@ -9,9 +9,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         MRI_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("MainActivity", "MRI_add clicked");
                 openGallery();
             }
         });
@@ -132,14 +129,16 @@ public class MainActivity extends AppCompatActivity {
             if (imageUri != null) {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                    Bitmap enhancedBitmap = enhanceImageQuality(bitmap);
+                    Bitmap enhancedBitmap = enhanceImageQuality(bitmap);  // 이미지를 224x224로 크기 조정
+
+                    // 분석 결과 생성 (TensorFlow Lite 모델을 사용해 분석)
                     String predictionResult = classifyImage(enhancedBitmap);
 
-                    // ResultActivity로 이미지 URI와 예측 결과 전달
+                    // 분석 결과와 선택한 이미지 URI를 ResultActivity로 전달
                     Intent resultIntent = new Intent(MainActivity.this, ResultActivity.class);
-                    resultIntent.putExtra("imageUri", imageUri.toString()); // URI를 문자열로 변환하여 전달
-                    resultIntent.putExtra("predictionResult", predictionResult);
-                    startActivity(resultIntent);
+                    resultIntent.putExtra("imageUri", imageUri.toString()); // 선택한 이미지 URI 전달
+                    resultIntent.putExtra("predictionResult", predictionResult); // 분석 결과 전달
+                    startActivity(resultIntent);  // ResultActivity로 전환
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -150,8 +149,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Bitmap enhanceImageQuality(Bitmap bitmap) {
-        // 이미지를 224x224로 크기 조정
-        return Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+        return Bitmap.createScaledBitmap(bitmap, 224, 224, true);  // 이미지를 224x224로 크기 조정
     }
 
     private String classifyImage(Bitmap bitmap) {
@@ -173,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         float[][] output = new float[1][15];
-        tflite.run(inputBuffer, output); ///11
+        tflite.run(inputBuffer, output);
 
         // 예측 결과를 정렬
         Prediction[] predictions = new Prediction[15];
@@ -211,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getModelPath() {
-        return "your_model.tflite"; // 모델 파일 경로
+        return "RealMDimodel2.tflite"; // 모델 파일 경로
     }
 
     private static class Prediction {
@@ -221,6 +219,6 @@ public class MainActivity extends AppCompatActivity {
         Prediction(String className, float probability) {
             this.className = className;
             this.probability = probability;
-        } ///111
+        }
     }
 }
