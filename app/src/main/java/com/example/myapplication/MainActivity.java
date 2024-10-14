@@ -231,6 +231,6 @@ public class MainActivity extends AppCompatActivity {
         Prediction(String className, float probability) {
             this.className = className;
             this.probability = probability;
-        }
+        } ///111
     }
 }
