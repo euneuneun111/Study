@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MRI 이미지 선택"
+                android:text="MRI 분석하기"
                 android:textSize="16sp"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
