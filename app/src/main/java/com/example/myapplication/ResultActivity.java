@@ -76,8 +76,8 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
-        // 이미지 추가 버튼 클릭 시 갤러리로 이동
-        ImageView checkResultButton = findViewById(R.id.checkResultButton);
+
+        LinearLayout checkResultButton = findViewById(R.id.mri_check);
         checkResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
