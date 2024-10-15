@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +18,7 @@
 
         <!-- MainActivity 선언 -->
         <activity
-            android:name=".SignUpActivity"
+            android:name=".LoginActivity"
 
             android:exported="true">
             <intent-filter>
@@ -28,7 +29,7 @@
 
         <!-- ProfileActivity 선언 -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".SignUpActivity"
             android:exported="true">
         </activity>
 
@@ -43,7 +44,7 @@
         </activity>
 
         <activity
-            android:name=".BoardwriteActivity"
+            android:name=".DiseaselistActivity"
             android:exported="true">
         </activity>
 
@@ -51,14 +52,12 @@
             android:name=".ResultActivity"
             android:exported="true">
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+
         <activity
             android:name=".InfoActivity"
             android:exported="true">
         </activity>
+
     </application>
 
 </manifest>
