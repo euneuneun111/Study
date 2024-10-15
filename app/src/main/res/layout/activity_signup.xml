@@ -61,7 +61,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NIKNAME "
+            android:text="NICKNAME "
             android:textSize="16sp" />
 
         <!-- PW 입력 -->
@@ -98,30 +98,6 @@
             android:padding="10dp"
             android:background="@android:drawable/edit_text" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="닉네임 "
-            android:textSize="16sp" />
-
-        <!-- PW 입력 -->
-        <EditText
-            android:id="@+id/inputNikName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="닉네임을 입력하세요."
-            android:padding="10dp"
-            android:background="@android:drawable/edit_text" />
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"

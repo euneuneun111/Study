@@ -134,7 +134,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
-                    finish();
                 } else {
                     String message = jsonResponse.getString("message");
                     Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_SHORT).show();
