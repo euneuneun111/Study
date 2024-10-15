@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ResultActivity.class);
                 startActivity(intent);
+
+                TextView resultTextView = findViewById(R.id.result_text_view);
+                LinearLayout mriCheckLayout = findViewById(R.id.mri_check);
+
+                resultTextView.setVisibility(View.VISIBLE); // TextView를 VISIBLE로 설정
+                mriCheckLayout.setVisibility(View.VISIBLE); // LinearLayout을 VISIBLE로 설정
+
+
             }
         });
 
