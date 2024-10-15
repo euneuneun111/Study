@@ -27,12 +27,12 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText inputId, inputPassword, inputNikName, medicalNumber;
+    private EditText inputId, inputPassword, inputNickName, medicalNumber;
     private CheckBox checkMedical;
     private Spinner regionSpinner;
     private Button signupButton;
 
-    private static final String IP_ADDRESS = "10.0.2.2";
+    private static final String IP_ADDRESS = "10.206.102.62";
     private static final String TAG = "phpsignup";
 
     @Override
@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup); ///111
 
         inputId = findViewById(R.id.inputId);
-        inputNikName = findViewById(R.id.inputNikName);
+        inputNickName = findViewById(R.id.inputNickName);
         inputPassword = findViewById(R.id.inputPassword);
         medicalNumber = findViewById(R.id.medicalNumber);
         checkMedical = findViewById(R.id.checkMedical);
@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String id = inputId.getText().toString().trim();
-                String nikname = inputNikName.getText().toString().trim();
+                String nickname = inputNickName.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
                 String region = regionSpinner.getSelectedItem().toString().trim();
                 String doctor = checkMedical.isChecked() ? "Y" : "N";
@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (id.isEmpty() || password.isEmpty() || region.equals("- 지역을 선택해주세요 -")) {
                     Toast.makeText(SignUpActivity.this, "필수 항목을 입력하세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    new SignUpTask().execute(id, nikname, password, doctor, region);
+                    new SignUpTask().execute(id, nickname, password, doctor, region);
                 }
             }
         });
@@ -72,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String id = params[0];
-            String nikname = params[1];
+            String nickname = params[1];
             String password = params[2];
             String doctor = params[3];
             String region = params[4];
@@ -88,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 String postData = getPostDataString(new HashMap<String, String>() {{
                     put("u_id", id);
-                    put("u_nikname", nikname);
+                    put("u_nickname", nickname);
                     put("u_password", password);
                     put("u_doctor", doctor);
                     put("u_region", region);

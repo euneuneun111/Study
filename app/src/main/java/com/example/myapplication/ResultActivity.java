@@ -77,6 +77,12 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openGallery();
+
+                TextView resultTextView = findViewById(R.id.result_text_view);
+                LinearLayout mriCheckLayout = findViewById(R.id.mri_check);
+
+                resultTextView.setVisibility(View.VISIBLE); // TextView를 VISIBLE로 설정
+                mriCheckLayout.setVisibility(View.VISIBLE); // LinearLayout을 VISIBLE로 설정
             }
         });
 
@@ -86,14 +92,13 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (predictions != null && predictions.length > 0) {
-                    // predictions 배열이 null이 아니고 배열에 값이 있을 때만 참조
                     String bestPrediction = predictions[0].className;
                     float bestSimilarity = predictions[0].probability * 100; // 확률을 백분율로 변환
 
-                    // InfoActivity로 이동하며 데이터를 전달
+                    // InfoActivity로 이동하며 병명만 전달, 병명에 맞는 정보는 InfoActivity에서 처리
                     Intent intent = new Intent(ResultActivity.this, InfoActivity.class);
-                    String resultMessage = "사용자님은 '" + bestPrediction + "' 증상이 의심됩니다. 유사성은 " + String.format("%.2f", bestSimilarity) + "% 입니다.";
-                    intent.putExtra("diseaseName", resultMessage);
+                    intent.putExtra("diseaseName", bestPrediction);  // 병명을 전달
+                    intent.putExtra("similarity", String.format("%.2f", bestSimilarity)); // 유사성 전달
                     startActivity(intent);
                 } else {
                     Toast.makeText(ResultActivity.this, "이미지를 먼저 분석하세요.", Toast.LENGTH_SHORT).show();
@@ -263,4 +268,3 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 }
-
