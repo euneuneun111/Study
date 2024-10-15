@@ -13,15 +13,15 @@
 
       <TextView
           android:id="@+id/app_title"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginLeft="12dp"
           android:layout_marginTop="16dp"
           android:layout_weight="1"
-          android:text="애플리케이션 타이틀"
-          android:textColor="#000000"
-          android:textSize="24sp"
-          android:textStyle="bold" />
+          android:text="X - RayCare"
+          android:textColor="@android:color/holo_blue_dark"
+          android:textSize="28sp"
+          android:textStyle="italic|bold" />
 
 
       <LinearLayout
