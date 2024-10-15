@@ -7,49 +7,15 @@
     android:gravity="center"
     android:padding="16dp">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <!-- 프로젝트 이미지 및 이름 -->
+    <TextView
+        android:id="@+id/projectName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="16dp">
+        android:text="프로젝트 이미지 및 이름"
+        android:textSize="18sp"
+        android:layout_marginBottom="40dp" />
 
-        <!-- 매우 큰 "X" -->
-        <TextView
-            android:id="@+id/projectX"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="X"
-            android:textSize="120sp"
-            android:textStyle="italic"
-            android:textColor="@android:color/holo_blue_dark"
-            android:layout_gravity="center"
-            android:shadowColor="#80000000"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="8"
-            android:layout_marginBottom="10dp" />
-
-        <!-- "RayCare" -->
-        <TextView
-            android:id="@+id/projectName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="- RayCare"
-            android:textColor="@android:color/holo_blue_dark"
-            android:layout_gravity="center"
-            android:shadowColor="#80000000"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="6" />
-
-    </LinearLayout>
-
-
-    <!-- ID 입력 필드 (수평 레이아웃) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="로그인"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@drawable/button_background"
         android:textColor="@android:color/white"
         android:layout_marginBottom="20dp" />
 

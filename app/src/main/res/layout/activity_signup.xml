@@ -52,6 +52,29 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NIKNAME "
+            android:textSize="16sp" />
+
+        <!-- PW 입력 -->
+        <EditText
+            android:id="@+id/inputNikName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="닉네임을 입력하세요."
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text" />
+    </LinearLayout>
+
     <!-- PW 입력 필드 (수평 레이아웃) -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +88,6 @@
             android:text="PW "
             android:textSize="16sp" />
 
-        <!-- PW 입력 -->
         <EditText
             android:id="@+id/inputPassword"
             android:layout_width="0dp"

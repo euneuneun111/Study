@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ public class ResultActivity extends AppCompatActivity {
     private Interpreter tflite;  // TensorFlow Lite 모델 인터프리터
     private String[] classNames = new String[15];  // 클래스 이름 배열
     private String[] diseaseDescriptions = new String[15];  // 질병 설명 배열
+    private Prediction[] predictions;  // 예측 결과 배열
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,8 @@ public class ResultActivity extends AppCompatActivity {
             Glide.with(this).load(imageUri).into(resultImageView);
             resultTextView.setText(predictionResult);
         }
+
+        // 갤러리에서 이미지 선택을 위한 버튼
         LinearLayout uploadButton = findViewById(R.id.uploadButton);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +80,24 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
-        // 이미지 추가 버튼 클릭 시 갤러리로 이동
-        ImageView checkResultButton = findViewById(R.id.checkResultButton);
+        // 결과 확인 버튼 클릭 시 InfoActivity로 이동
+        LinearLayout checkResultButton = findViewById(R.id.mri_check);
         checkResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this, InfoActivity.class);
-                startActivity(intent);  // InfoActivity로 이동
+                if (predictions != null && predictions.length > 0) {
+                    // predictions 배열이 null이 아니고 배열에 값이 있을 때만 참조
+                    String bestPrediction = predictions[0].className;
+                    float bestSimilarity = predictions[0].probability * 100; // 확률을 백분율로 변환
+
+                    // InfoActivity로 이동하며 데이터를 전달
+                    Intent intent = new Intent(ResultActivity.this, InfoActivity.class);
+                    String resultMessage = "사용자님은 '" + bestPrediction + "' 증상이 의심됩니다. 유사성은 " + String.format("%.2f", bestSimilarity) + "% 입니다.";
+                    intent.putExtra("diseaseName", resultMessage);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ResultActivity.this, "이미지를 먼저 분석하세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -107,10 +122,9 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-
     // 갤러리 열기 메서드
     private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE);
     }
 
@@ -168,15 +182,15 @@ public class ResultActivity extends AppCompatActivity {
         tflite.run(inputBuffer, output);
 
         // 예측 결과를 정렬
-        Prediction[] predictions = new Prediction[15];
+        predictions = new Prediction[15];
         for (int i = 0; i < output[0].length; i++) {
             predictions[i] = new Prediction(classNames[i], output[0][i]);
         }
 
         // 확률을 기준으로 내림차순 정렬
-        Arrays.sort(predictions, new Comparator<Prediction>() {
+        Arrays.sort(predictions, new Comparator<ResultActivity.Prediction>() {
             @Override
-            public int compare(Prediction p1, Prediction p2) {
+            public int compare(ResultActivity.Prediction p1, ResultActivity.Prediction p2) {
                 return Float.compare(p2.probability, p1.probability);
             }
         });
@@ -191,7 +205,6 @@ public class ResultActivity extends AppCompatActivity {
 
         return result.toString();
     }
-
 
     private void initializeClassNames() {
         classNames[0] = "무기폐 (Atelectasis)";
@@ -222,7 +235,7 @@ public class ResultActivity extends AppCompatActivity {
         diseaseDescriptions[7] = "기흉은 폐의 공기가 누출되어 발생하는 상태입니다.";
         diseaseDescriptions[8] = "폐경화는 폐의 경직 상태입니다.";
         diseaseDescriptions[9] = "부종은 체액이 과도하게 축적된 상태입니다.";
-        diseaseDescriptions[10] = "폐기종은 폐의 공기 주머니가 파괴되는된 상태입니다.";
+        diseaseDescriptions[10] = "폐기종은 폐의 공기 주머니가 파괴되는 상태입니다.";
         diseaseDescriptions[11] = "섬유화는 폐 조직이 굳어지는 상태입니다.";
         diseaseDescriptions[12] = "흉막 비후는 흉막이 두꺼워진 상태입니다.";
         diseaseDescriptions[13] = "탈장은 장기가 정상 위치에서 벗어난 상태입니다.";
@@ -250,3 +263,4 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 }
+
