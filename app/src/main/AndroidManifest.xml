@@ -29,6 +29,11 @@
 
         <!-- ProfileActivity 선언 -->
         <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".SignUpActivity"
             android:exported="true">
         </activity>
