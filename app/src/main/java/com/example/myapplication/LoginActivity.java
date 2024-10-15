@@ -51,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     // 서버에 로그인 요청
                     new LoginTask().execute(id, password);
+                    Toast.makeText(LoginActivity.this, "로그인 요청중입니다..", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
