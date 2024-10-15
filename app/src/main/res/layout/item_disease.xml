@@ -14,45 +14,12 @@
         android:scaleType="centerCrop"
         android:contentDescription="병명" />
 
-    <!-- 텍스트들을 감쌀 레이아웃 -->
-    <LinearLayout
-        android:layout_width="0dp"
+    <!-- 작성 시간 -->
+    <TextView
+        android:id="@+id/post_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <!-- 게시글 제목 -->
-        <TextView
-            android:id="@+id/disease_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="게시글 제목"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <!-- 작성자 이름 및 작성 시간 묶음 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp">
-
-            <!-- 작성자 이름 -->
-
-
-            <!-- 작성 시간 -->
-            <TextView
-                android:id="@+id/post_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2024-10-10"
-                android:textSize="14sp"
-                android:layout_marginStart="16dp" />
-
-        </LinearLayout>
-
-        <!-- 게시글 미리보기 내용 -->
-
-    </LinearLayout>
-
+        android:text="2024-10-10"
+        android:textSize="14sp"
+        android:layout_gravity="center_vertical" />
 </LinearLayout>
