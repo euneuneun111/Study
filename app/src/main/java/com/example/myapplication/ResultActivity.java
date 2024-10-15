@@ -77,6 +77,12 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openGallery();
+
+                TextView resultTextView = findViewById(R.id.result_text_view);
+                LinearLayout mriCheckLayout = findViewById(R.id.mri_check);
+
+                resultTextView.setVisibility(View.VISIBLE); // TextView를 VISIBLE로 설정
+                mriCheckLayout.setVisibility(View.VISIBLE); // LinearLayout을 VISIBLE로 설정
             }
         });
 
