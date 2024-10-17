@@ -28,8 +28,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -97,10 +99,13 @@ public class ResultActivity extends AppCompatActivity {
                     String bestPrediction = predictions[0].className;
                     float bestSimilarity = predictions[0].probability * 100; // 확률을 백분율로 변환
 
-                    // InfoActivity로 이동하며 병명만 전달, 병명에 맞는 정보는 InfoActivity에서 처리
+                    // 현재 시간 가져오기
+                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
                     Intent intent = new Intent(ResultActivity.this, InfoActivity.class);
-                    intent.putExtra("diseaseName", bestPrediction);  // 병명을 전달
-                    intent.putExtra("similarity", String.format("%.2f", bestSimilarity)); // 유사성 전달
+                    intent.putExtra("imageUri", imageUriString.toString()); // 이미지 URI 전달
+                    intent.putExtra("predictionResult", bestPrediction); // 예측 결과 전달
+                    intent.putExtra("timestamp", currentTime); // 시간 전달
                     startActivity(intent);
                 } else {
                     Toast.makeText(ResultActivity.this, "이미지를 먼저 분석하세요.", Toast.LENGTH_SHORT).show();

@@ -1,7 +1,5 @@
 package com.example.myapplication.api;
 
-import com.example.myapplication.Disease;
-
 import java.util.List;
 
 import retrofit2.Call;
