@@ -61,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "필수 항목을 입력하세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     new SignUpTask().execute(id, nickname, password, doctor, region);
+                    Toast.makeText(SignUpActivity.this, "dd.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
