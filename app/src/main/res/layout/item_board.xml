@@ -30,31 +30,13 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- 작성자 이름 및 작성 시간 묶음 -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/post_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp">
+            android:text="내용"
+            android:textSize="14sp" />
 
-            <!-- 작성자 이름 -->
-            <TextView
-                android:id="@+id/post_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="작성자"
-                android:textSize="14sp" />
-
-            <!-- 작성 시간 -->
-            <TextView
-                android:id="@+id/post_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2024-10-10"
-                android:textSize="14sp"
-                android:layout_marginStart="16dp" />
-
-        </LinearLayout>
 
         <!-- 게시글 미리보기 내용 -->
 
