@@ -19,7 +19,7 @@
         android:id="@+id/post_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2024-10-10"
+        android:text="날짜"
         android:textSize="14sp"
         android:layout_gravity="center_vertical" />
 </LinearLayout>
