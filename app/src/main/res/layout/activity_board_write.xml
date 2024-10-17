@@ -18,19 +18,18 @@
         android:layout_marginLeft="30dp">
     </ImageView>
 
-    <TextView
-        android:id="@+id/tv_board_title"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="제목"
+        android:hint="제목"
         android:textStyle="bold"
         android:textSize="35sp"
         android:textColor="#000000"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/board_save"
@@ -38,7 +37,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ellipse"
         app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_picture"
-        app:layout_constraintTop_toTopOf="@+id/tv_board_title">
+        app:layout_constraintTop_toTopOf="@+id/et_title">
     </ImageView>
 
     <TextView
@@ -68,7 +67,7 @@
         android:textSize="16sp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@+id/tv_board_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_board_title">
+        app:layout_constraintTop_toBottomOf="@+id/ed_title">
     </TextView>
 
     <ImageView
@@ -90,17 +89,18 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picture_text">
+        app:layout_constraintTop_toBottomOf="@+id/et_title">
     </ImageView>
 
-    <TextView
+    <EditText
+        android:id="@+id/et_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="글 내용 작성"
         android:layout_margin="12dp"
         app:layout_constraintStart_toStartOf="@+id/iv_rectangle_picture"
         app:layout_constraintTop_toTopOf="@+id/iv_rectangle_picture">
-    </TextView>
+    </EditText>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

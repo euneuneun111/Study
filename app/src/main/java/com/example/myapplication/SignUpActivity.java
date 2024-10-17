@@ -32,13 +32,13 @@ public class SignUpActivity extends AppCompatActivity {
     private Spinner regionSpinner;
     private Button signupButton;
 
-    private static final String IP_ADDRESS = "10.206.102.62";
+    private static final String IP_ADDRESS = "10.0.2.2";
     private static final String TAG = "phpsignup";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup); ///111
+        setContentView(R.layout.activity_signup);
 
         inputId = findViewById(R.id.inputId);
         inputNickName = findViewById(R.id.inputNickName);
@@ -61,7 +61,6 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "필수 항목을 입력하세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     new SignUpTask().execute(id, nickname, password, doctor, region);
-                    Toast.makeText(SignUpActivity.this, "dd.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -127,22 +126,23 @@ public class SignUpActivity extends AppCompatActivity {
 
             try {
                 JSONObject jsonResponse = new JSONObject(result);
-                String status = jsonResponse.getString("status");
+                String status = jsonResponse.optString("status", "error");
+                String message = jsonResponse.optString("message", "Unknown error occurred.");
 
                 if (status.equals("success")) {
-                    Toast.makeText(SignUpActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "POST response - " + result);
 
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
-                    String message = jsonResponse.getString("message");
                     Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
                 Toast.makeText(SignUpActivity.this, "응답 처리 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+
 
         private String getPostDataString(HashMap<String, String> params) throws Exception {
             StringBuilder result = new StringBuilder();
