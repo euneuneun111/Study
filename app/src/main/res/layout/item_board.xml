@@ -5,16 +5,6 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <!-- 게시글 이미지 -->
-    <ImageView
-        android:id="@+id/post_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="게시글 이미지" />
-
-    <!-- 텍스트들을 감쌀 레이아웃 -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,7 +21,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/post_author"
+            android:id="@+id/post_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내용"
