@@ -42,9 +42,10 @@ public class BoardwriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_write);
 
-        selectedImageView = findViewById(R.id.iv_rectangle_picture);
+
         titleEditText = findViewById(R.id.et_title); // 제목 입력 필드
         contentEditText = findViewById(R.id.et_content); // 내용 입력 필드
+        selectedImageView = findViewById(R.id.image_upload);
 
         findViewById(R.id.iv_arrow_left_board).setOnClickListener(view -> finish());
         findViewById(R.id.picture_text).setOnClickListener(view -> openGallery());
@@ -66,6 +67,7 @@ public class BoardwriteActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             selectedImageUri = data.getData();
             if (selectedImageUri != null) {
+                selectedImageView.setVisibility(View.VISIBLE);
                 selectedImageView.setImageURI(selectedImageUri);
             } else {
                 Toast.makeText(this, "이미지 가져오기 실패", Toast.LENGTH_SHORT).show();
