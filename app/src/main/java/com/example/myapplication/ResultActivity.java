@@ -83,6 +83,8 @@ public class ResultActivity extends AppCompatActivity {
 
                 resultTextView.setVisibility(View.VISIBLE); // TextView를 VISIBLE로 설정
                 mriCheckLayout.setVisibility(View.VISIBLE); // LinearLayout을 VISIBLE로 설정
+
+
             }
         });
 
@@ -151,6 +153,12 @@ public class ResultActivity extends AppCompatActivity {
                     // 이미지와 분석 결과 표시
                     Glide.with(this).load(selectedImageUri).into(resultImageView);
                     resultTextView.setText(predictionResult);
+
+                    // 선택한 이미지 URI를 Intent로 전달
+                    Intent intent = new Intent(ResultActivity.this, InfoActivity.class); // 다음 Activity로 변경
+                    intent.putExtra("imageUri", selectedImageUri.toString());
+                    intent.putExtra("predictionResult", predictionResult);
+                    startActivity(intent); // 다음 Activity로 전환
 
                 } catch (IOException e) {
                     e.printStackTrace();
