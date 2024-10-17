@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView signUp, findPassword;
 
-    private static final String IP_ADDRESS = "10.206.102.62";
+    private static final String IP_ADDRESS = "10.0.2.2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     // 서버에 로그인 요청
                     new LoginTask().execute(id, password);
-                    Toast.makeText(LoginActivity.this, "로그인 요청중입니다..", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
@@ -132,14 +130,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (jsonArray.length() > 0) {
                         JSONObject userObject = jsonArray.getJSONObject(0);
-                        String u_nikname = userObject.getString("u_nickname");
+                        String u_nickname = userObject.getString("u_nickname");
 
-                        Toast.makeText(LoginActivity.this, "로그인 성공: " + u_nikname, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "로그인 성공: " + u_nickname, Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(LoginActivity.this, "응답 처리 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "로그인 실패: 데이터 파싱 오류", Toast.LENGTH_SHORT).show();
                 }
             }
         }
