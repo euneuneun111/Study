@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -130,10 +131,29 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (jsonArray.length() > 0) {
                         JSONObject userObject = jsonArray.getJSONObject(0);
+                        String u_id = userObject.getString("u_id");
                         String u_nickname = userObject.getString("u_nickname");
+                        String u_password = userObject.getString("u_password");
+                        String u_doctor = userObject.getString("u_doctor");
+                        String u_region = userObject.getString("u_region");
+
 
                         Toast.makeText(LoginActivity.this, "로그인 성공: " + u_nickname, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("u_id", u_id);
+                                intent.putExtra("u_nickname", u_nickname);
+                                intent.putExtra("u_password", u_password);
+                                intent.putExtra("u_doctor", u_doctor);
+                                intent.putExtra("u_region", u_region);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 2000);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

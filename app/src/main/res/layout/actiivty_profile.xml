@@ -52,7 +52,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/ic_profile" />
+                android:src="@drawable/ic_profile"
+                android:layout_gravity="center"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -61,11 +62,11 @@
                 android:layout_marginStart="16dp">
 
                 <TextView
-                    android:id="@+id/profile_name"
+                    android:id="@+id/profile_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="이름"
+                    android:text="닉네임"
                     android:textSize="24sp" />
 
                 <TextView
@@ -74,52 +75,66 @@
                     android:layout_height="wrap_content"
                     android:text="아이디"
                     android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/profile_doc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="의사여부"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/profile_re"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지역"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="내 주변 병원"
-            android:textSize="15dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="14dp">
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="내 주변 병원"-->
+<!--            android:textSize="15dp"-->
+<!--            android:layout_marginLeft="7dp"-->
+<!--            android:layout_marginTop="14dp">-->
 
-        </TextView>
+<!--        </TextView>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
 
-            android:orientation="horizontal">
+<!--            android:orientation="horizontal">-->
 
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/hos_button1"
-                android:src="@drawable/ic_profile">
+<!--            <ImageButton-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:id="@+id/hos_button1"-->
+<!--                android:src="@drawable/ic_profile">-->
 
-            </ImageButton>
+<!--            </ImageButton>-->
 
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/hos_button2"
+<!--            <ImageButton-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:id="@+id/hos_button2"-->
 
-                android:src="@drawable/ic_profile">
+<!--                android:src="@drawable/ic_profile">-->
 
-            </ImageButton>
+<!--            </ImageButton>-->
 
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/hos_button3"
+<!--            <ImageButton-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:id="@+id/hos_button3"-->
 
-                android:src="@drawable/ic_profile">
+<!--                android:src="@drawable/ic_profile">-->
 
-            </ImageButton>
+<!--            </ImageButton>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 
