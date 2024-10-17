@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,6 @@ public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapte
     private List<RecentRecord> recentRecordList;
     private OnItemClickListener listener;
 
-    // 인터페이스 정의
     public interface OnItemClickListener {
         void onItemClick(RecentRecord recentRecord);
     }
@@ -45,28 +45,23 @@ public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapte
         return recentRecordList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView timestampTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.disease_image);
-            timestampTextView = itemView.findViewById(R.id.post_time);
+            imageView = itemView.findViewById(R.id.disease_image); // item_recent_record.xml의 ImageView ID
+            timestampTextView = itemView.findViewById(R.id.post_time); // item_recent_record.xml의 TextView ID
         }
 
-        public void bind(final RecentRecord recentRecord, final OnItemClickListener listener) {
-            // 이미지 및 타임스탬프 설정
+        public void bind(RecentRecord recentRecord, OnItemClickListener listener) {
+            // 이미지 URI를 사용하여 이미지 로드
             imageView.setImageURI(recentRecord.getImageUri());
             timestampTextView.setText(recentRecord.getTimestamp());
 
-            // 아이템 클릭 리스너 설정
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(recentRecord);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(recentRecord));
         }
     }
 }
+
