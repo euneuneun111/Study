@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView signUp, findPassword;
 
-    private static final String IP_ADDRESS = "10.206.102.62";
+    private static final String IP_ADDRESS = "203.237.153.31";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
