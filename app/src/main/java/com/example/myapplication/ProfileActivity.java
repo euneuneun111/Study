@@ -61,7 +61,6 @@ public class ProfileActivity extends AppCompatActivity{
                     startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                     return true;
                 } else if (id == R.id.nav_profile) {
-                    startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
                     return true;
                 }
                 return false;
