@@ -1,21 +1,20 @@
 package com.example.myapplication;
 
-import android.net.Uri;
-
 public class RecentRecord {
-    private Uri imageUri;
+
     private String timestamp;
+    private String imageUri;
 
-    public RecentRecord(Uri imageUri, String timestamp) {
-        this.imageUri = imageUri;
+    public RecentRecord(String timestamp, String imageUri) {
         this.timestamp = timestamp;
-    }
-
-    public Uri getImageUri() {
-        return imageUri;
+        this.imageUri = imageUri;
     }
 
     public String getTimestamp() {
         return timestamp;
+    }
+
+    public String getImageUri() {
+        return imageUri;
     }
 }
