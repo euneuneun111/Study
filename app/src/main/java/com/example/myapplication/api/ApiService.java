@@ -1,6 +1,4 @@
-/*
 package com.example.myapplication.api;
-
 
 import java.util.List;
 
@@ -18,4 +16,3 @@ public interface ApiService {
     @GET("api/disease")  // 서버에서의 올바른 엔드포인트로 수정
     Call<Disease> getDiseaseByName(@Query("name") String diseaseName);  // 서버의 Query 파라미터 이름에 맞춰 수정
 }
-*/

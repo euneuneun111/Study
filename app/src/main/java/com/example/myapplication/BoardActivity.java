@@ -1,6 +1,9 @@
 package com.example.myapplication;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +13,18 @@ import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BoardActivity extends AppCompatActivity{
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class BoardActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private PostAdapter postAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,33 +32,56 @@ public class BoardActivity extends AppCompatActivity{
         setContentView(R.layout.activity_board);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // 리스너 추가하여 메뉴 선택 시 동작 정의
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+        fetchPosts(apiService);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_write) {
-                    Intent intent = new Intent(BoardActivity.this,BoardwriteActivity.class);
+                    Intent intent = new Intent(BoardActivity.this, BoardwriteActivity.class);
                     startActivity(intent);
-                    // 작성 아이템 클릭 시 처리
                     return true;
-                } else
-                return false;
+                } else {
+                    return false;
+                }
             }
         });
 
         ImageView Backview = findViewById(R.id.iv_arrow_left_board);
-
         Backview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 클릭 시 실행할 작업을 여기에 작성
-
-                // 예: 뒤로 가기 동작 구현
-                finish();  // 현재 액티비티를 종료하고 이전 액티비티로 돌아갑니다.
+                finish();
             }
         });
+    }
 
+    private void fetchPosts(ApiService apiService) {
+        Call<List<Post>> call = apiService.getPosts();
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Post> posts = response.body();
+                    postAdapter = new PostAdapter(posts);
+                    recyclerView.setAdapter(postAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

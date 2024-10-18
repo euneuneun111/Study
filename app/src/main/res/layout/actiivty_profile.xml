@@ -30,12 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
+
                 android:layout_marginLeft="14dp"
                 android:text="내정보"
                 android:textSize="25sp"
-                android:gravity="start" />
+              />
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,60 +77,47 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="12dp"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_dark"
-            android:orientation="horizontal">
+            android:text="내 주변 병원"
+            android:textSize="15dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="14dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="내 주변 병원"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginLeft="7dp" />
-
-            <TextView
-                android:id="@+id/hospital_more"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="right"
-                android:gravity="right"
-                android:text="더보기 >"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:layout_marginRight="17dp"
-                android:textColor="@color/white"
-                android:layout_marginLeft="7dp" />
-
-        </LinearLayout>
+        </TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="horizontal">
 
             <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/hos_button1"
-                android:src="@drawable/ic_profile" />
+                android:src="@drawable/ic_profile">
+
+            </ImageButton>
 
             <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/hos_button2"
-                android:src="@drawable/ic_profile" />
+
+                android:src="@drawable/ic_profile">
+
+            </ImageButton>
 
             <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/hos_button3"
-                android:src="@drawable/ic_profile" />
+
+                android:src="@drawable/ic_profile">
+
+            </ImageButton>
 
         </LinearLayout>
 
@@ -143,5 +133,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:itemIconTint="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
