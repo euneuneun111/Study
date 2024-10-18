@@ -107,7 +107,7 @@
                 android:id="@+id/hospital_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
+                android:layout_marginRight="17dp"
                 android:text="더보기 >"
                 android:textSize="18sp" />
 

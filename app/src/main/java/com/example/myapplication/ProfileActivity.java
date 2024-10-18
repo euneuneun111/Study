@@ -49,6 +49,18 @@ public class ProfileActivity extends AppCompatActivity{
             }
         });
 
+        TextView Morehospital = findViewById(R.id.hospital_more);
+
+        Morehospital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 클릭 시 실행할 작업을 여기에 작성
+
+                startActivity(new Intent(ProfileActivity.this, MoreHospital.class));
+            }
+        });
+
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
