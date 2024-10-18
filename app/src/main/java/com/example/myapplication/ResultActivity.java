@@ -265,7 +265,7 @@ public class ResultActivity extends AppCompatActivity {
 
     // TensorFlow Lite 모델 로드 메서드
     private MappedByteBuffer loadModelFile() throws IOException {
-        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("RealMDimodel2.tflite");
+        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("chest_xray_mode453.tflite");
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
