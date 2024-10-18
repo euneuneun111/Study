@@ -99,13 +99,10 @@ public class ResultActivity extends AppCompatActivity {
                     String bestPrediction = predictions[0].className;
                     float bestSimilarity = predictions[0].probability * 100; // 확률을 백분율로 변환
 
-                    // 현재 시간 가져오기
-                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
                     Intent intent = new Intent(ResultActivity.this, InfoActivity.class);
-                    intent.putExtra("imageUri", imageUriString.toString()); // 이미지 URI 전달
                     intent.putExtra("predictionResult", bestPrediction); // 예측 결과 전달
-                    intent.putExtra("timestamp", currentTime); // 시간 전달
+
                     startActivity(intent);
                 } else {
                     Toast.makeText(ResultActivity.this, "이미지를 먼저 분석하세요.", Toast.LENGTH_SHORT).show();
@@ -163,6 +160,12 @@ public class ResultActivity extends AppCompatActivity {
                     Intent intent = new Intent(ResultActivity.this, InfoActivity.class); // 다음 Activity로 변경
                     intent.putExtra("imageUri", selectedImageUri.toString());
                     intent.putExtra("predictionResult", predictionResult);
+
+                    // 현재 시간 가져오기
+                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                    intent.putExtra("timestamp", currentTime); // 시간 전달
+
+
                     startActivity(intent); // 다음 Activity로 전환
 
                 } catch (IOException e) {
