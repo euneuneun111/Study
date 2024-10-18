@@ -22,23 +22,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp">
-            </ImageView>
+                android:layout_marginLeft="30dp" />
 
             <TextView
-                android:id="@+id/profile_title1"
+                android:id="@+id/profile_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-
                 android:layout_marginLeft="14dp"
                 android:text="내정보"
-                android:textSize="25sp"
-              />
+                android:textSize="25sp" />
 
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +47,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/ic_profile" />
+                android:src="@drawable/ic_profile"
+                android:layout_gravity="center" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -74,59 +70,21 @@
                     android:layout_height="wrap_content"
                     android:text="아이디"
                     android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/profile_doc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="의사여부"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/profile_re"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지역"
+                    android:textSize="18sp" />
             </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="내 주변 병원"
-            android:textSize="15dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="14dp">
-
-        </TextView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/hos_button1"
-                android:src="@drawable/ic_profile">
-
-            </ImageButton>
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/hos_button2"
-
-                android:src="@drawable/ic_profile">
-
-<<<<<<< HEAD
-            </ImageButton>
-
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/hos_button3"
-=======
-<!--            </ImageButton>-->
-<!--            <ImageButton-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:id="@+id/hos_button3"-->
->>>>>>> 9244cd7d970b1443128ccd53a20e3b241dbb0413
-
-                android:src="@drawable/ic_profile">
-
-            </ImageButton>
-
         </LinearLayout>
 
     </LinearLayout>
@@ -141,6 +99,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:itemIconTint="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
