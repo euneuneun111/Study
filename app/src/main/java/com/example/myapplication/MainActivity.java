@@ -2,12 +2,14 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.view.View;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,40 +18,73 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecentRecordAdapter adapter;
-    private ArrayList<RecentRecord> recentRecords;
+    private RecentRecordViewModel viewModel;
+    private List<RecentRecord> recentRecordList;
+
+    private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    String imageUri = result.getData().getStringExtra("imageUri");
+                    if (imageUri != null) {
+                        addRecentRecord(imageUri);
+                    } else {
+                        Log.e("MainActivity", "Received imageUri is null");
+                    }
+                } else {
+                    Log.e("MainActivity", "Result is not OK or data is null");
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // RecyclerView 및 데이터 리스트 초기화
         recyclerView = findViewById(R.id.recent_records_recycler_view);
-        recentRecords = new ArrayList<>();
+        recentRecordList = new ArrayList<>();
+
+        // ViewModel 초기화
+        viewModel = new ViewModelProvider(this).get(RecentRecordViewModel.class);
+        setupObservers(); // LiveData 관찰 설정
 
         // UI 컴포넌트 초기화
-        LinearLayout MRI_add = findViewById(R.id.mri_add);
+        setupUIComponents();
 
-        // MRI_add 버튼 클릭 시 ResultActivity로 이동
-        MRI_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                // 시작한 Activity에서 데이터를 반환받을 수 있도록 시작
-                startActivityForResult(intent, 1);
-            }
+        // Adapter 및 RecyclerView 설정
+        setupRecyclerView();
+
+        // 최근 기록 로드
+        loadRecentRecords();
+
+    }
+
+    private void setupObservers() {
+        viewModel.getRecentRecords().observe(this, records -> {
+            recentRecordList.clear();
+            recentRecordList.addAll(records);
+            adapter.notifyDataSetChanged(); // 어댑터 갱신
+        });
+    }
+
+    private void setupUIComponents() {
+        LinearLayout MRI_add = findViewById(R.id.mri_add);
+        MRI_add.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+            resultLauncher.launch(intent);
         });
 
         ImageView directory_disease = findViewById(R.id.disease_list);
-        directory_disease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DiseaselistActivity.class));
-            }
+        directory_disease.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DiseaselistActivity.class);
+            startActivity(intent);
         });
 
         // BottomNavigationView 설정
@@ -67,50 +102,25 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
 
-        adapter = new RecentRecordAdapter(recentRecords, new RecentRecordAdapter.OnRecordClickListener() {
-            @Override
-            public void onRecordClick(RecentRecord record) {
-                // 클릭 시의 동작을 정의합니다.
-                // 예: 클릭한 기록의 URI로 새로운 액티비티를 시작하거나 상세 정보를 표시하는 기능을 추가할 수 있습니다.
-            }
-        });
-
+    private void setupRecyclerView() {
+        adapter = new RecentRecordAdapter(recentRecordList, null); // 클릭 리스너 제거
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-        // 데이터 로딩 및 업데이트
-        loadRecentRecords();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            // ResultActivity에서 이미지 URI를 반환한다고 가정합니다.
-            String imageUri = data.getStringExtra("imageUri");
-            if (imageUri != null) {
-                addRecentRecord(imageUri); // 새 기록 추가 메서드 호출
-            }
-        }
-    }
-
-    private void loadRecentRecords() {
-        // Intent로부터 최근 기록을 가져오는 방법을 구현하세요.
-        ArrayList<RecentRecord> recordsFromIntent = (ArrayList<RecentRecord>) getIntent().getSerializableExtra("recentRecords");
-        if (recordsFromIntent != null) {
-            recentRecords.addAll(recordsFromIntent);
-        }
-        // 어댑터 데이터 갱신
-        adapter.notifyDataSetChanged();
-    }
-
-    // RecentRecord 목록을 추가하는 메서드 (예시)
     public void addRecentRecord(String imageUri) {
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         RecentRecord recentRecord = new RecentRecord(currentTime, imageUri);
-        recentRecords.add(recentRecord);
-        adapter.notifyItemInserted(recentRecords.size() - 1); // 새로 추가된 아이템 알림
+        viewModel.addRecentRecord(recentRecord);
+        Log.d("MainActivity", "Added record: " + recentRecord);
     }
+
+    private void loadRecentRecords() {
+        // ViewModel에서 데이터를 관찰하므로 필요하지 않을 수 있습니다.
+        // 데이터 초기 로딩 로직이 필요한 경우 해당 로직을 추가할 수 있습니다.
+    }
+
+
 }
-
-

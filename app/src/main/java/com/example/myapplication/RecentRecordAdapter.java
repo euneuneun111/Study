@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.net.Uri;
-
 import java.util.List;
 
 public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapter.ViewHolder> {
+    private List<RecentRecord> records;
+    private OnRecordClickListener listener;
 
-    private List<RecentRecord> recentRecordList;
-    private OnRecordClickListener onRecordClickListener;
-
-    public interface OnRecordClickListener {
-        void onRecordClick(RecentRecord recentRecord);
-    }
-
-    public RecentRecordAdapter(List<RecentRecord> recentRecordList, OnRecordClickListener listener) {
-        this.recentRecordList = recentRecordList;
-        this.onRecordClickListener = listener;
+    public RecentRecordAdapter(List<RecentRecord> records, OnRecordClickListener listener) {
+        this.records = records;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,29 +30,33 @@ public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RecentRecord recentRecord = recentRecordList.get(position);
-        holder.timestampTextView.setText(recentRecord.getTimestamp());
-
-        // String 형태의 URI를 Uri 객체로 변환
-        Uri imageUri = Uri.parse(recentRecord.getImageUri());
-        holder.imageView.setImageURI(imageUri); // Uri 객체를 사용하여 이미지 설정
-
-        holder.itemView.setOnClickListener(v -> onRecordClickListener.onRecordClick(recentRecord));
+        RecentRecord record = records.get(position);
+        holder.bind(record, listener);
     }
 
     @Override
     public int getItemCount() {
-        return recentRecordList.size();
+        return records.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView timestampTextView;
-        ImageView imageView;
+        private TextView timestampTextView;
+        private ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             timestampTextView = itemView.findViewById(R.id.timestamp_text_view);
             imageView = itemView.findViewById(R.id.image_view);
         }
+
+        public void bind(RecentRecord record, OnRecordClickListener listener) {
+            timestampTextView.setText(record.getTimestamp());
+            imageView.setImageURI(Uri.parse(record.getImageUri()));
+            itemView.setOnClickListener(v -> listener.onRecordClick(record)); // 클릭 이벤트 처리
+        }
+    }
+
+    public interface OnRecordClickListener {
+        void onRecordClick(RecentRecord record);
     }
 }

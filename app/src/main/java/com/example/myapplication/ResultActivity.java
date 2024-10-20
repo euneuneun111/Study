@@ -91,7 +91,7 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
-        // 결과 확인 버튼 클릭 시 InfoActivity로 이동
+        // 상세 확인 버튼 클릭 시 InfoActivity로 이동
         LinearLayout checkResultButton = findViewById(R.id.mri_check);
         checkResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
