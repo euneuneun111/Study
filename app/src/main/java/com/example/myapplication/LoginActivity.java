@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         String u_region = userObject.getString("u_region");
 
 
-                        Toast.makeText(LoginActivity.this, "로그인 성공: " + u_nickname, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,  u_nickname + "님 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
 
 
                         new Handler().postDelayed(new Runnable() {
