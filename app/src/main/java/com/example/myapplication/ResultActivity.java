@@ -1,4 +1,4 @@
-/*package com.example.myapplication;
+package com.example.myapplication;
 
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,159 +36,149 @@ import java.util.Locale;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE = 1;  // 이미지를 선택하는 요청 코드
+    private static final int PICK_IMAGE = 1; // 이미지를 선택하기 위한 요청 코드
     private ImageView resultImageView;
     private TextView resultTextView;
-    private Interpreter tflite;  // TensorFlow Lite 모델 인터프리터
-    private String[] classNames = new String[15];  // 클래스 이름 배열
-    private String[] diseaseDescriptions = new String[15];  // 질병 설명 배열
-    private Prediction[] predictions;  // 예측 결과 배열
-    private ArrayList<RecentRecord> recentRecords = new ArrayList<>();  // 최근 기록 저장 리스트
+    private Interpreter tflite; // TensorFlow Lite 모델 인터프리터
+    private String[] classNames = new String[15]; // 클래스 이름 배열
+    private ArrayList<RecentRecord> recentRecords = new ArrayList<>(); // 최근 기록 목록
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        resultImageView = findViewById(R.id.result_image_view);
-        resultTextView = findViewById(R.id.result_text_view);
+        initViews();
+        initializeModel();
 
-        // 클래스 이름 및 질병 설명 초기화
-        initializeClassNames();
-        initializeDiseaseDescriptions();
-
-        // TensorFlow Lite 모델 초기화
-        try {
-            tflite = new Interpreter(loadModelFile());
-        } catch (IOException e) {
-            Log.e("ResultActivity", "TensorFlow Lite 모델 초기화 중 오류 발생", e);
-        }
-
-        // Intent로부터 전달받은 이미지 URI와 예측 결과 표시
         Intent intent = getIntent();
         String imageUriString = intent.getStringExtra("imageUri");
         String predictionResult = intent.getStringExtra("predictionResult");
 
         if (imageUriString != null) {
-            Uri imageUri = Uri.parse(imageUriString);
-            Glide.with(this).load(imageUri).into(resultImageView);
-            resultTextView.setText(predictionResult);
+            displayResult(Uri.parse(imageUriString), predictionResult);
         }
 
-        // 갤러리에서 이미지 선택을 위한 버튼
+        setupListeners();
+        setupBottomNavigation();
+    }
+
+    private void initViews() {
+        resultImageView = findViewById(R.id.result_image_view);
+        resultTextView = findViewById(R.id.result_text_view);
         LinearLayout uploadButton = findViewById(R.id.uploadButton);
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openGallery();
+        uploadButton.setVisibility(View.VISIBLE);
+    }
 
-                TextView resultTextView = findViewById(R.id.result_text_view);
-                LinearLayout mriCheckLayout = findViewById(R.id.mri_check);
+    private void initializeModel() {
+        try {
+            tflite = new Interpreter(loadModelFile());
+            initializeClassNames();
+        } catch (IOException e) {
+            Log.e("ResultActivity", "TensorFlow Lite 모델 초기화 오류", e);
+        }
+    }
 
-                resultTextView.setVisibility(View.VISIBLE); // TextView를 VISIBLE로 설정
-                mriCheckLayout.setVisibility(View.VISIBLE); // LinearLayout을 VISIBLE로 설정
-            }
+    private void setupListeners() {
+        findViewById(R.id.uploadButton).setOnClickListener(v -> {
+            openGallery(); // 갤러리를 엽니다.
+            v.setVisibility(View.GONE); // 업로드 버튼 숨김
+            findViewById(R.id.applyButton).setVisibility(View.VISIBLE); // 적용 버튼 보이기
+            findViewById(R.id.mri_check).setVisibility(View.VISIBLE); // MRI 체크 버튼 보이기
         });
 
-        // 상세 확인 버튼 클릭 시 InfoActivity로 이동
-        LinearLayout checkResultButton = findViewById(R.id.mri_check);
-        checkResultButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (predictions != null && predictions.length > 0) {
-                    String bestPrediction = predictions[0].className;
-                    float bestSimilarity = predictions[0].probability * 100; // 확률을 백분율로 변환
-
-                    // InfoActivity로 이동하며 병명만 전달, 병명에 맞는 정보는 InfoActivity에서 처리
-                    Intent intent = new Intent(ResultActivity.this, InfoActivity.class);
-                    intent.putExtra("diseaseName", bestPrediction);  // 병명을 전달
-                    intent.putExtra("similarity", String.format("%.2f", bestSimilarity)); // 유사성 전달
-                    startActivity(intent);
-
-
-                } else {
-                    Toast.makeText(ResultActivity.this, "이미지를 먼저 분석하세요.", Toast.LENGTH_SHORT).show();
-                }
-            }
+        findViewById(R.id.applyButton).setOnClickListener(v -> {
+            saveCurrentRecord(); // 현재 기록 저장
+            Intent intent = new Intent(ResultActivity.this, MainActivity.class);
+            String currentImageUri = resultImageView.getTag().toString();
+            String currentPredictionResult = resultTextView.getText().toString();
+            intent.putExtra("imageUri", currentImageUri); // 이미지 URI 추가
+            intent.putExtra("predictionResult", currentPredictionResult); // 예측 결과 추가
+            startActivity(intent); // MainActivity로 이동
+            finish(); // 현재 액티비티 종료
         });
 
-        // BottomNavigationView 설정
+        findViewById(R.id.mri_check).setOnClickListener(v -> {
+            // MRI 체크 버튼의 기능 구현
+            Log.d("ResultActivity", "MRI 체크 버튼이 클릭되었습니다.");
+            // MRI 체크 기능을 여기에 추가합니다.
+        });
+    }
+
+    private void setupBottomNavigation() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.nav_board) {
+                if (item.getItemId() == R.id.nav_board) {
                     startActivity(new Intent(ResultActivity.this, BoardActivity.class));
                     return true;
-                } else if (id == R.id.nav_home) {
+                } else if (item.getItemId() == R.id.nav_home) {
                     startActivity(new Intent(ResultActivity.this, MainActivity.class));
                     return true;
-                } else if (id == R.id.nav_profile) {
+                } else if (item.getItemId() == R.id.nav_profile) {
                     startActivity(new Intent(ResultActivity.this, ProfileActivity.class));
                     return true;
+                } else {
+                    return false;
                 }
-                return false;
             }
         });
     }
 
-    // 갤러리 열기 메서드
+    // 갤러리를 열어 이미지를 선택합니다.
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE);
     }
 
-    // 선택한 이미지 처리
+    // 갤러리에서의 결과를 처리합니다.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImageUri = data.getData();
             if (selectedImageUri != null) {
-                try {
-                    // 선택한 이미지를 비트맵으로 변환
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                    Bitmap enhancedBitmap = enhanceImageQuality(bitmap);  // 이미지를 224x224로 크기 조정
-
-                    // 분석 결과 생성 (TensorFlow Lite 모델을 사용해 분석)
-                    String predictionResult = classifyImage(enhancedBitmap);
-
-                    // 이미지와 분석 결과 표시
-                    Glide.with(this).load(selectedImageUri).into(resultImageView);
-                    resultTextView.setText(predictionResult);
-
-                    // 선택한 이미지 URI와 분석 결과를 기록
-                    saveRecentRecord(selectedImageUri.toString(), predictionResult);
-
-                    // 선택한 이미지 URI를 Intent로 전달
-                    Intent intent = new Intent(ResultActivity.this, MainActivity.class); // 다음 Activity로 변경
-                    intent.putExtra("imageUri", selectedImageUri.toString());
-                    intent.putExtra("predictionResult", predictionResult);
-
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("ResultActivity", "이미지 로딩 중 오류 발생", e);
-                }
+                processSelectedImage(selectedImageUri);
             }
         }
     }
 
-    // 최근 기록 저장 메서드
+    private void processSelectedImage(Uri selectedImageUri) {
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+            Bitmap enhancedBitmap = enhanceImageQuality(bitmap); // 이미지 품질 향상
+
+            String predictionResult = classifyImage(enhancedBitmap);
+            displayResult(selectedImageUri, predictionResult);
+            saveRecentRecord(selectedImageUri.toString(), predictionResult);
+        } catch (IOException e) {
+            Log.e("ResultActivity", "이미지 로드 오류", e);
+        }
+    }
+
+    private void displayResult(Uri imageUri, String predictionResult) {
+        Glide.with(this).load(imageUri).into(resultImageView);
+        resultTextView.setText(predictionResult);
+        resultImageView.setTag(imageUri.toString()); // 이미지 URI를 태그로 설정
+    }
+
+    private void saveCurrentRecord() {
+        String currentImageUri = resultImageView.getTag().toString();
+        String currentPredictionResult = resultTextView.getText().toString();
+        saveRecentRecord(currentImageUri, currentPredictionResult);
+        Log.d("ResultActivity", "메인 화면에 기록이 저장되었습니다.");
+    }
+
     private void saveRecentRecord(String imageUri, String predictionResult) {
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         RecentRecord recentRecord = new RecentRecord(currentTime, imageUri);
         recentRecords.add(recentRecord);
-
-        // 로그로 기록 저장 확인
         Log.d("ResultActivity", "저장된 기록: " + recentRecord.getTimestamp() + ", " + recentRecord.getImageUri());
     }
 
     private Bitmap enhanceImageQuality(Bitmap bitmap) {
-        // 이미지를 224x224로 크기 조정
-        return Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+        return Bitmap.createScaledBitmap(bitmap, 224, 224, true); // 이미지를 224x224로 크기 조정
     }
 
     private String classifyImage(Bitmap bitmap) {
@@ -205,38 +194,36 @@ public class ResultActivity extends AppCompatActivity {
         bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
 
         for (int pixelValue : intValues) {
-            inputBuffer.putFloat(((pixelValue >> 16) & 0xFF) / 255.0f); // Red
-            inputBuffer.putFloat(((pixelValue >> 8) & 0xFF) / 255.0f);  // Green
-            inputBuffer.putFloat((pixelValue & 0xFF) / 255.0f);          // Blue
+            inputBuffer.putFloat(((pixelValue >> 16) & 0xFF) / 255.0f); // 빨강
+            inputBuffer.putFloat(((pixelValue >> 8) & 0xFF) / 255.0f);  // 초록
+            inputBuffer.putFloat((pixelValue & 0xFF) / 255.0f);          // 파랑
         }
 
         float[][] output = new float[1][15];
         tflite.run(inputBuffer, output);
 
-        predictions = new Prediction[15];
+        Prediction[] predictions = new Prediction[15];
         for (int i = 0; i < 15; i++) {
             predictions[i] = new Prediction(classNames[i], output[0][i]);
         }
 
-        // 확률에 따라 예측 결과를 정렬
         Arrays.sort(predictions, Comparator.comparing(Prediction::getProbability).reversed());
+        return formatPredictionResults(predictions);
+    }
 
-        // 상위 5개의 예측 결과 표시
+    private String formatPredictionResults(Prediction[] predictions) {
         StringBuilder resultBuilder = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            resultBuilder.append(predictions[i].className)
-                    .append(" (")
-                    .append(String.format(Locale.getDefault(), "%.2f", predictions[i].probability * 100))
-                    .append("%)\n")
-                    .append(diseaseDescriptions[i])
-                    .append("\n\n");
+        for (int i = 0; i < Math.min(5, predictions.length); i++) {
+            resultBuilder.append(predictions[i].getClassName())
+                    .append(": ")
+                    .append(String.format("%.2f", predictions[i].getProbability() * 100))
+                    .append("%\n");
         }
-
         return resultBuilder.toString();
     }
 
     private MappedByteBuffer loadModelFile() throws IOException {
-        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("Real3.tflite");
+        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("your_model.tflite");
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
@@ -244,33 +231,38 @@ public class ResultActivity extends AppCompatActivity {
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
     }
 
-    // 클래스 이름 초기화
     private void initializeClassNames() {
-        classNames[0] = "췌장암";
-        classNames[1] = "신장암";
-        classNames[2] = "위암";
-        // ... (다른 클래스 이름 초기화)
+        // 클래스 이름 및 질병 설명 초기화
+        classNames[0] = "Class1"; // 실제 클래스 이름을 여기에 추가하세요
+        // ... 다른 클래스 이름 초기화
     }
 
-    // 질병 설명 초기화
-    private void initializeDiseaseDescriptions() {
-        diseaseDescriptions[0] = "췌장암 설명";
-        diseaseDescriptions[1] = "신장암 설명";
-        diseaseDescriptions[2] = "위암 설명";
-        // ... (다른 질병 설명 초기화)
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (tflite != null) {
+            tflite.close(); // 모델 인터프리터 종료
+        }
     }
 
+
+
+    // 예측 결과 클래스 정의
     private static class Prediction {
-        String className;
-        float probability;
+        private String className;
+        private float probability;
 
         public Prediction(String className, float probability) {
             this.className = className;
             this.probability = probability;
         }
 
+        public String getClassName() {
+            return className;
+        }
+
         public float getProbability() {
             return probability;
         }
     }
-}*/
+}
