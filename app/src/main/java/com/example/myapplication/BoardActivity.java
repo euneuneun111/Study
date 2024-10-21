@@ -36,7 +36,7 @@ public class BoardActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2/")
+                .baseUrl("http://192.168.0.158/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

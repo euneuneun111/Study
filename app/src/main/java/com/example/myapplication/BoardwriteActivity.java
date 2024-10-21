@@ -31,7 +31,7 @@ import okhttp3.Response;
 public class BoardwriteActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 1;
-    private static final String SERVER_URL = "http://10.0.2.2/post_input.php";
+    private static final String SERVER_URL = "http://192.168.0.158/post_input.php";
     private ImageView selectedImageView;
     private EditText titleEditText;
     private EditText contentEditText;
@@ -117,6 +117,8 @@ public class BoardwriteActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show());
                     Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show());
                 }
