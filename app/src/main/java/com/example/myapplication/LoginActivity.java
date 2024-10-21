@@ -127,19 +127,21 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
-                    JSONArray jsonArray = jsonObject.getJSONArray("user");
+                    if (!jsonObject.has("user")) {
+                        Toast.makeText(LoginActivity.this, "유효하지 않은 응답 형식입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
+                    JSONArray jsonArray = jsonObject.getJSONArray("user");
                     if (jsonArray.length() > 0) {
                         JSONObject userObject = jsonArray.getJSONObject(0);
-                        String u_id = userObject.getString("u_id");
-                        String u_nickname = userObject.getString("u_nickname");
-                        String u_password = userObject.getString("u_password");
-                        String u_doctor = userObject.getString("u_doctor");
-                        String u_region = userObject.getString("u_region");
+                        String u_id = userObject.optString("u_id", "unknown");
+                        String u_nickname = userObject.optString("u_nickname", "unknown");
+                        String u_password = userObject.optString("u_password", "unknown");
+                        String u_doctor = userObject.optString("u_doctor", "unknown");
+                        String u_region = userObject.optString("u_region", "unknown");
 
-
-                        Toast.makeText(LoginActivity.this,  u_nickname + "님 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(LoginActivity.this, u_nickname + "님 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
 
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -154,11 +156,14 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                             }
                         }, 2000);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "로그인 실패: 사용자 정보가 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(LoginActivity.this, "로그인 실패: 데이터 파싱 오류", Toast.LENGTH_SHORT).show();
                 }
+
             }
         }
     }
