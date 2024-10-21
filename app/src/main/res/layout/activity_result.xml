@@ -43,13 +43,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginEnd="16dp"
                 android:gravity="center">
 
-                <!-- 이미지 업로드 버튼 (ic_add 아이콘) -->
                 <LinearLayout
                     android:id="@+id/uploadButton"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -72,12 +69,40 @@
                         android:gravity="center_vertical" />
                 </LinearLayout>
 
+                <!-- 이미지 업로드 버튼 (ic_add 아이콘) -->
                 <LinearLayout
+                    android:id="@+id/applyButton"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:contentDescription="저장"
+                        android:tint="@android:color/holo_blue_dark"
+                        android:src="@drawable/ic_add" />
+
+                    <!-- "이미지 추가" 텍스트 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="저장"
+                        android:textSize="14sp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+
+                    android:layout_marginLeft="14dp"
                     android:id="@+id/mri_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="gone"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -95,6 +120,7 @@
                         android:text="상세 확인"
                         android:textSize="14sp"
                         android:layout_marginStart="8dp"
+
                         android:gravity="center_vertical" />
                 </LinearLayout>
             </LinearLayout>
