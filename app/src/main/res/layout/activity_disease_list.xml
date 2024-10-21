@@ -53,6 +53,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_marginLeft="14dp"
                     android:id="@+id/nodule"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -60,6 +61,8 @@
                     android:text="결절"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Pneumo"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -67,6 +70,8 @@
                     android:text="기흉"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Athelectasis"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -74,6 +79,8 @@
                     android:text="무기폐"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Edema"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -81,6 +88,8 @@
                     android:text="부종"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Effusion"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -88,6 +97,8 @@
                     android:text="삼출"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Fibrosis"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -95,6 +106,8 @@
                     android:text="섬유화"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Cardiomegaly"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -102,6 +115,8 @@
                     android:text="심장비대"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Mass"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -109,6 +124,8 @@
                     android:text="종괴"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Infiltration"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -116,6 +133,8 @@
                     android:text="침윤"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Hernia"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -123,6 +142,8 @@
                     android:text="탈장"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Consolidation"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -130,6 +151,8 @@
                     android:text="폐경화"
                     android:textSize="24dp" />
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Emphysema"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -138,6 +161,8 @@
                     android:textSize="24dp" />
 
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Pneumonia"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
@@ -146,6 +171,8 @@
                     android:textSize="24dp" />
 
                 <TextView
+                    android:layout_marginLeft="14dp"
+
                     android:id="@+id/Pleural"
                     android:layout_marginTop="14dp"
                     android:layout_width="match_parent"
