@@ -143,7 +143,10 @@ public class ResultActivity extends AppCompatActivity {
                             break;
                     }
 
-
+                    if (intent != null) {
+                        intent.putExtra("predictionResult", bestPrediction); // 예측 결과 전달
+                        startActivity(intent); // 상세정보 액티비티로 이동
+                    }
 
                 }
             }
