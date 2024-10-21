@@ -13,8 +13,6 @@ import android.view.MenuItem;
 
 public class DiseaselistActivity extends AppCompatActivity {
 
-    private String[] classNames = new String[14];
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +22,13 @@ public class DiseaselistActivity extends AppCompatActivity {
         setTextViewClickListener(R.id.Athelectasis, 0);
         setTextViewClickListener(R.id.Cardiomegaly, 1);
         setTextViewClickListener(R.id.Effusion, 2);
-        setTextViewClickListener(R.id.Infiltration, 3);
+        setTextViewClickListener(R.id.Edema, 3);
         setTextViewClickListener(R.id.Mass, 4);
         setTextViewClickListener(R.id.nodule, 5);
         setTextViewClickListener(R.id.Pneumonia, 6);
         setTextViewClickListener(R.id.Pneumo, 7);
         setTextViewClickListener(R.id.Consolidation, 8);
-        setTextViewClickListener(R.id.Edema, 9);
+        setTextViewClickListener(R.id.Infiltration, 9);
         setTextViewClickListener(R.id.Emphysema, 10);
         setTextViewClickListener(R.id.Fibrosis, 11);
         setTextViewClickListener(R.id.Pleural, 12);
@@ -107,8 +105,10 @@ public class DiseaselistActivity extends AppCompatActivity {
                     case 13:
                         intent = new Intent(DiseaselistActivity.this, InfoActivity14.class);
                         break;
+                }
 
-
+                if (intent != null) {
+                    startActivity(intent);  // InfoActivity로 이동
                 }
             }
         });
