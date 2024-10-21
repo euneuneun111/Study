@@ -73,7 +73,7 @@ public class DiseaselistActivity extends AppCompatActivity {
                         intent = new Intent(DiseaselistActivity.this, InfoActivity3.class);
                         break;
                     case 3:
-                        intent = new Intent(DiseaselistActivity.this, InfoActivity4.class);
+                        intent = new Intent(DiseaselistActivity.this, InfoActivity10.class);
                         break;
                     case 4:
                         intent = new Intent(DiseaselistActivity.this, InfoActivity5.class);
@@ -91,7 +91,7 @@ public class DiseaselistActivity extends AppCompatActivity {
                         intent = new Intent(DiseaselistActivity.this, InfoActivity9.class);
                         break;
                     case 9:
-                        intent = new Intent(DiseaselistActivity.this, InfoActivity10.class);
+                        intent = new Intent(DiseaselistActivity.this, InfoActivity4.class);
                         break;
                     case 10:
                         intent = new Intent(DiseaselistActivity.this, InfoActivity11.class);
