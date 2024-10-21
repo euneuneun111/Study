@@ -85,15 +85,15 @@ public class ResultActivity extends AppCompatActivity {
             v.setVisibility(View.GONE); // 업로드 버튼 숨김
             findViewById(R.id.applyButton).setVisibility(View.VISIBLE); // 적용 버튼 보이기
             findViewById(R.id.mri_check).setVisibility(View.VISIBLE); // MRI 체크 버튼 보이기
-        });//11
+        });
 
         findViewById(R.id.applyButton).setOnClickListener(v -> {
             saveCurrentRecord(); // 현재 기록 저장
             Intent intent = new Intent(ResultActivity.this, MainActivity.class);
             String currentImageUri = resultImageView.getTag().toString();
-            String currentPredictionResult = resultTextView.getText().toString();
             intent.putExtra("imageUri", currentImageUri); // 이미지 URI 추가
-            intent.putExtra("predictionResult", currentPredictionResult); // 예측 결과 추가
+            String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+            intent.putExtra("timestamp", currentTime); // 타임스탬프 추가
             startActivity(intent); // MainActivity로 이동
             finish(); // 현재 액티비티 종료
         });
@@ -172,7 +172,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void saveRecentRecord(String imageUri, String predictionResult) {
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        RecentRecord recentRecord = new RecentRecord(currentTime, imageUri);
+        RecentRecord recentRecord = new RecentRecord(currentTime, imageUri); // 타임스탬프, 이미지 URI 및 예측 결과 저장
         recentRecords.add(recentRecord);
         Log.d("ResultActivity", "저장된 기록: " + recentRecord.getTimestamp() + ", " + recentRecord.getImageUri());
     }
@@ -232,22 +232,23 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void initializeClassNames() {
-        // 클래스 이름 및 질병 설명 초기화
-        classNames[0] = "Class1"; // 실제 클래스 이름을 여기에 추가하세요
-        // ... 다른 클래스 이름 초기화
+        // 클래스 이름 배열 초기화
+        classNames[0] = "Class1";
+        classNames[1] = "Class2";
+        classNames[2] = "Class3";
+        classNames[3] = "Class4";
+        classNames[4] = "Class5";
+        classNames[5] = "Class6";
+        classNames[6] = "Class7";
+        classNames[7] = "Class8";
+        classNames[8] = "Class9";
+        classNames[9] = "Class10";
+        classNames[10] = "Class11";
+        classNames[11] = "Class12";
+        classNames[12] = "Class13";
+        classNames[13] = "Class14";
+        classNames[14] = "Class15";
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (tflite != null) {
-            tflite.close(); // 모델 인터프리터 종료
-        }
-    }
-
-
-
-    // 예측 결과 클래스 정의
     private static class Prediction {
         private String className;
         private float probability;
@@ -266,3 +267,4 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 }
+
