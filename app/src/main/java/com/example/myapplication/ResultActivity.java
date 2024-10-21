@@ -28,10 +28,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -39,8 +37,8 @@ public class ResultActivity extends AppCompatActivity {
     private ImageView resultImageView;
     private TextView resultTextView;
     private Interpreter tflite;  // TensorFlow Lite 모델 인터프리터
-    private String[] classNames = new String[9];  // 클래스 이름 배열
-    private String[] diseaseDescriptions = new String[9];  // 질병 설명 배열
+    private String[] classNames = new String[15];  // 클래스 이름 배열
+    private String[] diseaseDescriptions = new String[15];  // 질병 설명 배열
     private Prediction[] predictions;  // 예측 결과 배열
 
     @Override
@@ -85,12 +83,10 @@ public class ResultActivity extends AppCompatActivity {
 
                 resultTextView.setVisibility(View.VISIBLE); // TextView를 VISIBLE로 설정
                 mriCheckLayout.setVisibility(View.VISIBLE); // LinearLayout을 VISIBLE로 설정
-
-
             }
         });
 
-        // 결과 확인 버튼 클릭 시 InfoActivity로 이동
+        // 결과 확인 버튼 클릭 시 병명에 따른 상세 액티비티로 이동
         LinearLayout checkResultButton = findViewById(R.id.mri_check);
         checkResultButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,16 +95,65 @@ public class ResultActivity extends AppCompatActivity {
                     String bestPrediction = predictions[0].className;
                     float bestSimilarity = predictions[0].probability * 100; // 확률을 백분율로 변환
 
+                    Intent intent = null;
 
-                    Intent intent = new Intent(ResultActivity.this, InfoActivity.class);
-                    intent.putExtra("predictionResult", bestPrediction); // 예측 결과 전달
+                    // 병명에 따라 다른 레이아웃으로 이동하는 로직
+                    switch (bestPrediction) {
+                        case "무기폐 (Atelectasis)":
+                            intent = new Intent(ResultActivity.this, InfoActivity1.class);
+                            break;
+                        case "심장비대 (Cardiomegaly)":
+                            intent = new Intent(ResultActivity.this, InfoActivity2.class);
+                            break;
+                        case "삼출 (Effusion)":
+                            intent = new Intent(ResultActivity.this, InfoActivity3.class);
+                            break;
+                        case "침윤 (Infiltration)":
+                            intent = new Intent(ResultActivity.this, InfoActivity4.class);
+                            break;
+                        case "종괴 (Mass)":
+                            intent = new Intent(ResultActivity.this, InfoActivity5.class);
+                            break;
+                        case "결절 (Nodule)":
+                            intent = new Intent(ResultActivity.this, InfoActivity6.class);
+                            break;
+                        case "폐렴 (Pneumonia)":
+                            intent = new Intent(ResultActivity.this, InfoActivity7.class);
+                            break;
+                        case "기흉 (Pneumothorax)":
+                            intent = new Intent(ResultActivity.this, InfoActivity8.class);
+                            break;
+                        case "폐경화 (Consolidation)":
+                            intent = new Intent(ResultActivity.this, InfoActivity9.class);
+                            break;
+                        case "부종 (Edema)":
+                            intent = new Intent(ResultActivity.this, InfoActivity10.class);
+                            break;
+                        case "폐기종 (Emphysema)":
+                            intent = new Intent(ResultActivity.this, InfoActivity11.class);
+                            break;
+                        case "섬유화 (Fibrosis)":
+                            intent = new Intent(ResultActivity.this, InfoActivity12.class);
+                            break;
+                        case "흉막 비후 (Pleural Thickening)":
+                            intent = new Intent(ResultActivity.this, InfoActivity13.class);
+                            break;
+                        case "탈장 (Hernia)":
+                            intent = new Intent(ResultActivity.this, InfoActivity14.class);
+                            break;
+                    }
 
-                    startActivity(intent);
+                    if (intent != null) {
+                        intent.putExtra("predictionResult", bestPrediction); // 예측 결과 전달
+                        startActivity(intent); // 상세정보 액티비티로 이동
+                    }
+
                 } else {
                     Toast.makeText(ResultActivity.this, "이미지를 먼저 분석하세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
         // BottomNavigationView 설정
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -156,18 +201,6 @@ public class ResultActivity extends AppCompatActivity {
                     Glide.with(this).load(selectedImageUri).into(resultImageView);
                     resultTextView.setText(predictionResult);
 
-                    // 선택한 이미지 URI를 Intent로 전달
-                    Intent intent = new Intent(ResultActivity.this, InfoActivity.class); // 다음 Activity로 변경
-                    intent.putExtra("imageUri", selectedImageUri.toString());
-                    intent.putExtra("predictionResult", predictionResult);
-
-                    // 현재 시간 가져오기
-                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                    intent.putExtra("timestamp", currentTime); // 시간 전달
-
-
-                    startActivity(intent); // 다음 Activity로 전환
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("ResultActivity", "이미지 로딩 중 오류 발생", e);
@@ -199,11 +232,11 @@ public class ResultActivity extends AppCompatActivity {
             inputBuffer.putFloat((pixelValue & 0xFF) / 255.0f);          // Blue
         }
 
-        float[][] output = new float[1][9];
+        float[][] output = new float[1][15];
         tflite.run(inputBuffer, output);
 
         // 예측 결과를 정렬
-        predictions = new Prediction[9];
+        predictions = new Prediction[15];
         for (int i = 0; i < output[0].length; i++) {
             predictions[i] = new Prediction(classNames[i], output[0][i]);
         }
@@ -265,7 +298,7 @@ public class ResultActivity extends AppCompatActivity {
 
     // TensorFlow Lite 모델 로드 메서드
     private MappedByteBuffer loadModelFile() throws IOException {
-        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("mobilenetv2_model.tflite");
+        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("RealMDimodel2.tflite");
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();

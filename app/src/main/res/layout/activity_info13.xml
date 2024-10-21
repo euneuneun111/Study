@@ -21,6 +21,18 @@
             android:padding="16dp">
 
             <!-- 질병 이름 및 확률 -->
+            <TextView
+                android:id="@+id/app_title2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:text="X - RayCare"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="28sp"
+                android:textStyle="italic|bold" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,45 +40,50 @@
 
                 <!-- 질병 이름 -->
                 <TextView
-                    android:id="@+id/disease_name"
+                    android:id="@+id/disease_name213"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="질병 이름"
+                    android:text="흉막 비후 (Pleural Thickening)"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />
-
-                <!-- 확률 % -->
-                <TextView
-                    android:id="@+id/disease_probability"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="%"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    app:layout_constraintStart_toEndOf="@id/disease_name"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="45dp" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <!-- 질병 설명 -->
             <TextView
-                android:id="@+id/disease_description"
+                android:id="@+id/disease_description213"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이것은 질병에 대한 상세 설명으로, 질병의 성격, 원인 및 일반적인 개요에 대한 정보를 제공합니다."
+                android:text="늑막(흉막)이 부어서 두툼해진 상태."
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
 
             <!-- 먹으면 좋은 음식 섹션 -->
             <TextView
-                android:id="@+id/disease_food_label"
+                android:id="@+id/disease_food_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="증상"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/disease_food213"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.가슴통증 \n2.호흡장애"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="#333333" />
+
+            <!-- 진료과 섹션 -->
+            <TextView
+                android:id="@+id/disease_department_label2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="먹으면 좋은 음식"
@@ -76,17 +93,16 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/disease_food"
+                android:id="@+id/disease_department213"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1. 음식 1\n2. 음식 2\n3. 음식 3"
+                android:text="연어, 블루베리, 감귤, 콩, 감자, 토마토"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
 
-            <!-- 진료과 섹션 -->
             <TextView
-                android:id="@+id/disease_department_label"
+                android:id="@+id/disease12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="진료과"
@@ -96,14 +112,32 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/disease_department"
+                android:id="@+id/disease2213"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="해당 질병을 치료할 수 있는 진료과는 내과, 신경과, 외과 등입니다."
+                android:text="순환기내과"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
 
+            <TextView
+                android:id="@+id/disease32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="원인"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/disease4213"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="심장 내부 공간이 확장되어 나타날 수도 있고, 심실 비대에 의해 나타날 수있음"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="#333333" />
         </LinearLayout>
     </ScrollView>
 

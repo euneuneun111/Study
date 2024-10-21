@@ -60,10 +60,6 @@
             android:exported="true">
         </activity>
 
-        <activity
-            android:name=".InfoActivity"
-            android:exported="true">
-        </activity>
 
         <activity
             android:name=".BoardwriteActivity"
@@ -74,6 +70,64 @@
             android:name=".MoreHospital"
             android:exported="true">
         </activity>
+
+        <activity
+            android:name=".InfoActivity1"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoActivity2"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".InfoActivity3"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoActivity4"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoActivity5"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoActivity6"
+            android:exported="true">
+        </activity>        <activity
+        android:name=".InfoActivity7"
+        android:exported="true">
+    </activity>        <activity
+        android:name=".InfoActivity8"
+        android:exported="true">
+    </activity>        <activity
+        android:name=".InfoActivity9"
+        android:exported="true">
+    </activity>        <activity
+        android:name=".InfoActivity10"
+        android:exported="true">
+    </activity>        <activity
+        android:name=".InfoActivity11"
+        android:exported="true">
+    </activity>        <activity
+        android:name=".InfoActivity12"
+        android:exported="true">
+    </activity>        <activity
+        android:name=".InfoActivity13"
+        android:exported="true">
+    </activity>        <activity
+        android:name=".InfoActivity14"
+        android:exported="true">
+    </activity>
+
+
+
+
+
+
+
+
 
     </application>
 
