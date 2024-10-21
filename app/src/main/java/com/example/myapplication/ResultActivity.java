@@ -1,4 +1,4 @@
-/*package com.example.myapplication;
+package com.example.myapplication;
 
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -39,8 +39,8 @@ public class ResultActivity extends AppCompatActivity {
     private ImageView resultImageView;
     private TextView resultTextView;
     private Interpreter tflite;  // TensorFlow Lite 모델 인터프리터
-    private String[] classNames = new String[15];  // 클래스 이름 배열
-    private String[] diseaseDescriptions = new String[15];  // 질병 설명 배열
+    private String[] classNames = new String[9];  // 클래스 이름 배열
+    private String[] diseaseDescriptions = new String[9];  // 질병 설명 배열
     private Prediction[] predictions;  // 예측 결과 배열
 
     @Override
@@ -199,11 +199,11 @@ public class ResultActivity extends AppCompatActivity {
             inputBuffer.putFloat((pixelValue & 0xFF) / 255.0f);          // Blue
         }
 
-        float[][] output = new float[1][15];
+        float[][] output = new float[1][9];
         tflite.run(inputBuffer, output);
 
         // 예측 결과를 정렬
-        predictions = new Prediction[15];
+        predictions = new Prediction[9];
         for (int i = 0; i < output[0].length; i++) {
             predictions[i] = new Prediction(classNames[i], output[0][i]);
         }
@@ -265,7 +265,7 @@ public class ResultActivity extends AppCompatActivity {
 
     // TensorFlow Lite 모델 로드 메서드
     private MappedByteBuffer loadModelFile() throws IOException {
-        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("RealMDimodel2.tflite");
+        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("mobilenetv2_model.tflite");
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
@@ -283,4 +283,4 @@ public class ResultActivity extends AppCompatActivity {
             this.probability = probability;
         }
     }
-}*/
+}
