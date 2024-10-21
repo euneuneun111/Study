@@ -1,4 +1,4 @@
-package com.example.myapplication;
+/*package com.example.myapplication;
 
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -273,4 +273,4 @@ public class ResultActivity extends AppCompatActivity {
             return probability;
         }
     }
-}
+}*/
