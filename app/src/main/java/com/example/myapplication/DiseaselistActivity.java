@@ -18,7 +18,7 @@ public class DiseaselistActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board);  // XML 파일 이름에 맞게 변경
+        setContentView(R.layout.activity_disease_list);  // XML 파일 이름에 맞게 변경
 
         // 각 TextView에 클릭 리스너 설정
         setTextViewClickListener(R.id.Athelectasis, 0);
