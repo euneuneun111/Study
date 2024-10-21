@@ -43,8 +43,8 @@ public class BoardwriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board_write);
 
 
-        titleEditText = findViewById(R.id.et_title); // 제목 입력 필드
-        contentEditText = findViewById(R.id.et_content); // 내용 입력 필드
+        titleEditText = findViewById(R.id.et_title);
+        contentEditText = findViewById(R.id.et_content);
         selectedImageView = findViewById(R.id.image_upload);
 
         findViewById(R.id.iv_arrow_left_board).setOnClickListener(view -> finish());
@@ -116,6 +116,7 @@ public class BoardwriteActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show());
+                    Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
                 } else {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show());
                 }

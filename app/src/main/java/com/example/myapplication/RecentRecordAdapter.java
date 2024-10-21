@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapter.ViewHolder> {
+    private List<RecentRecord> records;
+    private OnRecordClickListener listener;
 
-    private List<RecentRecord> recentRecordList;
-    private OnItemClickListener listener;
-
-    public interface OnItemClickListener {
-        void onItemClick(RecentRecord recentRecord);
-    }
-
-    public RecentRecordAdapter(List<RecentRecord> recentRecordList, OnItemClickListener listener) {
-        this.recentRecordList = recentRecordList;
+    public RecentRecordAdapter(List<RecentRecord> records, OnRecordClickListener listener) {
+        this.records = records;
         this.listener = listener;
     }
 
@@ -36,32 +30,33 @@ public class RecentRecordAdapter extends RecyclerView.Adapter<RecentRecordAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RecentRecord recentRecord = recentRecordList.get(position);
-        holder.bind(recentRecord, listener);
+        RecentRecord record = records.get(position);
+        holder.bind(record, listener);
     }
 
     @Override
     public int getItemCount() {
-        return recentRecordList.size();
+        return records.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView timestampTextView;
+        private ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.disease_image); // item_recent_record.xml의 ImageView ID
-            timestampTextView = itemView.findViewById(R.id.post_time); // item_recent_record.xml의 TextView ID
+            timestampTextView = itemView.findViewById(R.id.timestamp_text_view);
+            imageView = itemView.findViewById(R.id.image_view);
         }
 
-        public void bind(RecentRecord recentRecord, OnItemClickListener listener) {
-            // 이미지 URI를 사용하여 이미지 로드
-            imageView.setImageURI(recentRecord.getImageUri());
-            timestampTextView.setText(recentRecord.getTimestamp());
-
-            itemView.setOnClickListener(v -> listener.onItemClick(recentRecord));
+        public void bind(RecentRecord record, OnRecordClickListener listener) {
+            timestampTextView.setText(record.getTimestamp());
+            imageView.setImageURI(Uri.parse(record.getImageUri()));
+            itemView.setOnClickListener(v -> listener.onRecordClick(record)); // 클릭 이벤트 처리
         }
     }
-}
 
+    public interface OnRecordClickListener {
+        void onRecordClick(RecentRecord record);
+    }
+}

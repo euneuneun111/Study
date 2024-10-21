@@ -156,7 +156,6 @@ public class ResultActivity extends AppCompatActivity {
                     Glide.with(this).load(selectedImageUri).into(resultImageView);
                     resultTextView.setText(predictionResult);
 
-                    /*
                     // 선택한 이미지 URI를 Intent로 전달
                     Intent intent = new Intent(ResultActivity.this, InfoActivity.class); // 다음 Activity로 변경
                     intent.putExtra("imageUri", selectedImageUri.toString());
@@ -168,8 +167,6 @@ public class ResultActivity extends AppCompatActivity {
 
 
                     startActivity(intent); // 다음 Activity로 전환
-                    */
-
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -268,7 +265,7 @@ public class ResultActivity extends AppCompatActivity {
 
     // TensorFlow Lite 모델 로드 메서드
     private MappedByteBuffer loadModelFile() throws IOException {
-        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("chest_xray_model.tflite");
+        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("RealMDimodel2.tflite");
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
