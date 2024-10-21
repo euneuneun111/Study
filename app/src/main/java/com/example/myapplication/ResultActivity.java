@@ -85,7 +85,7 @@ public class ResultActivity extends AppCompatActivity {
             v.setVisibility(View.GONE); // 업로드 버튼 숨김
             findViewById(R.id.applyButton).setVisibility(View.VISIBLE); // 적용 버튼 보이기
             findViewById(R.id.mri_check).setVisibility(View.VISIBLE); // MRI 체크 버튼 보이기
-        });
+        });//11
 
         findViewById(R.id.applyButton).setOnClickListener(v -> {
             saveCurrentRecord(); // 현재 기록 저장
