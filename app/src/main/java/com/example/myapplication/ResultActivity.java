@@ -93,8 +93,18 @@ public class ResultActivity extends AppCompatActivity {
             }
         }
 
+        LinearLayout uploadButton = findViewById(R.id.uploadButton);
+
+        uploadButton.setOnClickListener(v -> {
+            openGallery(); // 갤러리 열기
+            v.setVisibility(View.GONE); // 업로드 버튼 숨기기
+            findViewById(R.id.applyButton).setVisibility(View.VISIBLE); // 적용 버튼 보여주기
+            findViewById(R.id.mri_check).setVisibility(View.VISIBLE); // MRI 체크 버튼 보여주기
+        });
+
         // 저장 버튼 클릭 리스너 추가
-        Button saveButton = findViewById(R.id.save_button);
+
+        LinearLayout saveButton = findViewById(R.id.applyButton);
         saveButton.setOnClickListener(v -> {
             if (selectedImageUri != null && predictions != null && predictions.length > 0) {
                 // SharedPreferences에서 currentIndex 불러오기

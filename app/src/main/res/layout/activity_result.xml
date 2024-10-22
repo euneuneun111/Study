@@ -97,7 +97,6 @@
 
                 <LinearLayout
                     android:visibility="gone"
-
                     android:layout_marginLeft="14dp"
                     android:id="@+id/mri_check"
                     android:layout_width="wrap_content"
