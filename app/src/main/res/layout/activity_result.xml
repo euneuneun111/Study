@@ -32,8 +32,6 @@
                 android:layout_below="@+id/result_image_view"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
-                android:text="결과가 여기에 표시됩니다."
-                android:visibility="invisible"
                 android:textSize="18sp" />
 
 
@@ -97,7 +95,6 @@
 
                 <LinearLayout
                     android:visibility="gone"
-
                     android:layout_marginLeft="14dp"
                     android:id="@+id/mri_check"
                     android:layout_width="wrap_content"
@@ -122,13 +119,7 @@
                         android:layout_marginStart="8dp"
 
                         android:gravity="center_vertical" />
-                    <Button
-                        android:id="@+id/save_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="저장"
-                        android:layout_marginTop="16dp"
-                        android:gravity="center"/>
+
 
                 </LinearLayout>
             </LinearLayout>

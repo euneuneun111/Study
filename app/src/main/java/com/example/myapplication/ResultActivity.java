@@ -86,15 +86,32 @@ public class ResultActivity extends AppCompatActivity {
             // 이미지 분석 (TensorFlow Lite 모델 사용)
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                analyzeImage(bitmap);  // 이미지를 분석하는 메소드 호출
+                analyzeImage(bitmap);  // 이미지를 분석하는 메소드 호출a
             } catch (IOException e) {
                 Log.e("ResultActivity", "이미지 로딩 중 오류 발생", e);
                 Toast.makeText(this, "이미지를 처리하는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
             }
         }
 
+        ImageView reimage = findViewById(R.id.result_image_view);
+
+        reimage.setOnClickListener(v -> {
+            openGallery();
+
+        });
+
+        LinearLayout uploadButton = findViewById(R.id.uploadButton);
+
+        uploadButton.setOnClickListener(v -> {
+            openGallery(); // 갤러리 열기
+            v.setVisibility(View.GONE); // 업로드 버튼 숨기기
+            findViewById(R.id.applyButton).setVisibility(View.VISIBLE); // 적용 버튼 보여주기
+            findViewById(R.id.mri_check).setVisibility(View.VISIBLE); // MRI 체크 버튼 보여주기
+        });
+
         // 저장 버튼 클릭 리스너 추가
-        Button saveButton = findViewById(R.id.save_button);
+
+        LinearLayout saveButton = findViewById(R.id.applyButton);
         saveButton.setOnClickListener(v -> {
             if (selectedImageUri != null && predictions != null && predictions.length > 0) {
                 // SharedPreferences에서 currentIndex 불러오기
@@ -224,71 +241,13 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void analyzeImage(Bitmap bitmap) {
-    }
-
-    // 권한 요청
-    private void checkPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
-            }
+        if (bitmap != null) {
+            Bitmap enhancedBitmap = enhanceImageQuality(bitmap); // 이미지 품질 개선
+            String result = classifyImage(enhancedBitmap); // 이미지 분석
+            resultTextView.setText(result); // 분석 결과를 화면에 표시
+        } else {
+            resultTextView.setText("이미지가 없습니다."); // 예외 처리
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 권한이 승인된 경우
-            } else {
-                Toast.makeText(this, "권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    // 갤러리 열기 메서드
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, PICK_IMAGE);
-    }
-
-    // 이미지 업로드 후 분석 기능 유지, MainActivity로 정보만 전송
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
-            selectedImageUri = data.getData();  // 선택한 이미지의 URI를 저장
-
-            if (selectedImageUri != null) {
-                try {
-                    // 선택한 이미지를 비트맵으로 변환
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-
-                    // 이미지를 축소하여 메모리 문제 방지
-                    Bitmap enhancedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
-
-                    // 분석 결과 생성 (TensorFlow Lite 모델을 사용해 분석)
-                    String predictionResult = classifyImage(enhancedBitmap);
-
-                    // 분석 결과를 리설트 액티비티 화면에 표시
-                    resultTextView.setText(predictionResult);
-                    Glide.with(this).load(selectedImageUri).into(resultImageView);
-
-                    // 타임스탬프 추가
-                    String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("ResultActivity", "이미지 로딩 중 오류 발생", e);
-                    Toast.makeText(this, "이미지를 처리하는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-
-    private Bitmap enhanceImageQuality(Bitmap bitmap) {
-        // 이미지를 224x224로 크기 조정
-        return Bitmap.createScaledBitmap(bitmap, 224, 224, true);
     }
 
     private String classifyImage(Bitmap bitmap) {
@@ -336,6 +295,63 @@ public class ResultActivity extends AppCompatActivity {
 
         return result.toString();
     }
+
+
+    // 권한 요청
+    private void checkPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
+            }
+        }
+    }
+
+
+    // 갤러리 열기 메서드
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE);
+    }
+
+    // 이미지 업로드 후 분석 기능 유지, MainActivity로 정보만 전송
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
+            selectedImageUri = data.getData();  // 선택한 이미지의 URI를 저장
+
+            if (selectedImageUri != null) {
+                try {
+                    // 선택한 이미지를 비트맵으로 변환
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+
+                    // 이미지를 축소하여 메모리 문제 방지
+                    Bitmap enhancedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+
+                    // 분석 결과 생성 (TensorFlow Lite 모델을 사용해 분석)
+                    String predictionResult = classifyImage(enhancedBitmap);
+
+                    // 분석 결과를 리설트 액티비티 화면에 표시
+                    resultTextView.setText(predictionResult);
+                    Glide.with(this).load(selectedImageUri).into(resultImageView);
+
+                    // 타임스탬프 추가
+                    String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("ResultActivity", "이미지 로딩 중 오류 발생", e);
+                    Toast.makeText(this, "이미지를 처리하는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private Bitmap enhanceImageQuality(Bitmap bitmap) {
+        // 이미지를 224x224로 크기 조정
+        return Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+    }
+
 
     private void initializeClassNames() {
         classNames[0] = "무기폐 (Atelectasis)";
