@@ -91,53 +91,53 @@ public class MainActivity extends AppCompatActivity {
                 if (imageUris[index] != null) {
                     // 타임스탬프에서 병명 추출
                     String timestamp = timestampViews[index].getText().toString();
-                    String predictionResult = timestamp.substring(timestamp.indexOf("(") + 1, timestamp.indexOf(")")); // 병명 추출
+                    String bestPrediction = timestamp.substring(timestamp.indexOf("(") + 1, timestamp.indexOf(")")); // 병명 추출
 
                     // Log 추가
-                    Log.d("MainActivity", "Prediction Result: " + predictionResult); // 병명 출력
+                    Log.d("MainActivity", "Prediction Result: " + bestPrediction); // 병명 출력
 
                     Intent intent;
-                    switch (predictionResult) {
-                        case "무기폐 (Atelectasis)":
+                    switch (bestPrediction) {
+                        case "무기폐 (Atelectasis":
                             intent = new Intent(MainActivity.this, InfoActivity1.class);
                             break;
-                        case "심장비대 (Cardiomegaly)":
+                        case "심장비대 (Cardiomegaly":
                             intent = new Intent(MainActivity.this, InfoActivity2.class);
                             break;
-                        case "삼출 (Effusion)":
+                        case "삼출 (Effusion":
                             intent = new Intent(MainActivity.this, InfoActivity3.class);
                             break;
-                        case "침윤 (Infiltration)":
+                        case "침윤 (Infiltration":
                             intent = new Intent(MainActivity.this, InfoActivity4.class);
                             break;
-                        case "종괴 (Mass)":
+                        case "종괴 (Mass":
                             intent = new Intent(MainActivity.this, InfoActivity5.class);
                             break;
-                        case "결절 (Nodule)":
+                        case "결절 (Nodule":
                             intent = new Intent(MainActivity.this, InfoActivity6.class);
                             break;
-                        case "폐렴 (Pneumonia)":
+                        case "폐렴 (Pneumonia":
                             intent = new Intent(MainActivity.this, InfoActivity7.class);
                             break;
-                        case "기흉 (Pneumothorax)":
+                        case "기흉 (Pneumothorax":
                             intent = new Intent(MainActivity.this, InfoActivity8.class);
                             break;
-                        case "폐경화 (Consolidation)":
+                        case "폐경화 (Consolidation":
                             intent = new Intent(MainActivity.this, InfoActivity9.class);
                             break;
-                        case "부종 (Edema)":
+                        case "부종 (Edema":
                             intent = new Intent(MainActivity.this, InfoActivity10.class);
                             break;
-                        case "폐기종 (Emphysema)":
+                        case "폐기종 (Emphysema":
                             intent = new Intent(MainActivity.this, InfoActivity11.class);
                             break;
-                        case "섬유화 (Fibrosis)":
+                        case "섬유화 (Fibrosis":
                             intent = new Intent(MainActivity.this, InfoActivity12.class);
                             break;
-                        case "흉막 비후 (Pleural Thickening)":
+                        case "흉막 비후 (Pleural Thickening":
                             intent = new Intent(MainActivity.this, InfoActivity13.class);
                             break;
-                        case "탈장 (Hernia)":
+                        case "탈장 (Hernia":
                             intent = new Intent(MainActivity.this, InfoActivity14.class);
                             break;
                         default:
