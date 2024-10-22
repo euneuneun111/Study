@@ -234,6 +234,11 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void analyzeImage(Bitmap bitmap) {
+        if (bitmap != null) {
+            Bitmap enhancedBitmap = enhanceImageQuality(bitmap); // 이미지 품질 개선
+            String result = classifyImage(enhancedBitmap); // 이미지 분석
+            resultTextView.setText(result); // 분석 결과를 화면에 표시
+        }
     }
 
     // 권한 요청
@@ -245,16 +250,6 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 권한이 승인된 경우
-            } else {
-                Toast.makeText(this, "권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     // 갤러리 열기 메서드
     private void openGallery() {
