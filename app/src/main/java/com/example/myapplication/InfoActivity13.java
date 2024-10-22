@@ -36,8 +36,7 @@ public class InfoActivity13 extends AppCompatActivity {
         findViewById(R.id.confirm_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 확인 버튼 클릭 시 동작 (예: 액티비티 종료 또는 다른 화면으로 이동)
-                Toast.makeText(InfoActivity13.this, "", Toast.LENGTH_SHORT).show();
+
                 finish();  // 현재 액티비티 종료
             }
         });

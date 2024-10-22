@@ -3,11 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,8 +14,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication">
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="31">
 
+        <!-- MainActivity 선언 -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -27,29 +27,32 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SignUpActivity" android:exported="true" />
-        <activity android:name=".ProfileActivity" android:exported="true" />
-        <activity android:name=".MainActivity" android:exported="true" />
-        <activity android:name=".BoardActivity" android:exported="true" />
-        <activity android:name=".DiseaselistActivity" android:exported="true" />
-        <activity android:name=".ResultActivity" android:exported="true" />
+        <!-- ProfileActivity 선언 -->
+        <activity android:name=".SignUpActivity" android:exported="true"/>
+        <activity android:name=".ProfileActivity" android:exported="true"/>
+        <activity android:name=".MainActivity" android:exported="true"/>
+        <activity android:name=".BoardActivity" android:exported="true"/>
+        <activity android:name=".BoardinfoActivity" android:exported="true"/>
+        <activity android:name=".DiseaselistActivity" android:exported="true"/>
+        <activity android:name=".ResultActivity" android:exported="true"/>
+        <activity android:name=".InfoActivity1" android:exported="true"/>
+        <activity android:name=".InfoActivity2" android:exported="true"/>
+        <activity android:name=".InfoActivity3" android:exported="true"/>
+        <activity android:name=".InfoActivity4" android:exported="true"/>
+        <activity android:name=".InfoActivity5" android:exported="true"/>
+        <activity android:name=".InfoActivity6" android:exported="true"/>
+        <activity android:name=".InfoActivity7" android:exported="true"/>
+        <activity android:name=".InfoActivity8" android:exported="true"/>
+        <activity android:name=".InfoActivity9" android:exported="true"/>
+        <activity android:name=".InfoActivity10" android:exported="true"/>
+        <activity android:name=".InfoActivity11" android:exported="true"/>
+        <activity android:name=".InfoActivity12" android:exported="true"/>
+        <activity android:name=".InfoActivity13" android:exported="true"/>
+        <activity android:name=".InfoActivity14" android:exported="true"/>
 
-        <!-- 다른 액티비티 선언 -->
-        <activity android:name=".BoardwriteActivity" android:exported="true" />
-        <activity android:name=".MoreHospital" android:exported="true" />
-        <activity android:name=".InfoActivity1" android:exported="true" />
-        <activity android:name=".InfoActivity2" android:exported="true" />
-        <activity android:name=".InfoActivity3" android:exported="true" />
-        <activity android:name=".InfoActivity4" android:exported="true" />
-        <activity android:name=".InfoActivity5" android:exported="true" />
-        <activity android:name=".InfoActivity6" android:exported="true" />
-        <activity android:name=".InfoActivity7" android:exported="true" />
-        <activity android:name=".InfoActivity8" android:exported="true" />
-        <activity android:name=".InfoActivity9" android:exported="true" />
-        <activity android:name=".InfoActivity10" android:exported="true" />
-        <activity android:name=".InfoActivity11" android:exported="true" />
-        <activity android:name=".InfoActivity12" android:exported="true" />
-        <activity android:name=".InfoActivity13" android:exported="true" />
-        <activity android:name=".InfoActivity14" android:exported="true" />
+        <activity android:name=".BoardwriteActivity" android:exported="true"/>
+        <activity android:name=".MoreHospital" android:exported="true"/>
+
     </application>
+
 </manifest>

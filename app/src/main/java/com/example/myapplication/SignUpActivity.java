@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Spinner regionSpinner;
     private Button signupButton;
 
-    private static final String IP_ADDRESS = "10.0.2.2";
+    private static final String IP_ADDRESS = "192.168.0.158";
     private static final String TAG = "phpsignup";
 
     @Override

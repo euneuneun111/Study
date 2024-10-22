@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -31,7 +35,7 @@ import okhttp3.Response;
 public class BoardwriteActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 1;
-    private static final String SERVER_URL = "http://10.0.2.2/post_input.php";
+    private static final String SERVER_URL = "http://192.168.0.158/post_input.php";
     private ImageView selectedImageView;
     private EditText titleEditText;
     private EditText contentEditText;
@@ -41,7 +45,6 @@ public class BoardwriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_write);
-
 
         titleEditText = findViewById(R.id.et_title);
         contentEditText = findViewById(R.id.et_content);
@@ -84,7 +87,14 @@ public class BoardwriteActivity extends AppCompatActivity {
             return;
         }
 
-        File imageFile = new File(FileUtils.getPath(this, selectedImageUri));
+        // 파일 경로 얻기
+        String imagePath = FileUtils.getPath(this, selectedImageUri);
+        if (imagePath == null) {
+            Toast.makeText(this, "이미지 경로를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        File imageFile = new File(imagePath);
         if (!imageFile.exists()) {
             Toast.makeText(this, "이미지 파일이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
             return;
@@ -117,25 +127,35 @@ public class BoardwriteActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show());
                     Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show());
                 }
             }
         });
     }
+
     public static class FileUtils {
         public static String getPath(Context context, Uri uri) {
-            String[] projection = {MediaStore.Images.Media.DATA};
-            Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
-            if (cursor != null) {
-                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                String path = cursor.getString(columnIndex);
-                cursor.close();
-                return path;
+            try {
+                InputStream inputStream = context.getContentResolver().openInputStream(uri);
+                if (inputStream == null) return null;
+
+                File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "uploaded_image.jpg");
+                OutputStream outputStream = new FileOutputStream(file);
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
+                }
+                outputStream.close();
+                inputStream.close();
+                return file.getAbsolutePath();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
-            return null;
         }
     }
-
 }

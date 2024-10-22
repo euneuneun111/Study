@@ -36,34 +36,26 @@ public class BoardActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2/")
+                .baseUrl("http://192.168.0.158/") // 서버 주소
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        fetchPosts(apiService);
+        fetchPosts(apiService); // 게시물 가져오기
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.nav_write) {
-                    Intent intent = new Intent(BoardActivity.this, BoardwriteActivity.class);
-                    startActivity(intent);
-                    return true;
-                } else {
-                    return false;
-                }
+        // 하단 내비게이션 설정
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_write) {
+                Intent intent = new Intent(BoardActivity.this, BoardwriteActivity.class);
+                startActivity(intent);
+                return true;
             }
+            return false;
         });
 
-        ImageView Backview = findViewById(R.id.iv_arrow_left_board);
-        Backview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        // 뒤로 가기 버튼 클릭 리스너
+        ImageView backView = findViewById(R.id.iv_arrow_left_board);
+        backView.setOnClickListener(v -> finish());
     }
 
     private void fetchPosts(ApiService apiService) {
@@ -73,14 +65,14 @@ public class BoardActivity extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Post> posts = response.body();
-                    postAdapter = new PostAdapter(posts);
+                    postAdapter = new PostAdapter(posts, BoardActivity.this); // Context 전달
                     recyclerView.setAdapter(postAdapter);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-                t.printStackTrace();
+                t.printStackTrace(); // 에러 로그 출력
             }
         });
     }

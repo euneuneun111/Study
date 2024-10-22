@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView signUp, findPassword;
 
-    private static final String IP_ADDRESS = "10.0.2.2";
+    private static final String IP_ADDRESS = "192.168.0.158";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                 connection.setDoOutput(true);
                 connection.setDoInput(true);
 
-                String postData = "u_id=" + id + "&u_password=" + password;
+                // 인코딩된 POST 데이터
+                String postData = "u_id=" + URLEncoder.encode(id, "UTF-8") + "&u_password=" + URLEncoder.encode(password, "UTF-8");
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
                 writer.write(postData);
                 writer.flush();
@@ -122,43 +124,38 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            if (result.contains("no id OR wrong password")) {
-                Toast.makeText(LoginActivity.this, "로그인 실패: 잘못된 ID 또는 비밀번호입니다.", Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    JSONArray jsonArray = jsonObject.getJSONArray("user");
-
-                    if (jsonArray.length() > 0) {
-                        JSONObject userObject = jsonArray.getJSONObject(0);
-                        String u_id = userObject.getString("u_id");
-                        String u_nickname = userObject.getString("u_nickname");
-                        String u_password = userObject.getString("u_password");
-                        String u_doctor = userObject.getString("u_doctor");
-                        String u_region = userObject.getString("u_region");
-
-
-                        Toast.makeText(LoginActivity.this, "로그인 성공: " + u_nickname, Toast.LENGTH_SHORT).show();
-
-
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("u_id", u_id);
-                                intent.putExtra("u_nickname", u_nickname);
-                                intent.putExtra("u_password", u_password);
-                                intent.putExtra("u_doctor", u_doctor);
-                                intent.putExtra("u_region", u_region);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }, 2000);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(LoginActivity.this, "로그인 실패: 데이터 파싱 오류", Toast.LENGTH_SHORT).show();
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if (!jsonObject.has("user")) {
+                    Toast.makeText(LoginActivity.this, "유효하지 않은 응답 형식입니다.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                JSONArray jsonArray = jsonObject.getJSONArray("user");
+                if (jsonArray.length() > 0) {
+                    JSONObject userObject = jsonArray.getJSONObject(0);
+                    String u_id = userObject.optString("u_id", "unknown");
+                    String u_nickname = userObject.optString("u_nickname", "unknown");
+                    String u_password = userObject.optString("u_password", "unknown");
+                    String u_doctor = userObject.optString("u_doctor", "unknown");
+                    String u_region = userObject.optString("u_region", "unknown");
+
+                    Toast.makeText(LoginActivity.this, u_nickname + "님 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("u_id", u_id);
+                    intent.putExtra("u_nickname", u_nickname);
+                    intent.putExtra("u_password", u_password);
+                    intent.putExtra("u_doctor", u_doctor);
+                    intent.putExtra("u_region", u_region);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "로그인 실패: 사용자 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(LoginActivity.this, "로그인 실패: 데이터 파싱 오류", Toast.LENGTH_SHORT).show();
             }
         }
     }
