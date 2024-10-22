@@ -52,6 +52,7 @@
 
         <activity android:name=".BoardwriteActivity" android:exported="true"/>
         <activity android:name=".MoreHospital" android:exported="true"/>
+        <activity android:name=".ChatActivity" android:exported="true"/>
 
     </application>
 

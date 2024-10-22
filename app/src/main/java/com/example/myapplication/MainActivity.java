@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,15 +22,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] timestampViews = new TextView[4];
     private String[] imageUris = new String[4]; // 이미지 URI 저장
     private int currentIndex;  // 현재 이미지가 채워질 슬롯 인덱스
+    private Button chatMoveButton;
 
     private static final String PREFS_NAME = "MyAppPrefs";
     private static final String INDEX_KEY = "currentIndex"; // 저장할 인덱스 키
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        chatMoveButton = findViewById(R.id.chat_move_button);
         // 4개의 ImageView와 TextView 연결
         imageViews[0] = findViewById(R.id.image_view_1);
         imageViews[1] = findViewById(R.id.image_view_2);
@@ -48,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mri_add).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ResultActivity.class);
             startActivity(intent);  // 이미지를 선택하는 액티비티 시작
+        });
+
+        chatMoveButton = findViewById(R.id.chat_move_button);
+        chatMoveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chatIntent = new Intent(MainActivity.this, ChatActivity.class);
+                chatIntent.putExtra("nickname", "사용자 닉네임"); // 실제 사용자 닉네임으로 변경
+                startActivity(chatIntent);
+            }
         });
 
         ImageView diseaseListImageView = findViewById(R.id.disease_list);

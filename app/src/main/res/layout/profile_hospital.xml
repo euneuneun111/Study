@@ -55,6 +55,8 @@
                     android:textStyle="bold" />
 
 
+
+
             </LinearLayout>
 
             <!-- 전화번호 -->
