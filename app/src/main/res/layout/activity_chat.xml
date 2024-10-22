@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -6,7 +5,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/message_input_container"> <!-- 입력 컨테이너 위에 위치 -->
+        android:layout_above="@+id/message_input_container">
 
         <TextView
             android:id="@+id/received_messages"
@@ -17,25 +16,39 @@
             android:textSize="16sp" />
     </ScrollView>
 
-    <LinearLayout android:id="@+id/message_input_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:orientation="horizontal">
-
-    <EditText
-        android:id="@+id/message_input"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/message_input_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="메시지를 입력하세요"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/room_id_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="룸 ID를 입력하세요"
         android:padding="8dp" />
 
-    <Button
-        android:id="@+id/send_button"
+        <EditText
+            android:id="@+id/message_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="메시지를 입력하세요"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/enter_room_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="전송" />
-</LinearLayout>
-    </RelativeLayout>
+        android:text="룸 입장" />
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="전송" />
+    </LinearLayout>
+</RelativeLayout>
