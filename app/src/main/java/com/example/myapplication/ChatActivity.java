@@ -20,6 +20,9 @@ public class ChatActivity extends AppCompatActivity {
     private Button sendButton;
     private String nickname; // 닉네임 변수 추가
 
+    private static final String PREFS_NAME = "MyAppPrefs";
+    private static final String CHAT_HISTORY_KEY = "chat_history"; // 채팅 내역 저장 키
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.send_button);
 
         // Shared Preferences에서 닉네임 가져오기
-        SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         nickname = sharedPreferences.getString("u_nickname", null); // 저장된 닉네임 가져오기
 
         if (nickname != null) {
@@ -44,6 +47,9 @@ public class ChatActivity extends AppCompatActivity {
         client = new ChatWebSocketClient(uri, nickname, this); // 닉네임과 ChatActivity 인스턴스 전달
         client.connect();
 
+        // 이전 채팅 내역 로드
+        loadChatHistory();
+
         // 전송 버튼 클릭 리스너
         sendButton.setOnClickListener(v -> {
             String message = messageInput.getText().toString();
@@ -52,8 +58,30 @@ public class ChatActivity extends AppCompatActivity {
                 client.send(formattedMessage); // 메시지 전송
                 receivedMessages.append("나: " + message + "\n"); // 본인 메시지 추가
                 messageInput.setText(""); // 입력 필드 비우기
+
+                // 채팅 내역 저장
+                saveChatHistory(formattedMessage);
             }
         });
+    }
+
+    // 채팅 내역 저장
+    private void saveChatHistory(String message) {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String existingHistory = sharedPreferences.getString(CHAT_HISTORY_KEY, "");
+        String newHistory = existingHistory + message + "\n"; // 새로운 메시지를 추가
+        editor.putString(CHAT_HISTORY_KEY, newHistory);
+        editor.apply();
+    }
+
+    // 이전 채팅 내역 로드
+    private void loadChatHistory() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String chatHistory = sharedPreferences.getString(CHAT_HISTORY_KEY, "");
+        if (!chatHistory.isEmpty()) {
+            receivedMessages.setText(chatHistory); // 로드한 채팅 내역을 표시
+        }
     }
 
     // WebSocketClient 클래스 정의
