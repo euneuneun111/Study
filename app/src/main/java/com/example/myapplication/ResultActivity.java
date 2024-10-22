@@ -95,7 +95,7 @@ public class ResultActivity extends AppCompatActivity {
             String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
             intent.putExtra("timestamp", currentTime); // 타임스탬프 추가
             startActivity(intent); // MainActivity로 이동
-            finish(); // 현재 액티비티 종료 1111
+            finish();
         });
 
         findViewById(R.id.mri_check).setOnClickListener(v -> {
