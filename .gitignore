@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# 제외할 .tflite 파일
+app/src/main/assets/chest_xray_model.tflite
+app/src/main/assets/chest_xray_mode453.tflite
+app/src/main/assets/chest_xray_model2.tflite
