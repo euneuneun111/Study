@@ -1,65 +1,56 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ProfileActivity extends AppCompatActivity{
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class ProfileActivity extends AppCompatActivity {
 
     private TextView profile_nickname, profile_id, profile_doc, profile_re;
+    private static final String IP_ADDRESS = "192.168.0.158";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actiivty_profile);
 
+        // View 초기화
         ImageView Backview = findViewById(R.id.iv_arrow_left_board);
-
         profile_nickname = findViewById(R.id.profile_nickname);
         profile_id = findViewById(R.id.profile_id);
         profile_doc = findViewById(R.id.profile_doc);
         profile_re = findViewById(R.id.profile_re);
 
-        // LoginActivity로부터 전달받은 사용자 정보 추출 및 설정
-        String nickname = getIntent().getStringExtra("profile_nickname");
-        String _id = getIntent().getStringExtra("profile_id");
-        String doc = getIntent().getStringExtra("profile_doc");
-        String re = getIntent().getStringExtra("profile_re");
+        String userId = getIntent().getStringExtra("u_id");
 
-        profile_nickname.setText("NickName: " + profile_nickname);
-        profile_id.setText("Id: " + profile_id);
-        profile_doc.setText("Doctor: " + profile_doc);
-        profile_re.setText("Region: " + profile_re);
+        if (userId != null) {
+            new FetchUserDataTask().execute(userId);
+        } else {
+            Toast.makeText(this, "사용자 ID가 제공되지 않았습니다.", Toast.LENGTH_SHORT).show();
+        }
 
-        Backview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 클릭 시 실행할 작업을 여기에 작성
-
-                // 예: 뒤로 가기 동작 구현
-                finish();  // 현재 액티비티를 종료하고 이전 액티비티로 돌아갑니다.
-            }
-        });
+        Backview.setOnClickListener(v -> finish());
 
         TextView Morehospital = findViewById(R.id.hospital_more);
-
-        Morehospital.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 클릭 시 실행할 작업을 여기에 작성
-
-                startActivity(new Intent(ProfileActivity.this, MoreHospital.class));
-            }
-        });
-
+        Morehospital.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, MoreHospital.class)));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -78,8 +69,62 @@ public class ProfileActivity extends AppCompatActivity{
                 return false;
             }
         });
-
     }
 
+    private class FetchUserDataTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String userId = params[0];
+            String serverURL = "http://" + IP_ADDRESS + "/getUserData.php?u_id=" + userId;
 
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    reader.close();
+                    return response.toString();
+                } else {
+                    return "Error: " + responseCode;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Exception: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                Log.d("ProfileActivity", "서버 응답: " + result); // 응답 로그 출력
+                JSONObject jsonObject = new JSONObject(result);
+                if (jsonObject.has("user")) {
+                    JSONObject userObject = jsonObject.getJSONObject("user");
+                    String nickname = userObject.optString("u_nickname", "Unknown");
+                    String id = userObject.optString("u_id", "Unknown");
+                    String doc = userObject.optString("u_doctor", "Unknown");
+                    String region = userObject.optString("u_region", "Unknown");
+
+                    profile_nickname.setText("NickName: " + nickname);
+                    profile_id.setText("Id: " + id);
+                    profile_doc.setText("Doctor: " + doc);
+                    profile_re.setText("Region: " + region);
+                } else {
+                    Toast.makeText(ProfileActivity.this, "사용자 정보를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(ProfileActivity.this, "데이터 처리 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
