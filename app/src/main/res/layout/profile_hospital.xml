@@ -102,16 +102,7 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/more_hos_info"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:text="더보기"/>
+
 
 </LinearLayout>
 
