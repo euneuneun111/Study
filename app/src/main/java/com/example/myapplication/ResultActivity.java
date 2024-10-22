@@ -76,7 +76,7 @@ public class ResultActivity extends AppCompatActivity {
         }
 
         // Intent로부터 전달받은 이미지 URI 표시
-        Intent intent = getIntent();
+        Intent intent = getIntent(); //22
         String imageUriString = intent.getStringExtra("imageUri");
 
         if (imageUriString != null) {
