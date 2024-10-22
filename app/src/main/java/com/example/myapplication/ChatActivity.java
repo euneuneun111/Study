@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import android.content.SharedPreferences; // SharedPreferences 임포트 추가
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +48,9 @@ public class ChatActivity extends AppCompatActivity {
         sendButton.setOnClickListener(v -> {
             String message = messageInput.getText().toString();
             if (!message.isEmpty()) {
-                client.send(nickname + ": " + message); // 닉네임과 메시지를 함께 전송
+                String formattedMessage = nickname + ": " + message; // 닉네임과 메시지를 함께 포맷팅
+                client.send(formattedMessage); // 메시지 전송
+                receivedMessages.append("나: " + message + "\n"); // 본인 메시지 추가
                 messageInput.setText(""); // 입력 필드 비우기
             }
         });
@@ -72,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
 
         @Override
         public void onMessage(String message) {
-            chatActivity.runOnUiThread(() -> chatActivity.receivedMessages.append("수신된 메시지: " + message + "\n"));
+            chatActivity.runOnUiThread(() -> chatActivity.receivedMessages.append("상대: " + message + "\n")); // 상대 메시지 추가
         }
 
         @Override
