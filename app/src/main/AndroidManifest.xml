@@ -51,6 +51,11 @@
         </activity>
 
         <activity
+            android:name=".BoardinfoActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".DiseaselistActivity"
             android:exported="true">
         </activity>
@@ -61,7 +66,7 @@
         </activity>
 
         <activity
-            android:name=".InfoActivity"
+            android:name=".InfoActivity1"
             android:exported="true">
         </activity>
 
