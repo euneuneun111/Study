@@ -86,12 +86,19 @@ public class ResultActivity extends AppCompatActivity {
             // 이미지 분석 (TensorFlow Lite 모델 사용)
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                analyzeImage(bitmap);  // 이미지를 분석하는 메소드 호출
+                analyzeImage(bitmap);  // 이미지를 분석하는 메소드 호출a
             } catch (IOException e) {
                 Log.e("ResultActivity", "이미지 로딩 중 오류 발생", e);
                 Toast.makeText(this, "이미지를 처리하는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
             }
         }
+
+        ImageView reimage = findViewById(R.id.result_image_view);
+
+        reimage.setOnClickListener(v -> {
+            openGallery();
+
+        });
 
         LinearLayout uploadButton = findViewById(R.id.uploadButton);
 
@@ -238,8 +245,57 @@ public class ResultActivity extends AppCompatActivity {
             Bitmap enhancedBitmap = enhanceImageQuality(bitmap); // 이미지 품질 개선
             String result = classifyImage(enhancedBitmap); // 이미지 분석
             resultTextView.setText(result); // 분석 결과를 화면에 표시
+        } else {
+            resultTextView.setText("이미지가 없습니다."); // 예외 처리
         }
     }
+
+    private String classifyImage(Bitmap bitmap) {
+        if (tflite == null) {
+            Log.e("TFLite", "모델이 초기화되지 않았습니다.");
+            return "모델이 초기화되지 않았습니다.";
+        }
+
+        ByteBuffer inputBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3);
+        inputBuffer.order(java.nio.ByteOrder.nativeOrder());
+
+        int[] intValues = new int[224 * 224];
+        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+        for (int pixelValue : intValues) {
+            inputBuffer.putFloat(((pixelValue >> 16) & 0xFF) / 255.0f); // Red
+            inputBuffer.putFloat(((pixelValue >> 8) & 0xFF) / 255.0f);  // Green
+            inputBuffer.putFloat((pixelValue & 0xFF) / 255.0f);          // Blue
+        }
+
+        float[][] output = new float[1][15];
+        tflite.run(inputBuffer, output);
+
+        // 예측 결과를 정렬
+        predictions = new Prediction[15];
+        for (int i = 0; i < output[0].length; i++) {
+            predictions[i] = new Prediction(classNames[i], output[0][i]);
+        }
+
+        // 확률을 기준으로 내림차순 정렬
+        Arrays.sort(predictions, new Comparator<Prediction>() {
+            @Override
+            public int compare(Prediction p1, Prediction p2) {
+                return Float.compare(p2.probability, p1.probability);
+            }
+        });
+
+        // 상위 5개 예측 결과와 설명을 반환
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            result.append(predictions[i].className).append(": ")
+                    .append(String.format("%.2f", predictions[i].probability * 100)).append("%\n")
+                    .append(diseaseDescriptions[i]).append("\n\n");
+        }
+
+        return result.toString();
+    }
+
 
     // 권한 요청
     private void checkPermissions() {
@@ -296,51 +352,6 @@ public class ResultActivity extends AppCompatActivity {
         return Bitmap.createScaledBitmap(bitmap, 224, 224, true);
     }
 
-    private String classifyImage(Bitmap bitmap) {
-        if (tflite == null) {
-            Log.e("TFLite", "모델이 초기화되지 않았습니다.");
-            return "모델이 초기화되지 않았습니다.";
-        }
-
-        ByteBuffer inputBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3);
-        inputBuffer.order(java.nio.ByteOrder.nativeOrder());
-
-        int[] intValues = new int[224 * 224];
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-
-        for (int pixelValue : intValues) {
-            inputBuffer.putFloat(((pixelValue >> 16) & 0xFF) / 255.0f); // Red
-            inputBuffer.putFloat(((pixelValue >> 8) & 0xFF) / 255.0f);  // Green
-            inputBuffer.putFloat((pixelValue & 0xFF) / 255.0f);          // Blue
-        }
-
-        float[][] output = new float[1][15];
-        tflite.run(inputBuffer, output);
-
-        // 예측 결과를 정렬
-        predictions = new Prediction[15];
-        for (int i = 0; i < output[0].length; i++) {
-            predictions[i] = new Prediction(classNames[i], output[0][i]);
-        }
-
-        // 확률을 기준으로 내림차순 정렬
-        Arrays.sort(predictions, new Comparator<Prediction>() {
-            @Override
-            public int compare(Prediction p1, Prediction p2) {
-                return Float.compare(p2.probability, p1.probability);
-            }
-        });
-
-        // 상위 5개 예측 결과와 설명을 반환
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            result.append(predictions[i].className).append(": ")
-                    .append(String.format("%.2f", predictions[i].probability * 100)).append("%\n")
-                    .append(diseaseDescriptions[i]).append("\n\n");
-        }
-
-        return result.toString();
-    }
 
     private void initializeClassNames() {
         classNames[0] = "무기폐 (Atelectasis)";
