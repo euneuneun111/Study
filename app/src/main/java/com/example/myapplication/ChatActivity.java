@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import android.content.SharedPreferences;
+import android.content.SharedPreferences; // SharedPreferences 임포트 추가
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -102,7 +102,11 @@ public class ChatActivity extends AppCompatActivity {
 
         @Override
         public void onMessage(String message) {
-            chatActivity.runOnUiThread(() -> chatActivity.receivedMessages.append("상대: " + message + "\n")); // 상대 메시지 추가
+            chatActivity.runOnUiThread(() -> {
+                chatActivity.receivedMessages.append("상대: " + message + "\n"); // 상대 메시지 추가
+                // 채팅 내역 저장
+                chatActivity.saveChatHistory("상대: " + message); // 상대방 메시지 저장
+            });
         }
 
         @Override
