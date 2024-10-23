@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        chatMoveButton = findViewById(R.id.chat_move_button);
         // 4개의 ImageView와 TextView 연결
         imageViews[0] = findViewById(R.id.image_view_1);
         imageViews[1] = findViewById(R.id.image_view_2);
@@ -54,15 +53,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);  // 이미지를 선택하는 액티비티 시작
         });
 
-        chatMoveButton = findViewById(R.id.chat_move_button);
-        chatMoveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chatIntent = new Intent(MainActivity.this, ChatActivity.class);
-                chatIntent.putExtra("nickname", "사용자 닉네임"); // 실제 사용자 닉네임으로 변경
-                startActivity(chatIntent);
-            }
-        });
+
 
         ImageView diseaseListImageView = findViewById(R.id.disease_list);
         diseaseListImageView.setOnClickListener(v -> {
@@ -71,28 +62,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent); // 액티비티 시작
         });
 
-        // 각 이미지 클릭 시 ResultActivity로 이미지 전송
-        // 아래의 코드 블록은 삭제했습니다.
-        /*
-        for (int i = 0; i < 4; i++) {
-            int index = i;
-            imageViews[i].setOnClickListener(v -> {
-                if (imageUris[index] != null) {
-                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                    intent.putExtra("imageUri", imageUris[index]);  // 클릭한 이미지의 URI를 전송
-
-                    // 병명 추출
-                    String timestamp = timestampViews[index].getText().toString();
-                    String predictionResult = timestamp.substring(timestamp.indexOf("(") + 1, timestamp.indexOf(")")); // 병명 추출
-
-                    intent.putExtra("predictionResult", predictionResult); // 병명도 함께 전송
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "이미지가 없습니다.", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        */
 
         // 텍스트 클릭 리스너 추가
         for (int i = 0; i < 4; i++) {
