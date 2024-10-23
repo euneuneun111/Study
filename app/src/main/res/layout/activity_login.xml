@@ -5,12 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp"
-    android:background="#FFFFFF">
+    android:background="@color/white"
+
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="16dp">
@@ -18,6 +21,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+
             android:src="@drawable/x_raycare_logo"/>
 
     </LinearLayout>
@@ -35,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="ID "
             android:textSize="16sp"
+            android:textColor="#156081"
             android:layout_gravity="center_vertical"/>
 
         <!-- ID 에디트 텍스트 -->
@@ -61,6 +67,8 @@
             android:layout_height="wrap_content"
             android:text="PW "
             android:textSize="16sp"
+            android:textColor="#156081"
+
             android:layout_gravity="center_vertical"/>
 
         <!-- PW 에디트 텍스트 -->
@@ -100,15 +108,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="회원가입"
-            android:textColor="@android:color/black"
-            android:layout_marginEnd="30dp" />
+            android:layout_marginEnd="30dp"
+            android:textColor="@android:color/holo_blue_dark" />
 
         <TextView
             android:id="@+id/findPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="비밀번호 찾기"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/holo_blue_dark" />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:gravity="center"
     android:padding="16dp"
-    android:background="#FFFFFF">
+    >
 
     <!-- 회원가입 제목 -->
     <TextView
@@ -16,7 +17,7 @@
         android:textSize="55sp"
         android:layout_gravity="left"
         android:textStyle="bold"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="#156081"
         android:layout_marginBottom="40dp" />
 
     <!-- ID 입력 필드 (수평 레이아웃) -->
@@ -30,6 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID "
+            android:textColor="#156081"
+
             android:textSize="16sp" />
 
         <!-- ID 입력 -->
@@ -62,7 +65,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NICKNAME "
+            android:text="닉네임 "
+            android:textColor="#156081"
+
             android:textSize="16sp" />
 
         <!-- PW 입력 -->
@@ -87,6 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PW "
+            android:textColor="#156081"
+
             android:textSize="16sp" />
 
         <EditText
@@ -109,6 +116,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="지역  "
+            android:textColor="#156081"
+
             android:textSize="16sp" />
 
 
@@ -134,6 +143,7 @@
         <CheckBox
             android:id="@+id/checkMedical"
             android:layout_width="wrap_content"
+            android:textColor="#156081"
             android:layout_height="wrap_content"
             android:text="의료진 확인" />
 
@@ -163,7 +173,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="회원가입 완료"
-        android:background="@android:color/holo_blue_dark"
+        android:background="#156081"
+
         android:textColor="@android:color/white"
         android:layout_marginTop="30dp" />
 

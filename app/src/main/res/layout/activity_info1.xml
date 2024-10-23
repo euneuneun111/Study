@@ -22,17 +22,13 @@
             android:padding="16dp">
 
             <!-- 질병 이름 및 확률 -->
-            <TextView
-                android:id="@+id/app_title2"
+            <ImageView
+                android:id="@+id/app_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:text="X - RayCare"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="28sp"
-                android:textStyle="italic|bold" />
+                android:layout_height="60dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/x_raycare_logo2"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -99,7 +95,8 @@
                 android:id="@+id/disease_department"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="생선, 꿀, 배 주스, 신선한 우유, 연꽃 씨앗, 아몬드, 호두"
+                android:text="생선, 꿀, 배 주스, 신선한 우유, 연꽃 씨앗, 아몬드,
+                호두"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
@@ -149,8 +146,10 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:text="확인"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_round_blue"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -161,9 +160,9 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="#CCDDEE"
         app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@android:color/holo_blue_dark"
+        app:itemIconTint="#156081"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -36,31 +36,30 @@
 
                 <!-- 질병 이름 -->
                 <TextView
-                    android:id="@+id/disease_name28"
+                    android:id="@+id/disease_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="기흉 (Pneumothorax)"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <!-- 질병 설명 -->
             <TextView
-                android:id="@+id/disease_description28"
+                android:id="@+id/disease_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="공기주머니에 해당하는 폐에 구멍이 생겨
-                공기가 새고 이로 인해 늑막강 내에 \n공기나 가스가 고이게 되는 질환."
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
 
             <!-- 먹으면 좋은 음식 섹션 -->
             <TextView
-                android:id="@+id/disease_food_label2"
+                android:id="@+id/disease_food_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="증상"
@@ -70,17 +69,16 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/disease_food28"
+                android:id="@+id/disease_food"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1.흉통 \n2.호흡곤랑"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
 
             <!-- 진료과 섹션 -->
             <TextView
-                android:id="@+id/disease_department_label28"
+                android:id="@+id/disease_department_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="먹으면 좋은 음식"
@@ -90,16 +88,15 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/disease_department28"
+                android:id="@+id/disease_department"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="생선, 꿀, 배 주스, 신선한 우유, 연꽃 씨앗, 아몬드, 호두"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
 
             <TextView
-                android:id="@+id/disease12"
+                android:id="@+id/disease1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="진료과"
@@ -109,16 +106,15 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/disease228"
+                android:id="@+id/disease2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="흉부외과, 소아청소년과, 호흡기내과"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
 
             <TextView
-                android:id="@+id/disease32"
+                android:id="@+id/disease3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="원인"
@@ -128,13 +124,13 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/disease428"
+                android:id="@+id/disease4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="흡연, 만성 폐쇄성 폐질환이나 폐기종 등 폐에 질환"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#333333" />
+
         </LinearLayout>
     </ScrollView>
 
@@ -158,10 +154,9 @@
         android:layout_height="wrap_content"
         android:background="#CCDDEE"
         app:menu="@menu/bottom_nav_menu"
-
+        app:itemIconTint="#156081"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:itemIconTint="#156081"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
