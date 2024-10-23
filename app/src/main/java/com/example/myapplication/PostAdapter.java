@@ -32,17 +32,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = postList.get(position);
-        // titleTextView 설정
         holder.titleTextView.setText(post.getP_title());
 
-        // 아이템 클릭 리스너 설정
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, BoardinfoActivity.class);
             intent.putExtra("post_title", post.getP_title());
             intent.putExtra("post_content", post.getP_content());
+            intent.putExtra("post_img", post.getP_img()); // 이미지 경로 전달
             context.startActivity(intent);
         });
     }
+
 
     @Override
     public int getItemCount() {
