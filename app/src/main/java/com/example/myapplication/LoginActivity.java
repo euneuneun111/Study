@@ -152,12 +152,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     editor.apply();
 
-                    // Shared Preferences에 로그인 정보 저장
-                    SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("u_id", u_id);
-                    editor.putString("u_nickname", u_nickname);
-                    editor.apply();
+//                    // Shared Preferences에 로그인 정보 저장
+//                    SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("u_id", u_id);
+//                    editor.putString("u_nickname", u_nickname);
+//                    editor.apply();
 
                     Toast.makeText(LoginActivity.this, u_nickname + "님 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
 
