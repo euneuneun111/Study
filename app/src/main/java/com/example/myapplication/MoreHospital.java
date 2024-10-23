@@ -90,17 +90,17 @@ public class MoreHospital extends AppCompatActivity {
     }
 
     private void fetchHospitals(String h_region) {
-        // Retrofit을 이용한 병원 데이터 요청
         Call<List<Hospital>> call = hospitalApi.getHospitals(h_region);
         call.enqueue(new Callback<List<Hospital>>() {
             @Override
             public void onResponse(Call<List<Hospital>> call, Response<List<Hospital>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // 성공적으로 데이터를 받아왔을 때
                     List<Hospital> hospitals = response.body();
+                    hospitalList.clear(); // 기존 데이터 초기화
+                    hospitalList.addAll(hospitals); // 받아온 데이터 추가
+                    hospitalAdapter.notifyDataSetChanged(); // 어댑터에 변경사항 알림
                     Log.d("API Response", "Response: " + hospitals.toString());
                 } else {
-                    // 오류 응답을 디버깅하기 위해 응답 본문을 출력
                     try {
                         String errorResponse = response.errorBody().string();
                         Log.e("API Error", "Error Response: " + errorResponse);
@@ -116,4 +116,5 @@ public class MoreHospital extends AppCompatActivity {
             }
         });
     }
+
 }
