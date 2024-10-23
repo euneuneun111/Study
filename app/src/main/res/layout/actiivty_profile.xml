@@ -2,13 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,9 +22,10 @@
                 android:id="@+id/iv_arrow_left_board"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/arrow_left_board"
+                android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:tint="#156081"
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="30dp" />
 
@@ -29,18 +33,20 @@
                 android:id="@+id/profile_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="34dp"
                 android:layout_marginLeft="14dp"
                 android:text="내정보"
-                android:textSize="25sp" />
+                android:textStyle="bold"
+                android:textColor="#156081"
+                android:textSize="22sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="16dp"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/profile_title">
 
             <ImageView
@@ -49,13 +55,14 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_profile"
+                android:tint="#156081"
                 android:layout_gravity="center" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/profile_nickname"
@@ -102,6 +109,7 @@
                 android:layout_marginLeft="14dp"
                 android:layout_weight="1"
                 android:text="내 주변 병원"
+                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="18sp" />
 
             <TextView
@@ -110,11 +118,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="17dp"
                 android:text="더보기 >"
+                android:textColor="#156081"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
         </LinearLayout>
 
-        <include layout="@layout/profile_hospital" />
+        <include layout="@layout/hospital_item" />
 
     </LinearLayout>
 
@@ -122,11 +132,11 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="#CCDDEE"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:itemIconTint="@android:color/holo_blue_dark"
+        app:itemIconTint="#156081"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
