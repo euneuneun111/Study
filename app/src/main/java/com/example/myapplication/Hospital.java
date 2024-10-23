@@ -1,13 +1,28 @@
 package com.example.myapplication;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Hospital {
-    private String h_img; // 병원 로고
-    private String h_name; // 병원 이름
-    private String h_region; // 지역
-    private String h_contact_number; // 연락처
-    private String h_Address; // 주소
-    private String h_url; // 병원 웹서버
-    private String h_re_url; // 예약 링크
+    @SerializedName("h_img") // JSON의 h_img 필드와 매핑
+    private String h_img;
+
+    @SerializedName("h_name") // JSON의 h_name 필드와 매핑
+    private String h_name;
+
+    @SerializedName("h_region") // JSON의 h_region 필드와 매핑
+    private String h_region;
+
+    @SerializedName("h_contact_number") // JSON의 h_contact_number 필드와 매핑
+    private String h_contact_number;
+
+    @SerializedName("h_Address") // JSON의 h_Address 필드와 매핑 (대소문자 주의)
+    private String h_Address;
+
+    @SerializedName("h_url") // JSON의 h_url 필드와 매핑
+    private String h_url;
+
+    @SerializedName("h_re_url") // JSON의 h_re_url 필드와 매핑
+    private String h_re_url;
 
     // 생성자
     public Hospital(String h_img, String h_name, String h_region, String h_contact_number,
