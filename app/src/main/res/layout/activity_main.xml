@@ -71,12 +71,14 @@
                     android:textSize="16sp"
                     android:layout_marginStart="8dp" />
             </LinearLayout>
-            <Button
-                android:id="@+id/chat_move_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="채팅 이동"
-                android:layout_marginTop="16dp"/>
+<!--            <Button-->
+<!--                android:id="@+id/chat_move_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="채팅 이동"-->
+<!--                android:layout_marginTop="16dp"/>-->
+
+
 
             <TextView
                 android:id="@+id/recent_records"

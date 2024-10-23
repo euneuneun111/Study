@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,6 +41,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     private EditText titleEditText;
     private EditText contentEditText;
     private Uri selectedImageUri;
+    private String roomId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,19 @@ public class BoardwriteActivity extends AppCompatActivity {
         findViewById(R.id.picture_text).setOnClickListener(view -> openGallery());
         findViewById(R.id.picture_upload).setOnClickListener(view -> openGallery());
 
-        findViewById(R.id.tv_upload).setOnClickListener(view -> uploadPost());
+        // 게시글 작성 버튼 클릭 시 고유한 룸 번호 생성 후 업로드
+        findViewById(R.id.tv_upload).setOnClickListener(view -> {
+            // 고유한 룸 번호 생성
+            roomId = generateRoomId();
+
+            // 서버로 글 정보와 함께 룸 번호 전송
+            uploadPost(roomId);
+        });
+    }
+
+    // 고유한 룸 번호 생성 (UUID 사용)
+    private String generateRoomId() {
+        return UUID.randomUUID().toString();
     }
 
     private void openGallery() {
@@ -78,7 +92,8 @@ public class BoardwriteActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadPost() {
+    // 게시글과 룸 번호 서버로 전송
+    private void uploadPost(String roomId) {
         String title = titleEditText.getText().toString().trim();
         String content = contentEditText.getText().toString().trim();
 
@@ -106,6 +121,7 @@ public class BoardwriteActivity extends AppCompatActivity {
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("p_title", title)
                 .addFormDataPart("p_content", content)
+                .addFormDataPart("room_id", roomId) // 룸 번호도 함께 전송
                 .addFormDataPart("p_img", imageFile.getName(),
                         RequestBody.create(MediaType.parse("image/*"), imageFile))
                 .build();

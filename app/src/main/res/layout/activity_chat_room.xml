@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 채팅 메시지를 보여주는 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <!-- 메시지 입력 필드와 전송 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 이미지 업로드 버튼 -->
+        <Button
+            android:id="@+id/button_image_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이미지업로드" />
+
+        <!-- 메시지 입력 필드 -->
+        <EditText
+            android:id="@+id/editText_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="메시지를 입력하세요" />
+
+        <!-- 전송 버튼 -->
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전송" />
+    </LinearLayout>
+</LinearLayout>
