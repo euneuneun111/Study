@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
     <!-- 회원가입 제목 -->
     <TextView

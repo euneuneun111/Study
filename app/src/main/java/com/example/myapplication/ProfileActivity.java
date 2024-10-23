@@ -105,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             try {
-                Log.d("ProfileActivity", "서버 응답: " + result); // 응답 로그 출력
+                Log.d("ProfileActivity", "서버 응답: " + result);
                 JSONObject jsonObject = new JSONObject(result);
                 if (jsonObject.has("user")) {
                     JSONObject userObject = jsonObject.getJSONObject("user");

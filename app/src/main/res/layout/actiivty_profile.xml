@@ -2,14 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,19 +22,18 @@
                 android:id="@+id/iv_arrow_left_board"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/arrow_left_board"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_back"
-                android:tint="#156081"
-                android:layout_margin="23dp">
-            </ImageView>
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="30dp" />
 
             <TextView
                 android:id="@+id/profile_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
-                android:layout_marginLeft="3dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="14dp"
                 android:text="내정보"
                 android:textStyle="bold"
                 android:textColor="#156081"
@@ -43,25 +44,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="16dp"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/profile_title">
 
             <ImageView
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_profile"
-                android:tint="#156081"
-
                 android:layout_gravity="center" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/profile_nickname"
@@ -123,7 +123,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/profile_hospital" />
+        <include layout="@layout/hospital_item" />
 
     </LinearLayout>
 
