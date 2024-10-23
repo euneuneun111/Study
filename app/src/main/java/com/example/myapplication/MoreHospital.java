@@ -69,7 +69,7 @@ public class MoreHospital extends AppCompatActivity {
                 startActivity(new Intent(MoreHospital.this, BoardActivity.class));
                 return true;
             } else if (id == R.id.nav_home) {
-                startActivity(new Intent(MoreHospital.this, BoardActivity.class));
+                startActivity(new Intent(MoreHospital.this, MainActivity.class));
 
                 return true;
             } else if (id == R.id.nav_profile) {
