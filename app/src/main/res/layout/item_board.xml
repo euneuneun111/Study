@@ -1,40 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@drawable/border_side"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/border_side">  <!-- 테두리 적용 -->
 
-
-    <LinearLayout
-        android:layout_width="0dp"
+    <!-- 게시글 제목 -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:paddingBottom="4dp"/>
 
-        <!-- 게시글 제목 -->
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="게시글 제목"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내용"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
+    <!-- 게시글 이미지 -->
     <ImageView
-        android:id="@+id/iv_text_detail"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:orientation="vertical"/>
+        android:id="@+id/post_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:visibility="visible"/>
 
+    <!-- 룸 ID 표시 (보이지 않게 설정) -->
+    <TextView
+        android:id="@+id/tv_room_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="invisible"
+        android:paddingBottom="4dp"/>
 </LinearLayout>

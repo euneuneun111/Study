@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        chatMoveButton = findViewById(R.id.chat_move_button);
-        // 4개의 ImageView와 TextView 연결
         imageViews[0] = findViewById(R.id.image_view_1);
         imageViews[1] = findViewById(R.id.image_view_2);
         imageViews[2] = findViewById(R.id.image_view_3);
