@@ -26,7 +26,7 @@ public class DiseaselistActivity extends AppCompatActivity {
         setTextViewClickListener(R.id.Mass, 9);
         setTextViewClickListener(R.id.nodule, 5);
         setTextViewClickListener(R.id.Pneumonia, 6);
-        setTextViewClickListener(R.id.Pneumo, 7);
+        setTextViewClickListener(R.id.Pneumothorax, 7);
         setTextViewClickListener(R.id.Consolidation, 8);
         setTextViewClickListener(R.id.Infiltration, 4);
         setTextViewClickListener(R.id.Emphysema, 10);
@@ -76,7 +76,7 @@ public class DiseaselistActivity extends AppCompatActivity {
                         intent = new Intent(DiseaselistActivity.this, InfoActivity10.class);
                         break;
                     case 4:
-                        intent = new Intent(DiseaselistActivity.this, InfoActivity5.class);
+                        intent = new Intent(DiseaselistActivity.this, InfoActivity4.class);
                         break;
                     case 5:
                         intent = new Intent(DiseaselistActivity.this, InfoActivity6.class);
@@ -91,7 +91,7 @@ public class DiseaselistActivity extends AppCompatActivity {
                         intent = new Intent(DiseaselistActivity.this, InfoActivity9.class);
                         break;
                     case 9:
-                        intent = new Intent(DiseaselistActivity.this, InfoActivity4.class);
+                        intent = new Intent(DiseaselistActivity.this, InfoActivity5.class);
                         break;
                     case 10:
                         intent = new Intent(DiseaselistActivity.this, InfoActivity11.class);

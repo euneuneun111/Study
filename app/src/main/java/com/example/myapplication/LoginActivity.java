@@ -1,10 +1,9 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.SharedPreferences; // SharedPreferences 임포트 추가
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView signUp, findPassword;
 
-    // 에뮬레이터에서 테스트하는 경우 10.0.2.2를 사용
     private static final String IP_ADDRESS = "192.168.0.158";
 
     @Override
@@ -75,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 비밀번호 찾기 화면으로 이동
                 startActivity(new Intent(LoginActivity.this, PasswordActivity.class));
-
                 Toast.makeText(LoginActivity.this, "비밀번호 찾기 화면으로 이동", Toast.LENGTH_SHORT).show();
             }
         });
@@ -103,9 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                 writer.flush();
                 writer.close();
 
-                // 로그 추가
-                Log.d("LoginTask", "Request: " + postData);
-
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -117,14 +111,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     reader.close();
-                    Log.d("LoginTask", "Response: " + response.toString());
                     return response.toString();
                 } else {
-                    Log.e("LoginTask", "Response Code: " + responseCode);
                     return "Error: " + responseCode;
                 }
             } catch (Exception e) {
-                Log.e("LoginTask", "Exception: " + e.getMessage());
+                e.printStackTrace();
                 return "Exception: " + e.getMessage();
             }
         }
@@ -145,23 +137,35 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject userObject = jsonArray.getJSONObject(0);
                     String u_id = userObject.optString("u_id", "unknown");
                     String u_nickname = userObject.optString("u_nickname", "unknown");
+                    String u_password = userObject.optString("u_password", "unknown");
                     String u_doctor = userObject.optString("u_doctor", "unknown");
                     String u_region = userObject.optString("u_region", "unknown");
+                    String h_name = userObject.optString("h_name", "unknown");
 
                     // Shared Preferences에 로그인 정보 저장
                     SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("u_id", u_id);
                     editor.putString("u_nickname", u_nickname);
-                    editor.putString("u_doctor", u_doctor);
-                    editor.putString("u_region", u_region);
+                    editor.putString("u_doctor", u_doctor); // 추가
+                    editor.putString("u_region", u_region); // 추가
+                    editor.putString("h_name", h_name);
+
                     editor.apply();
+
+//                    // Shared Preferences에 로그인 정보 저장
+//                    SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("u_id", u_id);
+//                    editor.putString("u_nickname", u_nickname);
+//                    editor.apply();
 
                     Toast.makeText(LoginActivity.this, u_nickname + "님 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("u_id", u_id);
                     intent.putExtra("u_nickname", u_nickname);
+                    intent.putExtra("u_password", u_password);
                     intent.putExtra("u_doctor", u_doctor);
                     intent.putExtra("u_region", u_region);
                     startActivity(intent);
@@ -170,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "로그인 실패: 사용자 정보가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-                Log.e("LoginTask", "Parsing Error: " + e.getMessage());
+                e.printStackTrace();
                 Toast.makeText(LoginActivity.this, "로그인 실패: 데이터 파싱 오류", Toast.LENGTH_SHORT).show();
             }
         }
