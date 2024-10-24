@@ -50,21 +50,63 @@
                     android:id="@+id/Athelectasis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="결절"
+                    android:text="무기폐"
                     android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/Cardiomegaly"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="기흉"
+                    android:text="심장비대"
                     android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/Effusion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="무기폐"
+                    android:text="삼출"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/Infiltration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="침윤"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/Mass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="종괴"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/nodule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="결절"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/Pneumonia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="폐렴"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/Pneumothorax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="기흉"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/Consolidation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="폐경화"
                     android:textSize="24sp" />
 
                 <TextView
@@ -75,73 +117,31 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/Mass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="삼출"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/nodule"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="섬유화"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/Pneumonia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="심장비대"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/Pneumo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="종괴"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/Consolidation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="침윤"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/Infiltration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="탈장"
-                    android:textSize="24sp" />
-
-                <TextView
                     android:id="@+id/Emphysema"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="폐경화"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/Fibrosis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="폐기종"
                     android:textSize="24sp" />
 
                 <TextView
+                    android:id="@+id/Fibrosis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="섬유화"
+                    android:textSize="24sp" />
+
+                <TextView
                     android:id="@+id/Pleural"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="폐렴"
+                    android:text="흉막 비후"
                     android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/Hernia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="흉막 비후"
+                    android:text="탈장"
                     android:textSize="24sp" />
             </LinearLayout>
         </ScrollView>
