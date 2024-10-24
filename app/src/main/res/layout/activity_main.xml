@@ -24,17 +24,6 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-<!--                <TextView-->
-<!--                    android:id="@+id/app_title"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="12dp"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text="X - RayCare"-->
-<!--                    android:textColor="@android:color/holo_blue_dark"-->
-<!--                    android:textSize="28sp"-->
-<!--                    android:textStyle="italic|bold" />-->
 
                 <ImageView
                     android:id="@+id/app_title"
@@ -87,54 +76,6 @@
                     android:layout_marginStart="8dp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginTop="16dp">
-
-                <ImageView
-                    android:id="@+id/chat_icon"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_hospital"
-                    android:tint="#156081"
-                    android:layout_marginTop="16dp" />
-
-                <TextView
-                    android:id="@+id/chat_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="의료인 건강상담"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:gravity="center"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:id="@+id/chat_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="증상부터 건강검진까지\n고민하지 말고 물어보세요!"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:gravity="center"
-                    android:layout_marginTop="4dp" />
-
-                <Button
-                    android:id="@+id/chat_button"
-                    android:layout_width="204dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/btn_round_blue"
-                    android:text="마음 편하게 질문하기"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
 
             <TextView
                 android:id="@+id/recent_records"
@@ -183,7 +124,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081" />
 
                 <!-- 2번째 이미지 및 타임스탬프 (가로로 정렬) -->
                 <LinearLayout
@@ -215,7 +156,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081"/>
 
                 <!-- 3번째 이미지 및 타임스탬프 (가로로 정렬) -->
                 <LinearLayout
@@ -249,7 +190,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081" />
 
                 <!-- 4번째 이미지 및 타임스탬프 (가로로 정렬) -->
                 <LinearLayout
@@ -282,7 +223,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081" />
 
             </LinearLayout>
 

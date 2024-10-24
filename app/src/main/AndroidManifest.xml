@@ -50,10 +50,12 @@
         <activity android:name=".InfoActivity13" android:exported="true"/>
         <activity android:name=".InfoActivity14" android:exported="true"/>
 
+
         <activity android:name=".BoardwriteActivity" android:exported="true"/>
         <activity android:name=".MoreHospital" android:exported="true"/>
-        <activity android:name=".ChatActivity" android:exported="true"/>
         <activity android:name=".PasswordActivity" android:exported="true"/>
+        <activity android:name=".WebSocketChatActivity" android:exported="true"/>
+
 
 
     </application>

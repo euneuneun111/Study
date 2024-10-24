@@ -2,11 +2,9 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,11 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,6 +42,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     private EditText titleEditText;
     private EditText contentEditText;
     private Uri selectedImageUri;
+    private String roomId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,19 @@ public class BoardwriteActivity extends AppCompatActivity {
         findViewById(R.id.picture_text).setOnClickListener(view -> openGallery());
         findViewById(R.id.picture_upload).setOnClickListener(view -> openGallery());
 
-        findViewById(R.id.tv_upload).setOnClickListener(view -> uploadPost());
+        // 게시글 작성 버튼 클릭 시 고유한 룸 번호 생성 후 업로드
+        findViewById(R.id.tv_upload).setOnClickListener(view -> {
+            // 고유한 룸 번호 생성
+            roomId = generateRoomId();
+
+            // 서버로 글 정보와 함께 룸 번호 전송
+            uploadPost(roomId);
+        });
+    }
+
+    // 고유한 룸 번호 생성 (UUID 사용)
+    private String generateRoomId() {
+        return UUID.randomUUID().toString();
     }
 
     private void openGallery() {
@@ -78,7 +93,8 @@ public class BoardwriteActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadPost() {
+    // 게시글과 룸 번호 서버로 전송
+    private void uploadPost(String roomId) {
         String title = titleEditText.getText().toString().trim();
         String content = contentEditText.getText().toString().trim();
 
@@ -106,6 +122,7 @@ public class BoardwriteActivity extends AppCompatActivity {
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("p_title", title)
                 .addFormDataPart("p_content", content)
+                .addFormDataPart("room_id", roomId)
                 .addFormDataPart("p_img", imageFile.getName(),
                         RequestBody.create(MediaType.parse("image/*"), imageFile))
                 .build();
@@ -125,14 +142,33 @@ public class BoardwriteActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show());
-                    Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
-                    startActivity(intent);
-                    finish();
+                    String responseBody = response.body().string();
+                    try {
+                        // JSON 파싱
+                        JSONObject json = new JSONObject(responseBody);
+                        if (json.getBoolean("success")) {
+                            String imageUrl = json.getString("image_url");  // 서버에서 받은 이미지 URL
+                            runOnUiThread(() -> {
+                                Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            });
+                        } else {
+                            // 여기에서 JSONException 예외 처리
+                            String errorMessage = json.getString("message");  // 예외 발생 가능성 있음
+                            runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패: " + errorMessage, Toast.LENGTH_SHORT).show());
+                        }
+                    } catch (JSONException e) {
+                        // JSONException 예외 처리
+                        runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "JSON 파싱 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        Log.e("JSON_ERROR", e.getMessage(), e);
+                    }
                 } else {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show());
                 }
             }
+
         });
     }
 
