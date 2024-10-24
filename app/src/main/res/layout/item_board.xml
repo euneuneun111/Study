@@ -7,7 +7,7 @@
     android:background="@drawable/border_side">  <!-- 테두리 적용 -->
 
     <ImageView
-        android:id="@+id/visible"
+        android:id="@+id/visible_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_image"

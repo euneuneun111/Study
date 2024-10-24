@@ -52,6 +52,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         if (imageUrl != null && !imageUrl.isEmpty()) {
             holder.postImageView.setVisibility(View.GONE);
 
+            holder.visibleimage.setVisibility(View.VISIBLE);
+
             Glide.with(context).load(imageUrl).into(holder.postImageView); // 이미지 로드
         } else {
             holder.postImageView.setVisibility(View.GONE); // 이미지가 없으면 숨김
@@ -77,12 +79,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         TextView titleTextView;
         TextView roomIdTextView;
         ImageView postImageView; // 추가된 이미지뷰
+        ImageView visibleimage;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.tv_title);
             roomIdTextView = itemView.findViewById(R.id.tv_room_id);
             postImageView = itemView.findViewById(R.id.post_image); // 이미지뷰 연결
+            visibleimage = itemView.findViewById(R.id.visible_image);
         }
     }
 }
