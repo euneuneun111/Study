@@ -33,6 +33,7 @@
     <!-- SearchView -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:queryHint="검색어를 입력해주세요."
@@ -49,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="정렬"
+        android:visibility="gone"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"

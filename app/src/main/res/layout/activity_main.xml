@@ -135,7 +135,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081" />
 
                 <!-- 2번째 이미지 및 타임스탬프 (가로로 정렬) -->
                 <LinearLayout
@@ -167,7 +167,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081"/>
 
                 <!-- 3번째 이미지 및 타임스탬프 (가로로 정렬) -->
                 <LinearLayout
@@ -201,7 +201,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081" />
 
                 <!-- 4번째 이미지 및 타임스탬프 (가로로 정렬) -->
                 <LinearLayout
@@ -234,7 +234,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="#156081" />
 
             </LinearLayout>
 

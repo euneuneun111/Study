@@ -79,6 +79,8 @@
                 <ImageView
                     android:id="@+id/chat_icon"
                     android:layout_width="60dp"
+                    android:src="@drawable/ic_hospital"
+                    android:tint="#156081"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp" />
@@ -105,12 +107,13 @@
 
                 <Button
                     android:id="@+id/chat_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="204dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_round_blue"
                     android:layout_marginBottom="16dp"
                     android:text="의료인 상담실 입장"
-                    android:textColor="@android:color/white"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>

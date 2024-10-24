@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:layout_marginBottom="8dp"> <!-- 메시지 간 간격 추가 -->
 
     <!-- 텍스트 메시지 -->
     <TextView
@@ -11,12 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:background="@drawable/border_side"
+        android:padding="12dp" />
 
-    <!-- 이미지 메시지 -->
     <ImageView
         android:id="@+id/imageView_message"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:visibility="gone" /> <!-- 기본적으로 숨김 -->
+        android:background="@drawable/border_side"
+        android:visibility="gone" />
 </LinearLayout>
