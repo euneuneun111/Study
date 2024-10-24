@@ -47,7 +47,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board_write);
+        setContentView(R.layout.activity_board_write);//111
 
         titleEditText = findViewById(R.id.et_title);
         contentEditText = findViewById(R.id.et_content);
