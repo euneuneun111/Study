@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecentRecordViewModel extends ViewModel {
-    private MutableLiveData<List<RecentRecord>> recentRecords;
+    private MutableLiveData<List<RecentRecord>> recentRecords; //1
 
     public RecentRecordViewModel() {
         recentRecords = new MutableLiveData<>(new ArrayList<>());
