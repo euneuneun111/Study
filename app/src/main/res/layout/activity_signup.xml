@@ -9,12 +9,20 @@
     android:padding="16dp"
     >
 
+    <ImageView
+        android:id="@+id/app_title"
+        android:layout_width="244dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/x_raycare_logo2"
+        android:textSize="28sp"
+        android:textStyle="italic|bold" />
     <!-- 회원가입 제목 -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="회원가입"
-        android:textSize="55sp"
+        android:textSize="42sp"
         android:layout_gravity="left"
         android:textStyle="bold"
         android:textColor="#156081"
@@ -45,6 +53,7 @@
             android:padding="10dp"
             android:background="@android:drawable/edit_text" />
 
+
         <!-- 중복확인 버튼 -->
         <Button
             android:id="@+id/checkDuplicateButton"
@@ -52,6 +61,7 @@
             android:layout_height="wrap_content"
             android:text="중복확인"
             android:layout_marginStart="10dp"
+            android:visibility="gone"
             android:backgroundTint="@android:color/darker_gray"
             android:textColor="@android:color/white" />
     </LinearLayout>
