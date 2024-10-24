@@ -54,16 +54,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);  // 이미지를 선택하는 액티비티 시작
         });
 
-        chatMoveButton = findViewById(R.id.chat_move_button);
-        chatMoveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chatIntent = new Intent(MainActivity.this, ChatActivity.class);
-                chatIntent.putExtra("nickname", "사용자 닉네임"); // 실제 사용자 닉네임으로 변경
-                startActivity(chatIntent);
-            }
-        });
-
         ImageView diseaseListImageView = findViewById(R.id.disease_list);
         diseaseListImageView.setOnClickListener(v -> {
             // DiseaselistActivity로 이동하는 Intent 생성
