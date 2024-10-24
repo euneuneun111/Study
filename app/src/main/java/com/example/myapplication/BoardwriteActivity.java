@@ -2,11 +2,9 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -121,7 +122,7 @@ public class BoardwriteActivity extends AppCompatActivity {
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("p_title", title)
                 .addFormDataPart("p_content", content)
-                .addFormDataPart("room_id", roomId) // 룸 번호도 함께 전송
+                .addFormDataPart("room_id", roomId)
                 .addFormDataPart("p_img", imageFile.getName(),
                         RequestBody.create(MediaType.parse("image/*"), imageFile))
                 .build();
@@ -141,14 +142,33 @@ public class BoardwriteActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show());
-                    Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
-                    startActivity(intent);
-                    finish();
+                    String responseBody = response.body().string();
+                    try {
+                        // JSON 파싱
+                        JSONObject json = new JSONObject(responseBody);
+                        if (json.getBoolean("success")) {
+                            String imageUrl = json.getString("image_url");  // 서버에서 받은 이미지 URL
+                            runOnUiThread(() -> {
+                                Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            });
+                        } else {
+                            // 여기에서 JSONException 예외 처리
+                            String errorMessage = json.getString("message");  // 예외 발생 가능성 있음
+                            runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패: " + errorMessage, Toast.LENGTH_SHORT).show());
+                        }
+                    } catch (JSONException e) {
+                        // JSONException 예외 처리
+                        runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "JSON 파싱 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        Log.e("JSON_ERROR", e.getMessage(), e);
+                    }
                 } else {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show());
                 }
             }
+
         });
     }
 

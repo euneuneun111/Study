@@ -1,32 +1,21 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.io.File;
-import java.io.IOException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 
@@ -38,23 +27,30 @@ public class WebSocketChatActivity extends AppCompatActivity {
     private ChatAdapter chatAdapter;
     private List<String> chatMessages = new ArrayList<>();
     private RecyclerView recyclerViewChat;
-    private static final int PICK_IMAGE = 1;
-    private Uri selectedImageUri;
+    private String nickname;
+    private String docStatus;  // 'Y' or 'N'
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
+        // 인텐트에서 roomId 받기
+        Intent intent = getIntent();
+        roomId = intent.getStringExtra("room_id"); // 변경된 키 이름
+
+        // roomId 확인
+        Log.d("WebSocketChatActivity", "Received roomId: " + roomId);
+        // SharedPreferences에서 u_nickname과 u_doctor 값 가져오기
+        SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        nickname = sharedPreferences.getString("u_nickname", "Unknown");
+        docStatus = sharedPreferences.getString("u_doctor", "Unknown");
+
         // RecyclerView 설정
         recyclerViewChat = findViewById(R.id.recyclerView_chat);
         recyclerViewChat.setLayoutManager(new LinearLayoutManager(this));
         chatAdapter = new ChatAdapter(chatMessages, this);
         recyclerViewChat.setAdapter(chatAdapter);
-
-        // 인텐트에서 roomId 받기
-        Intent intent = getIntent();
-        roomId = intent.getStringExtra("roomId");
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("ws://192.168.0.158:8080").build();
@@ -63,27 +59,40 @@ public class WebSocketChatActivity extends AppCompatActivity {
             @Override
             public void onOpen(WebSocket webSocket, okhttp3.Response response) {
                 Log.d("WebSocket", "연결 성공");
-                webSocket.send("{\"roomId\": \"" + roomId + "\", \"user\": \"User1\", \"text\": \"entered\"}");
+                String userDisplayName = (docStatus.equals("Y")) ? "(의료인)" + nickname : nickname;
+                webSocket.send("{\"roomId\": \"" + roomId + "\", \"user\": \"" + userDisplayName + "\", \"text\": \"entered\"}");
             }
 
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 runOnUiThread(() -> {
-                    if (text.startsWith("image:")) {
-                        // 이미지 메시지 처리
-                        String imageUrl = text.substring(6); // "image:" 문자열 제거
-                        chatMessages.add("이미지 업로드 성공: " + imageUrl); // 이미지 업로드 성공 메시지 추가
-                        chatAdapter.notifyDataSetChanged();
-                        scrollToBottom(); // 메시지가 추가되면 자동 스크롤
-                    } else {
-                        // 일반 텍스트 메시지 처리
-                        chatMessages.add(text);
+                    try {
+                        // 여러 줄의 기록을 줄 단위로 분리
+                        String[] messages = text.split("\n");
+                        for (String message : messages) {
+                            JSONObject jsonObject = new JSONObject(message);
+                            String user = jsonObject.getString("user");
+
+                            if (jsonObject.has("text")) {
+                                // 일반 텍스트 메시지 처리
+                                String messageText = jsonObject.getString("text");
+                                chatMessages.add(user + ": " + messageText);
+                            } else if (jsonObject.has("image")) {
+                                // 이미지 메시지 처리 (필요한 경우)
+                                String imageUrl = jsonObject.getString("image");
+                                chatMessages.add(user + " 이미지: " + imageUrl);
+                            }
+                        }
+
+                        // 채팅 기록을 모두 추가한 후 RecyclerView 업데이트
                         chatAdapter.notifyDataSetChanged();
                         scrollToBottom();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 });
             }
-
 
             @Override
             public void onFailure(WebSocket webSocket, Throwable t, okhttp3.Response response) {
@@ -99,91 +108,22 @@ public class WebSocketChatActivity extends AppCompatActivity {
         });
 
         Button sendButton = findViewById(R.id.button_send);
-        Button buttonImageUpload = findViewById(R.id.button_image_upload);
         editTextMessage = findViewById(R.id.editText_message);
 
         // 텍스트 메시지 전송
         sendButton.setOnClickListener(v -> {
             String message = editTextMessage.getText().toString().trim();
             if (!message.isEmpty()) {
-                // 사용자가 보낸 메시지를 리스트에 추가
-                chatMessages.add("User1: " + message);
+                // u_doctor에 따라 사용자 이름 설정
+                String userDisplayName = (docStatus.equals("Y")) ? "(의료인)" + nickname : nickname;
+
+                chatMessages.add(userDisplayName + ": " + message);
                 chatAdapter.notifyDataSetChanged();
                 scrollToBottom();
 
                 // WebSocket을 통해 메시지 전송
-                webSocket.send("{\"roomId\": \"" + roomId + "\", \"user\": \"User1\", \"text\": \"" + message + "\"}");
+                webSocket.send("{\"roomId\": \"" + roomId + "\", \"user\": \"" + userDisplayName + "\", \"text\": \"" + message + "\"}");
                 editTextMessage.setText(""); // 입력 필드 초기화
-            }
-        });
-
-        // 이미지 업로드 버튼 클릭 시
-        buttonImageUpload.setOnClickListener(v -> openGallery());
-    }
-
-    private void openGallery() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "이미지 선택"), PICK_IMAGE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            selectedImageUri = data.getData();
-            uploadImage(selectedImageUri);
-        }
-    }
-
-    private void uploadImage(Uri imageUri) {
-        String imagePath = BoardwriteActivity.FileUtils.getPath(this, imageUri);
-        if (imagePath == null) {
-            Toast.makeText(this, "이미지 경로를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        File imageFile = new File(imagePath);
-        if (!imageFile.exists()) {
-            Toast.makeText(this, "이미지 파일이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        OkHttpClient client = new OkHttpClient();
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("image", imageFile.getName(), RequestBody.create(MediaType.parse("image/*"), imageFile))
-                .build();
-
-        Request request = new Request.Builder()
-                .url("http://192.168.0.158/upload_image.php") // 서버 URL 변경 필요
-                .post(requestBody)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(() -> Toast.makeText(WebSocketChatActivity.this, "이미지 업로드 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String imageUrl = response.body().string();
-
-                    // WebSocket으로 이미지 URL을 전송
-                    webSocket.send("{\"roomId\": \"" + roomId + "\", \"user\": \"User1\", \"image\": \"" + imageUrl + "\"}");
-
-                    runOnUiThread(() -> {
-                        chatMessages.add("이미지 업로드: " + imageUrl); // 업로드된 이미지 URL 추가
-                        chatAdapter.notifyDataSetChanged();
-                        scrollToBottom();
-                        Toast.makeText(WebSocketChatActivity.this, "이미지 업로드 성공", Toast.LENGTH_SHORT).show();
-                    });
-                } else {
-                    runOnUiThread(() -> Toast.makeText(WebSocketChatActivity.this, "이미지 업로드 실패", Toast.LENGTH_SHORT).show());
-                }
             }
         });
     }
