@@ -98,34 +98,32 @@ public class BoardwriteActivity extends AppCompatActivity {
         String title = titleEditText.getText().toString().trim();
         String content = contentEditText.getText().toString().trim();
 
-        if (selectedImageUri == null || title.isEmpty() || content.isEmpty()) {
-            Toast.makeText(this, "모든 필드를 입력하고 이미지를 선택하세요.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // 파일 경로 얻기
-        String imagePath = FileUtils.getPath(this, selectedImageUri);
-        if (imagePath == null) {
-            Toast.makeText(this, "이미지 경로를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        File imageFile = new File(imagePath);
-        if (!imageFile.exists()) {
-            Toast.makeText(this, "이미지 파일이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+        if (title.isEmpty() || content.isEmpty()) {
+            Toast.makeText(this, "제목과 내용을 입력하세요.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         OkHttpClient client = new OkHttpClient();
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("p_title", title)
+        // 제목, 내용, 룸 번호 추가
+        builder.addFormDataPart("p_title", title)
                 .addFormDataPart("p_content", content)
-                .addFormDataPart("room_id", roomId)
-                .addFormDataPart("p_img", imageFile.getName(),
-                        RequestBody.create(MediaType.parse("image/*"), imageFile))
-                .build();
+                .addFormDataPart("room_id", roomId);
+
+        // 선택적으로 이미지 추가
+        if (selectedImageUri != null) {
+            String imagePath = FileUtils.getPath(this, selectedImageUri);
+            if (imagePath != null) {
+                File imageFile = new File(imagePath);
+                if (imageFile.exists()) {
+                    builder.addFormDataPart("p_img", imageFile.getName(),
+                            RequestBody.create(MediaType.parse("image/*"), imageFile));
+                }
+            }
+        }
+
+        RequestBody requestBody = builder.build();
 
         Request request = new Request.Builder()
                 .url(SERVER_URL)
@@ -144,10 +142,8 @@ public class BoardwriteActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
                     try {
-                        // JSON 파싱
                         JSONObject json = new JSONObject(responseBody);
                         if (json.getBoolean("success")) {
-                            String imageUrl = json.getString("image_url");  // 서버에서 받은 이미지 URL
                             runOnUiThread(() -> {
                                 Toast.makeText(BoardwriteActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(BoardwriteActivity.this, BoardActivity.class);
@@ -155,12 +151,10 @@ public class BoardwriteActivity extends AppCompatActivity {
                                 finish();
                             });
                         } else {
-                            // 여기에서 JSONException 예외 처리
-                            String errorMessage = json.getString("message");  // 예외 발생 가능성 있음
+                            String errorMessage = json.getString("message");
                             runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패: " + errorMessage, Toast.LENGTH_SHORT).show());
                         }
                     } catch (JSONException e) {
-                        // JSONException 예외 처리
                         runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "JSON 파싱 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                         Log.e("JSON_ERROR", e.getMessage(), e);
                     }
@@ -168,7 +162,6 @@ public class BoardwriteActivity extends AppCompatActivity {
                     runOnUiThread(() -> Toast.makeText(BoardwriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show());
                 }
             }
-
         });
     }
 

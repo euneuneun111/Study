@@ -19,8 +19,12 @@
             android:id="@+id/iv_arrow_left_board"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_left_board"
-            android:layout_marginRight="16dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_back"
+            android:tint="#156081"
+            android:layout_margin="23dp">
+        </ImageView>
 
         <EditText
             android:id="@+id/et_title"
@@ -28,9 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="제목"
+            android:textColorHint="#156081"
             android:textStyle="bold"
-            android:textSize="24sp"
-            android:textColor="#000000"/>
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tv_upload"
@@ -70,30 +74,37 @@
             android:layout_marginLeft="15dp"/>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/image_upload"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:layout_marginTop="12dp"
-            android:hint="글 내용 작성" />
+            <ImageView
+                android:id="@+id/image_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:layout_marginTop="12dp"
+                android:hint="글 내용 작성" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
 
     <!-- 글 내용 작성 -->
 

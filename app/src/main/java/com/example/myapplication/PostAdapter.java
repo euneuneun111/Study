@@ -42,8 +42,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         // 제목 설정
         holder.titleTextView.setText(post.getP_title());
 
-
-
         // room_id 설정
         holder.roomIdTextView.setText(post.getRoom_id());
 

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_image"
         android:tint="#156081"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <!-- 게시글 제목 -->
     <TextView
