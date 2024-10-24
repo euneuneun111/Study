@@ -72,7 +72,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="주소 :"
+                        android:text="주소 : "
                         android:textSize="14sp" />
 
                     <TextView
@@ -91,7 +91,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="병원 링크 :"
+                        android:text="병원 링크 : "
                         android:textSize="14sp" />
 
                     <TextView
@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="병원 예약 링크 :"
+                        android:text="병원 예약 링크 : "
                         android:textSize="14sp" />
 
                     <TextView
