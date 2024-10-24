@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Post> postList;
     private Context context;
+
+
 
     public PostAdapter(List<Post> postList, Context context) {
         this.postList = postList;
@@ -39,13 +42,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         // 제목 설정
         holder.titleTextView.setText(post.getP_title());
 
+
+
         // room_id 설정
         holder.roomIdTextView.setText(post.getRoom_id());
 
         // 이미지 설정 (이미지 URL이 있을 경우에만 표시)
         String imageUrl = post.getP_img();
         if (imageUrl != null && !imageUrl.isEmpty()) {
-            holder.postImageView.setVisibility(View.VISIBLE);
+            holder.postImageView.setVisibility(View.GONE);
+
             Glide.with(context).load(imageUrl).into(holder.postImageView); // 이미지 로드
         } else {
             holder.postImageView.setVisibility(View.GONE); // 이미지가 없으면 숨김
