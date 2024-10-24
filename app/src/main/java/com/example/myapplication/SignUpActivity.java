@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Spinner regionSpinner;
     private Button signupButton;
 
-    private static final String IP_ADDRESS = "192.168.0.158";
+    private static final String IP_ADDRESS = "192.168.0.158"; // Android 에뮬레이터에서의 로컬 서버 주소
     private static final String TAG = "phpsignup";
 
     @Override
@@ -68,6 +68,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private class SignUpTask extends AsyncTask<String, Void, String> {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(SignUpActivity.this, "회원가입", "처리 중입니다...", true);
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -112,6 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
                     reader.close();
                     return response.toString(); // 서버 응답 반환
                 } else {
+                    Log.e(TAG, "서버 응답 실패: " + responseCode);
                     return "서버 응답 실패: " + responseCode; // 응답 실패 시 메시지
                 }
             } catch (Exception e) {
@@ -123,6 +131,9 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            progressDialog.dismiss(); // ProgressDialog 종료
+
+            Log.d(TAG, "Response: " + result); // 서버 응답 로그 출력
 
             try {
                 JSONObject jsonResponse = new JSONObject(result);
@@ -131,8 +142,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (status.equals("success")) {
                     Toast.makeText(SignUpActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "POST response - " + result);
-
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
@@ -142,7 +151,6 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(SignUpActivity.this, "응답 처리 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
-
 
         private String getPostDataString(HashMap<String, String> params) throws Exception {
             StringBuilder result = new StringBuilder();

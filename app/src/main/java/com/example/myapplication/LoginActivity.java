@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 비밀번호 찾기 화면으로 이동
+//                startActivity(new Intent(LoginActivity.this, PasswordActivity.class));
                 Toast.makeText(LoginActivity.this, "비밀번호 찾기 화면으로 이동", Toast.LENGTH_SHORT).show();
             }
         });
