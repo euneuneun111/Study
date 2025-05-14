@@ -1,203 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>이력서</title>
+    <style>
+        body {
+            font-family: '맑은 고딕', sans-serif;
+            margin: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            display: block;
+            margin: auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
+    <!-- 기본 인적사항 -->
+    <table>
+        <tr>
+            <th colspan="11" class="title">이력서</th>
+        </tr>
+        <tr>
+            <td rowspan="5" colspan="4">
+                <img src="./media/증명사진.jpg" width="100" height="120" alt="증명사진">
+            </td>
+            <th colspan="2">성명</th>
+            <td colspan="5">노은광</td>
+        </tr>
+        <tr>
+            <th colspan="2">생년월일</th>
+            <td colspan="5">2000년 04월 19일 (만 25세)</td>
+        </tr>
+        <tr>
+            <th colspan="2">현주소</th>
+            <td colspan="5">대전광역시 대덕구 오정동 신동아아파트 7 - 208호</td>
+        </tr>
+        <tr>
+            <th colspan="2">전화번호</th>
+            <td colspan="5">010-9291-2616</td>
+        </tr>
+        <tr>
+            <th colspan="2">이메일</th>
+            <td colspan="5">ekr2677@naver.com</td>
+        </tr>
+    </table>
 
-        <table border="1">
-            <tr>
-                <th colspan="11">&nbsp;&nbsp; 이력서 &nbsp;&nbsp;</th>
-            </tr>
-        
-            <tr>
-                <td rowspan="5" colspan="4">
-                    <img src="./media/Penguins.jpg" width="100" height="120" alt="펭귄 사진">
-                </td>
-                <th colspan="1">&nbsp;&nbsp; 성&nbsp;&nbsp;&nbsp;&nbsp;명 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; 노은광 </td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 생년월일 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; 2000년 04월 19일 (만 25세)</td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 현주소 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; 대전광역시 대덕구 오정동 신동아아파트 7 - 208호</td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 전화번호 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; (휴대폰) 010 9291 2616</td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 이&nbsp;&nbsp;메&nbsp;&nbsp;일 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; ekr2677@naver.com</td>
-            </tr>
+    <!-- 학력 -->
+    <table>
+        <tr>
+            <th rowspan="3" colspan="2">학<br>력</th>
+            <th colspan="3">기간</th>
+            <th colspan="3">학교명</th>
+            <th colspan="2">전공(부전공)</th>
+            <th>졸업 여부</th>
+        </tr>
+        <tr>
+            <td colspan="3">2016.03 ~ 2019.02</td>
+            <td colspan="3">동대전고등학교</td>
+            <td colspan="2">-</td>
+            <td>졸업</td>
+        </tr>
+        <tr>
+            <td colspan="3">2019.03 ~ 2025.02</td>
+            <td colspan="3">대전대학교</td>
+            <td colspan="2">정보보안학과</td>
+            <td>졸업</td>
+        </tr>
+    </table>
 
-        </table>
+    <!-- 사회생활 -->
+    <table>
+        <tr>
+            <th rowspan="4" colspan="2">사<br>회<br>생<br>활</th>
+            <th colspan="3">기간</th>
+            <th colspan="3">근무처</th>
+            <th colspan="2">직위</th>
+            <th>주요업무</th>
+        </tr>
+        <tr>
+            <td colspan="3">2024.06.24 ~ 2024.07.31</td>
+            <td colspan="3">(주) 엠브이아이</td>
+            <td colspan="2">인턴</td>
+            <td>문서 작성 애플리케이션 프레임워크 작성</td>
+        </tr>
+        <tr>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+            <td colspan="2">-</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+            <td colspan="2">-</td>
+            <td></td>
+        </tr>
+    </table>
 
-        <table border="1">
+    <!-- 보유 자격 -->
+    <table>
+        <tr>
+            <th rowspan="4" colspan="2">보<br>유<br>자<br>격</th>
+            <th colspan="3">자격 종목</th>
+            <th colspan="3">취득일</th>
+            <th colspan="3">발행기관</th>
+        </tr>
+        <tr>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+        </tr>
+        <tr>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+        </tr>
+        <tr>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+        </tr>
+    </table>
 
-            <tr>
-                <th rowspan="3" colspan="2"> 학<br>력 </th>
-                <th rowspan="1" colspan="4"> 기&nbsp;&nbsp;&nbsp;&nbsp;간 </th>
-                <th rowspan="1" colspan="4"> 학&nbsp;&nbsp;교&nbsp;&nbsp;명 </th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;전공 (부전공)&nbsp;&nbsp;&nbsp;&nbsp; </th>
-                <th rowspan="1" colspan="1"> &nbsp;&nbsp;&nbsp;&nbsp;졸업 여부&nbsp;&nbsp;&nbsp;&nbsp; </th>
-            </tr>
-    
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;2016.03 ~ 2019.02&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp; 동대전고등학교 &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;졸&nbsp;&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
+    <!-- 연수 경험 -->
+    <table>
+        <tr>
+            <th rowspan="4" colspan="2">연<br>수<br>경<br>험</th>
+            <th colspan="3">기간</th>
+            <th colspan="3">연수명</th>
+            <th colspan="3">연수기관</th>
+        </tr>
+        <tr>
+            <td colspan="3">2024.08.06 ~ 2024.11.04</td>
+            <td colspan="3">온디바이스 AI</td>
+            <td colspan="3">대전대학교</td>
+        </tr>
+        <tr>
+            <td colspan="3">2025.04.07 ~ 2025.09.29</td>
+            <td colspan="3">전자정부표준 프레임워크 기반 풀스택 개발</td>
+            <td colspan="3">DW 아카데미</td>
+        </tr>
+        <tr>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+            <td colspan="3">-</td>
+        </tr>
+    </table>
 
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;2019.03 ~ 2025.02&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 대전대학교 &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;정보보안학과 </td>
-                <td colspan="1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;졸&nbsp;&nbsp;&nbsp;&nbsp;업&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-          
+    <!-- 기타 신상 -->
+    <table>
+        <tr>
+            <th rowspan="3" colspan="2">기<br>타<br>신<br>상</th>
+            <th colspan="2">보훈번호</th>
+            <td colspan="4">-</td>
+            <th colspan="2">장애등급</th>
+            <td>(종별) - (등급) -</td>
+        </tr>
+        <tr>
+            <th colspan="2">저소득층</th>
+            <td colspan="7">□ 국민기초생활보호법 수급자 / □ 한부모가족지원법 보호대상</td>
+        </tr>
+        <tr>
+            <th colspan="2">병역사항</th>
+            <td colspan="7">(군별) 육군 / (복무기간) 2020.03.23 ~ 2021.09.29 / (전역사유) 만기 전역</td>
+        </tr>
+    </table>
 
-        </table>
-
-        <table border="1">
-
-            <tr>
-                <th rowspan="4" colspan="2"> 사<br>회<br>생<br>활 </th>
-                <th rowspan="1" colspan="4"> 기&nbsp;&nbsp;&nbsp;&nbsp;간 </th>
-                <th rowspan="1" colspan="4"> 근&nbsp;&nbsp;무&nbsp;&nbsp;처 </th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;직위(직급)&nbsp;&nbsp;&nbsp;&nbsp; </th>
-                <th rowspan="1" colspan="1"> &nbsp;&nbsp;&nbsp;&nbsp;주요업무실적&nbsp;&nbsp;&nbsp;&nbsp; </th>
-            </tr>
-    
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp; &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td colspan="1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-          
-
-        </table>
-
-        <table border="1">
-
-            <tr>
-                <th rowspan="4" colspan="2"> 보<br>유<br>자<br>격</th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;자격 종목&nbsp;&nbsp; </th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;취득일&nbsp;&nbsp; </th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;발행기관&nbsp;&nbsp;&nbsp;&nbsp; </th>
-            </tr>
-    
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp; &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;</td>
-            </tr>
-
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-          
-
-        </table>
-
-        <table border="1">
-
-            <tr>
-                <th rowspan="4" colspan="2"> 연<br>수<br>경<br>혐</th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;기간&nbsp;&nbsp; </th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;연수 종목&nbsp;&nbsp; </th>
-                <th rowspan="1" colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;연수 기관&nbsp;&nbsp;&nbsp;&nbsp; </th>
-            </tr>
-    
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp; &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;</td>
-            </tr>
-
-            <tr>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td colspan="4"> &nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-          
-
-        </table>
-
-        <table border="1">
-          
-            <tr>
-                <td rowspan="5" colspan="4">
-                </td>
-                <th colspan="1">&nbsp;&nbsp; 성&nbsp;&nbsp;&nbsp;&nbsp;명 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; 노은광 </td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 생년월일 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; 2000년 04월 19일 (만 25세)</td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 현주소 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; 대전광역시 대덕구 오정동 신동아아파트 7 - 208호</td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 전화번호 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; (휴대폰) 010 9291 2616</td>
-            </tr>
-        
-            <tr>
-                <th colspan="1">&nbsp;&nbsp; 이&nbsp;&nbsp;메&nbsp;&nbsp;일 &nbsp;&nbsp;</th>
-                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp; ekr2677@naver.com</td>
-            </tr>
-
-        </table>
-    
+    <!-- 서명 -->
+    <table>
+        <tr>
+            <td colspan="11" style="padding: 20px; text-align: center;">
+                위에 기재한 사항은 사실과 틀림이 없습니다.<br>
+                2025년 05월 10일<br><br>
+                성명: <strong>노은광</strong> (인)
+            </td>
+        </tr>
+    </table>
 
 </body>
-
 </html>
