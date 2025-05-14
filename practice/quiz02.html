@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건 선택 폼</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid lightgray;
+            border-collapse: collapse;
+            padding: 10px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <!-- 고용형태 -->
+        <tr>
+            <th>고용형태</th>
+            <td>
+                <input type="checkbox" name="아르바이트"> 아르바이트
+                <input type="checkbox" name="정규직"> 정규직
+                <input type="checkbox" name="계약직"> 계약직
+                <input type="checkbox" name="파견직"> 파견직
+                <input type="checkbox" name="인턴직"> 인턴직
+                <input type="checkbox" name="위촉직"> 위촉직
+                <input type="checkbox" name="교육생/수강생"> 교육생/수강생
+            </td>
+        </tr>
+
+        <!-- 학력 -->
+        <tr>
+            <th>학력</th>
+            <td>
+                <select>
+                    <option value="1">선택</option>
+                    <option value="2">중학교 졸업</option>
+                    <option value="3">고등학교 졸업</option>
+                    <option value="4">대학교 졸업</option>
+                    <option value="5">석사 이상</option>
+                </select>
+                <input type="checkbox" name="무관포함"> 무관 포함
+            </td>
+        </tr>
+
+        <!-- 급여 -->
+        <tr>
+            <th>급여</th>
+            <td>
+                <input type="checkbox" name="시급"> 시급
+                <input type="checkbox" name="일급"> 일급
+                <input type="checkbox" name="주급"> 주급
+                <input type="checkbox" name="월급"> 월급
+                <input type="checkbox" name="연봉"> 연봉
+                <input type="checkbox" name="건별"> 건별
+
+                <textarea name="급여조건" rows="1" cols="30"></textarea> 원 이상
+            </td>
+        </tr>
+
+        <!-- 복리후생 -->
+        <tr>
+            <th>복리후생</th>
+            <td>
+                <textarea name="복리후생" rows="2" cols="30">복리후생을 선택하세요</textarea>
+                <input type="checkbox" name="4대 보험"> 4대 보험
+                <input type="checkbox" name="식비 지원"> 식비 지원
+            </td>
+        </tr>
+
+        <!-- 우대조건 -->
+        <tr>
+            <th>우대조건</th>
+            <td>
+                <textarea name="우대조건" rows="2" cols="30">우대조건을 입력하세요</textarea>
+            </td>
+        </tr>
+
+        <!-- 검색기간 및 지원방법 -->
+        <tr>
+            
+            <td td colspan="2" style="text-align: left;">
+                <select>
+                    <option value="1">검색기간 전체</option>
+                    <option value="2">오늘 등록</option>
+                    <option value="3">3일 이내 등록</option>
+                    <option value="4">오늘 마감</option>
+                    <option value="5">내일 마감</option>
+                </select>
+
+                <input type="checkbox" name="온라인지원 가능"> 온라인지원 가능
+                <input type="checkbox" name="문자지원 가능"> 문자지원 가능
+
+                <input type="button" name="상세검색 닫기" value="상세검색 닫기 ∧">
+            </td>
+        </tr>
+
+        <!-- 버튼 -->
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" name="검색" value="검색">
+                <input type="reset" name="초기화" value="초기화">
+            </td>
+        </tr>
+
+        <!-- 마지막줄 -->
+        <tr>
+            <td style="text-align: left">
+                <textarea name="급여조건" rows="1" cols="30">선택이 제한됩니다.</textarea>
+            </td>
+
+            <td style="text-align: right">
+                <input type="button" name="파리바게뜨 공고 신청" value="파리바게뜨 공고 신청 ">
+                <input type="button" name="공고관리" value="공고관리">
+            </td>
+
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
