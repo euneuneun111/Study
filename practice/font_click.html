@@ -2,24 +2,61 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 
-    <style>
-        .button {
-            display: block;
+  <style>
+    /* 기본 구조 */
+    .btn-base {
+      display: inline-block;
+      width: 80px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      text-decoration: none;
+    }
 
-        }
-    </style>
+    /* 색상 및 배경 */
+    .btn-color {
+      background-color: brown;
+      color: white;
+      border: 2px solid white;
+    }
+
+    /* 효과 */
+    .btn-shadow {
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-radius {
+      border-radius: 20px;
+    }
+
+    .btn-transition {
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* 텍스트 관련 */
+    .btn-text-style {
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    /* 마우스 호버 효과 */
+    .btn-hover:hover {
+      background-color: aqua;
+      color: magenta;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="button">
-        <a href="#" class="font_big font_italic font_bold font_center">
-            click
-        </a>
-    </div>
+
+  <!-- 조합 예시 -->
+  <a href="#" class="btn-base btn-color btn-radius btn-shadow btn-transition btn-text-style btn-hover">
+    click
+  </a>
 
 </body>
 
