@@ -55,7 +55,7 @@ public class Solve {
 				System.out.println(sum); // 점수 총합 출력
 				
 				System.out.println("평균 : ");
-				System.out.println(sum / score.length); // 평균 출력 (총합 / 학생 수) , 총합 / 배열의 총 길이
+				System.out.println(sum / score.length); // 평균 출력 (총합 / 학생 수) , 총합 / 배열의 총 길이(크기)
 				
 				for (int i : score) { // 향상된 for문 - 0부터 score 배열 길이까지 반복 :: for (int i = 0; i < score.length; i++) 동일한 문법
 				    max = Math.max(max, i); // 현재 최고 점수보다 크면 max를 갱신
