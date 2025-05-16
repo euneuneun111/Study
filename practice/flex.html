@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+     
+        
+        .container {
+                  width: 800px;
+                  margin: 0 auto;
+
+                  padding: 0 250px;
+
+                  box-sizing: border-box;
+
+                  background-color: #cccccc;
+        }
+
+        .item {
+            width: 50px;
+            height: 50px;
+            
+            background-color: #00ffa0;
+
+            border: 1px solid #000000;
+
+            color: #000000;
+            font-size: 40px;
+            line-height: 50px;
+            text-align: center;
+
+        }
+
+        .item:hover {
+            background-color: aliceblue;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .flex {
+            display: flex; /* 기본 방향: row */
+            flex-direction: row; /* row로 값 설정 */
+            /*flex-direction: column-reverse; */
+           
+
+            /* flex-wrap: nowrap; or wrap */
+            
+            justify-content: space-between;
+            /* justify-content: space-evenly; 균등 간격 배치 */
+            /* justify-content: space-around;  시작과 끝 제외 간격 배치 */
+        }
+
+        /*
+        .item:nth-child(2n) {
+            width: 70px;
+        }
+        */
+    </style>
+</head>
+<body>
+    <div class="container flex">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+  
+    </div>
+</body>
+</html>
