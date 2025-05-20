@@ -1,0 +1,259 @@
+@charset "utf-8"; /* 문자 인코딩을 UTF-8로 설정 */
+
+* {
+	margin: 0px; /* 모든 요소의 바깥 여백 제거 */
+	padding: 0px; /* 모든 요소의 안쪽 여백 제거 */
+	font-family: "맑은 고딕", sans-serif; /* 기본 글꼴 설정 */
+	box-sizing: border-box; /* 패딩과 보더를 요소의 크기에 포함 */
+}
+
+ul, ol {
+	list-style: none; /* 리스트 앞 점 제거 */
+}
+
+a {
+	text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+header {
+	width: 100%; /* 헤더 전체 너비 설정 */
+	border-bottom: 1px solid #ddd; /* 아래쪽 테두리 회색선 */
+}
+
+header > .inner {
+	width: 1180px; /* 내부 컨텐츠의 고정 너비 */
+	height: 120px; /* 헤더 높이 설정 */
+	margin: 0px auto; /* 가운데 정렬 */
+	position: relative; /* 자식 요소의 절대 위치 기준 */
+}
+
+header > .inner h1 {
+	position: absolute; /* 위치 절대 지정 */
+	left: 0px; /* 왼쪽 정렬 */
+	bottom: 15px; /* 아래에서 15px 위에 위치 */
+}
+
+header > .inner h1 a {
+	font: bold 24px/1 "arial"; /* 글꼴 크기 및 스타일 설정 */
+	color: #444; /* 진한 회색 텍스트 */
+}
+
+header > .inner #gnb {
+	position: absolute; /* 절대 위치 지정 */
+	bottom: 0px; /* 아래 정렬 */
+	right: 0px; /* 오른쪽 정렬 */
+}
+
+header > .inner #gnb li {
+	float: left; /* 가로 정렬 */
+}
+
+header > .inner #gnb li a {
+	display: block; /* 블록 요소로 표시 */
+	padding: 20px 40px; /* 위아래 20px, 좌우 40px 패딩 */
+	font: bold 15px/1 "arial"; /* 글꼴 스타일 */
+	color: #555; /* 어두운 회색 텍스트 */
+	transition: all 0.5s; /* 모든 변화에 0.5초 애니메이션 적용 */
+}
+
+header > .inner #gnb li a:hover {
+	color: #fff; /* 마우스 호버 시 흰색 텍스트 */
+	background-color: #555; /* 배경 어두운 회색으로 변경 */
+}
+
+header > .inner #topMenu {
+	position: absolute; /* 절대 위치 지정 */
+	top: 20px; /* 위에서 20px 아래 */
+	right: 30px; /* 오른쪽에서 30px 왼쪽 */
+}
+
+header > .inner #topMenu li {
+	float: left; /* 가로 정렬 */
+}
+
+header > .inner #topMenu li a {
+	display: block; /* 블록 요소로 표시 */
+	padding: 0px 10px; /* 좌우 여백 10px */
+	font: 12px/1 "arial"; /* 글꼴 스타일 */
+	color: #AAA; /* 연한 회색 텍스트 */
+}
+
+figure {
+	width: 100%; /* 전체 너비 */
+	height: calc(100vh - 120px); /* 화면 높이에서 헤더 높이(120px) 뺀 값 */
+	background-color: #000; /* 배경색 검정 */
+	position: relative; /* 자식 요소 위치 기준 */
+	padding-top: 250px; /* 위쪽 여백 */
+	padding-left: 150px; /* 왼쪽 여백 */
+	overflow: hidden; /* 넘치는 요소 숨김 */
+}
+
+figure > video {
+	width: 100%; /* 동영상 전체 너비 */
+	height: 100%; /* 동영상 전체 높이 */
+	object-fit: cover; /* 동영상 비율 유지하면서 영역 채움 */
+	position: absolute; /* 절대 위치 지정 */
+	top: 0px; /* 위쪽 정렬 */
+	left: 0px; /* 왼쪽 정렬 */
+	opacity: 0.3; /* 반투명 효과 */
+}
+
+figure > #title_container {
+	width: 1180px; /* 제목 컨테이너 고정 너비 */
+	position: relative; /* 상대 위치 기준 */
+}
+
+figure > #title_container > h1 {
+	color: #fff; /* 흰색 텍스트 */
+	font: normal 120px/1 "arial"; /* 큰 제목 텍스트 스타일 */
+	margin-bottom: 20px; /* 아래 여백 */
+}
+
+figure > #title_container p {
+	font: 16px/1.4 "arial"; /* 본문 텍스트 스타일 */
+	color: #888; /* 회색 텍스트 */
+	margin-bottom: 60px; /* 아래 여백 */
+}
+
+figure > #title_container a {
+	display: block; /* 블록 요소로 표시 */
+	width: 400px; /* 너비 400px */
+	height: 30px; /* 높이 30px */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	color: #fff; /* 텍스트 흰색 */
+	font: bold 11px/30px "arial"; /* 텍스트 스타일 */
+	box-sizing: border-box; /* 테두리 포함 크기 계산 */
+	border: 1px solid #bbb; /* 연한 회색 테두리 */
+	letter-spacing: 1px; /* 자간 1px */
+	transition: all 0.5s; /* 부드러운 전환 효과 */
+}
+
+figure > #title_container a:hover {
+	background-color: #fff; /* 배경 흰색으로 변경 */
+	color: #333; /* 텍스트 어두운 회색으로 변경 */
+}
+
+section {
+	width: 100%; /* 전체 너비 */
+	padding: 200px 0px; /* 위아래 여백 200px */
+}
+
+section .inner {
+	width: 1180px; /* 내부 너비 고정 */
+	margin: 0px auto; /* 중앙 정렬 */
+}
+
+section .inner h1 {
+	font: bold 24px/1px "arial"; /* 제목 텍스트 스타일 */
+	color: #333; /* 어두운 회색 텍스트 */
+	text-align: center; /* 중앙 정렬 */
+	margin-bottom: 50px; /* 아래 여백 */
+}
+
+section .inner .wrap {
+	width: 100%; /* 전체 너비 */
+	display: flex; /* flex 레이아웃 적용 */
+	flex-direction: row; /* 가로 정렬 */
+	justify-content: space-between; /* 요소 사이 간격 동일하게 배분 */
+}
+
+section .inner .wrap article {
+	width: 280px; /* 각 아티클 고정 너비 */
+}
+
+section .inner .wrap article .pic {
+	width: 100%; /* 전체 너비 */
+	height: 120px; /* 고정 높이 */
+	position: relative; /* 상대 위치 */
+	background: #333; /* 배경 어두운 회색 */
+	margin-bottom: 15px; /* 아래 여백 */
+	overflow: hidden; /* 넘치는 요소 숨김 */
+}
+
+section .inner .wrap article .pic img {
+	object-fit: cover; /* 이미지 비율 유지하며 영역 채움 */
+	width: 100%; /* 전체 너비 */
+	height: 100%; /* 전체 높이 */
+}
+
+section .inner .wrap article h2 {
+	margin-bottom: 10px; /* 아래 여백 */
+}
+
+section .inner .wrap article h2 a {
+	font: bold 16px/1px "arial"; /* 제목 텍스트 스타일 */
+	color: #555; /* 텍스트 색상 회색 */
+}
+
+section .inner .wrap article p {
+	font: bold 14px/1.4px "arial"; /* 본문 텍스트 스타일 */
+	color: #777; /* 중간 회색 텍스트 */
+}
+
+footer {
+	width: 100%; /* 전체 너비 */
+	padding: 100px 0px; /* 위아래 여백 */
+	background: #333; /* 배경 어두운 회색 */
+	border-top: 1px solid #888; /* 위쪽 테두리 회색선 */
+}
+
+footer > .inner {
+	width: 1180px; /* 내부 고정 너비 */
+	margin: 0px auto; /* 가운데 정렬 */
+}
+
+footer .inner .upper {
+	width: 100%; /* 전체 너비 */
+	border-bottom: 1px solid #777; /* 아래쪽 테두리 */
+	padding-bottom: 20px; /* 아래 여백 */
+}
+
+footer .inner .upper::after {
+	content: ""; /* 가상 요소 생성 */
+	display: block; /* 블록 요소로 지정 */
+	clear: both; /* float 해제 */
+}
+
+footer .inner .upper h1 {
+	float: left; /* 왼쪽 정렬 */
+	font: bold 24px/1 "arial"; /* 제목 텍스트 스타일 */
+	color: #666; /* 회색 텍스트 */
+}
+
+footer .inner .upper ul::after {
+	content: ""; /* 가상 요소 생성 */
+	display: block; /* 블록 요소 */
+	clear: both; /* float 해제 */
+}
+
+footer .inner .upper ul {
+	float: right; /* 오른쪽 정렬 */
+}
+
+footer .inner .upper ul li {
+	float: left; /* 가로 정렬 */
+	margin-left: 20px; /* 왼쪽 여백 */
+}
+
+footer .inner .upper ul li a {
+	font: bold 14px/1 "arial"; /* 메뉴 텍스트 스타일 */
+	color: #666; /* 회색 텍스트 */
+}
+
+footer .inner .lower {
+	width: 100%; /* 전체 너비 */
+	padding-top: 20px; /* 위쪽 여백 */
+}
+
+footer .inner .lower address {
+	width: 100%; /* 전체 너비 */
+	font: 12px/1.3 "arial"; /* 주소 텍스트 스타일 */
+	color: #777; /* 회색 텍스트 */
+	margin-bottom: 20px; /* 아래 여백 */
+}
+
+footer .inner .lower p {
+	width: 100%; /* 전체 너비 */
+	font: 12px/1 "arial"; /* 문구 텍스트 스타일 */
+	color: #777; /* 회색 텍스트 */
+}
