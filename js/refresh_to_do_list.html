@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"> <!-- 문서 문자 인코딩 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
+    <title>Document</title> <!-- 웹 페이지 제목 -->
+</head>
+
+<body>
+    <form onsubmit="return false"> <!-- 폼 제출 시 새로고침 방지 -->
+        <h1>할일 추가</h1> <!-- 제목 표시 -->
+        <input type="text" id="list_name"> <!-- 할 일 입력란 -->
+        <button onclick="list_add()">추가</button> <br> <!-- 추가 버튼, 클릭 시 list_add 함수 실행 -->
+
+        <span>할일 목록</span> <!-- 할일 목록 제목 -->
+        <button onclick="list_delete()">제거</button> <br> <!-- 선택된 할일 삭제 버튼, 클릭 시 list_delete 함수 실행 -->
+        <div id="todo_list"></div> <!-- 할일 항목들이 추가될 영역 -->
+
+    </form>
+
+    <script>
+
+        // 할일 추가 함수
+        function list_add() {
+
+            const inputValue = document.querySelector("#list_name").value; // 입력된 값 가져오기
+
+            if(inputValue === "") { // 입력이 빈 문자열이면
+                alert("할일 내용을 입력하세요!"); // 경고창 표시
+                return; // 함수 종료하여 빈 값 추가 방지
+            }
+
+            const newItem = document.createElement("div"); // 새로운 div 요소 생성 (할일 한 줄)
+            const checkbox = document.createElement("input"); // 체크박스 요소 생성
+            checkbox.type = "checkbox"; // 타입을 체크박스로 지정
+
+            const finish = document.createElement("button"); // 완료 버튼 생성
+            finish.textContent = "완료"; // 버튼 텍스트 설정
+
+            // 완료 버튼 클릭 시 텍스트에 취소선 토글 기능
+            finish.onclick = function () {
+                if (newItem.style.textDecoration === "line-through") { // 이미 취소선 있으면
+                    newItem.style.textDecoration = "none"; // 취소선 제거
+                } else {
+                    newItem.style.textDecoration = "line-through"; // 취소선 추가
+                }
+            };
+
+            const text = document.createTextNode(inputValue); // 입력값 텍스트 노드 생성
+
+            newItem.appendChild(checkbox); // 체크박스 추가
+            newItem.appendChild(text); // 텍스트 추가
+            newItem.appendChild(finish); // 완료 버튼 추가
+
+            document.querySelector("#todo_list").appendChild(newItem); // todo_list 영역에 새 항목 추가
+
+            document.querySelector("#list_name").value = ""; // 입력란 초기화
+        }
+
+        // 할일 삭제 함수
+        function list_delete() {
+            const todoList = document.querySelector("#todo_list"); // 할일 목록 영역 선택
+            const items = todoList.querySelectorAll("div"); // 할일 항목들 모두 선택
+
+            items.forEach(item => { // 각 항목에 대해 반복
+                const checkbox = item.querySelector("input[type='checkbox']"); // 항목 내 체크박스 선택
+                if (checkbox && checkbox.checked) { // 체크박스가 있고 체크된 경우
+                    todoList.removeChild(item); // 해당 항목 삭제
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>
