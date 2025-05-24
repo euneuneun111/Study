@@ -1,0 +1,59 @@
+<!DOCTYPE html> <!-- 문서가 HTML5 형식임을 선언 -->
+
+<html lang="en"> <!-- 문서의 언어를 영어로 설정 -->
+
+<head>
+  <meta charset="UTF-8" /> <!-- 문자 인코딩을 UTF-8로 설정 (한글 포함 다양한 문자 지원) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- 모바일 화면 최적화 설정 -->
+  <title>입력 범위 내 소수와 짝/홀수 리스트 출력</title> <!-- 브라우저 탭에 표시될 제목 -->
+</head>
+
+<body> <!-- 문서의 본문 시작 -->
+
+  <script>
+    // 소수를 판별하는 함수 정의
+    function isPrime(num) {
+      if (num < 2) return false; // 2보다 작은 숫자는 소수가 아니므로 false 반환
+      for (let i = 2; i <= Math.sqrt(num); i++) { // 2부터 num의 제곱근까지 반복
+        if (num % i === 0) { // 나누어 떨어지는 수가 있으면
+          return false; // 소수가 아니므로 false 반환
+        }
+      }
+      return true; // 위 조건을 통과하면 소수이므로 true 반환
+    }
+
+    // 사용자로부터 시작 숫자를 입력받고 정수로 변환
+    const start = parseInt(prompt("시작 숫자를 입력해주세요."));
+    // 사용자로부터 끝 숫자를 입력받고 정수로 변환
+    const end = parseInt(prompt("끝 숫자를 입력해주세요."));
+
+    let oddCount = 0; // 홀수 개수를 저장할 변수 초기화
+    let evenCount = 0; // 짝수 개수를 저장할 변수 초기화
+    let primes = []; // 소수 목록을 저장할 빈 배열 초기화
+
+    // 시작 숫자부터 끝 숫자까지 반복
+    for (let i = start; i <= end; i++) {
+      // i가 짝수이면
+      if (i % 2 === 0) {
+        evenCount++; // 짝수 카운트 증가
+      } else {
+        oddCount++; // 홀수이면 홀수 카운트 증가
+      }
+
+      // i가 소수이면
+      if (isPrime(i)) {
+        primes.push(i); // 소수 배열에 추가
+      }
+    }
+
+    // 소수 목록을 콘솔에 출력 (쉼표로 구분된 문자열로 변환)
+    console.log("소수: " + primes.join(", "));
+    // 홀수 개수를 콘솔에 출력
+    console.log("홀수 개수: " + oddCount);
+    // 짝수 개수를 콘솔에 출력
+    console.log("짝수 개수: " + evenCount);
+  </script>
+
+</body> <!-- 문서의 본문 종료 -->
+
+</html> <!-- HTML 문서 종료 -->

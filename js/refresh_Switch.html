@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>동물 선택 예제</title>
+    <style>
+        #output img {
+            width: 110px;
+            margin: 15px;
+        }
+        #description {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <form onsubmit="return false">
+        동물 선택:
+        <select name="kind" id="kindSelect">
+            <option value="">동물을 선택하세요</option>
+            <option value="cat">고양이</option>
+            <option value="dog">강아지</option>
+            <option value="rabbit">토끼</option>
+        </select>
+        <br /><br />
+
+        개수:
+        <input type="number" name="count" id="countInput" min="1" max="10" />
+        <br /><br />
+
+        <button type="button" id="addBtn" onclick="click_on()">추가</button>
+    </form>
+
+    <div id="output"></div>
+    <div id="description"></div>
+
+    <script>
+        function click_on() {
+            const kind = document.getElementById('kindSelect').value;
+            const count = parseInt(document.getElementById('countInput').value, 10);
+            const output = document.getElementById('output');
+            const description = document.getElementById('description');
+
+            // 초기화
+            output.innerHTML = '';
+            description.textContent = '';
+
+            // 유효성 검사
+            if (!kind) {
+                alert('동물을 선택하세요.');
+                return;
+            }
+            if (isNaN(count) || count < 1 || count > 10) {
+                alert('개수를 1에서 10 사이로 입력하세요.');
+                return;
+            }
+
+            // 이미지 출력
+            for (let i = 0; i < count; i++) {
+                const img = document.createElement('img');
+                img.src = `./animals/${kind}.jpg`;
+                img.alt = kind;
+                output.appendChild(img);
+            }
+
+            // 동물 설명 출력
+            let descText = '';
+            switch (kind) {
+                case 'dog':
+                    descText = '강아지는 충성스럽고 활발한 성격을 가진 동물입니다.';
+                    break;
+                case 'cat':
+                    descText = '고양이는 독립적이면서도 애교가 많은 동물입니다.';
+                    break;
+                case 'rabbit':
+                    descText = '토끼는 조용하고 온순한 성격을 가진 동물입니다.';
+                    break;
+                default:
+                    descText = '';
+            }
+            description.textContent = descText;
+        }
+    </script>
+
+</body>
+</html>
