@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+
+    <script type="text/x-handlebars-template" id="thumb_template">
+    <div>
+         {{#with hello}}
+        <h2>{{title}}</h2>
+        <p>{{content}}</p>
+
+        <ul>
+            {{#each menu}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+
+        {{/with}}
+    </div>
+
+    </script>
+
+    <script>
+        let data = {
+           
+            hello : {
+                title : "안녕",
+            content : "반가워",
+            menu : ["김치 볶음밥", "제육 볶음", "고등어 백반"]
+        }
+    }
+    </script>
+
+    <script>
+        const template = Handlebars.compile(document.querySelector("script#thumb_template").innerHTML);
+
+        console.log(template(data));
+
+        document.body.innerHTML = template(data);
+    </script>
+
+
+</body>
+
+</html>

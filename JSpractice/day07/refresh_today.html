@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/score_style.css" />
+    <style>
+        input:read-only {
+            background-color: #eee;
+        }
+
+        div#wrap {
+            width: 1180px;
+            margin: 0 auto;
+        }
+
+        header>div.inner {
+            width: 100%;
+            height: 150px;
+        }
+
+        section>div.inner {
+            width: 100%;
+            height: calc(100vh - 150px);
+        }
+
+        section>div.inner::after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+
+        section>div.inner>aside {
+            width: 48%;
+            margin-top: 10px;
+            float: left;
+        }
+
+        section>div.inner>div#score_list {
+            width: 48%;
+            margin-top: 10px;
+            float: right;
+        }
+
+        section>div.inner>aside>div#picture {
+            width: 150px;
+            height: 200px;
+            margin: 0 auto;
+
+            border: 1px solid #aaa;
+        }
+
+        section>div.inner>aside>div#tool {
+            width: 300px;
+            margin: 0 auto;
+            padding: 5px 35px;
+
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        section>div.inner>aside>div#tool>span {
+            display: block;
+            width: 150px;
+            height: 30px;
+
+            line-height: 30px;
+
+            border: 1px solid #aaa;
+        }
+
+        section>div.inner>aside>form>table {
+            width: 250px;
+            margin: 0 auto;
+        }
+
+        section>div.inner>aside>form>table button {
+            width: 100%;
+        }
+
+        section>div.inner>aside>form>table td div#regist_td {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        section>div.inner>aside>form>table td div#regist_td button {
+            display: block;
+            width: 70px;
+        }
+
+        section div#score_list>div {
+            width: 100%;
+            height: 100px;
+
+            margin-bottom: 5px;
+
+            border: 1px solid #aaa;
+        }
+
+        section div#score_list>div::after {
+            /*  float로 배치한 자식 요소들이 부모를 '뚫고 나가는 현상'을 방지 */
+
+            display: block;
+            content: '';
+            clear: both;
+        }
+
+        section div#score_list>div>div:nth-child(1) {
+            width: 100px;
+            height: 100%;
+            position: relative;
+
+            float: left;
+        }
+
+        section div#score_list>div>div:nth-child(1) img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        section div#score_list>div>div:nth-child(2) {
+            width: calc(100% - 100px);
+            height: 100%;
+
+            float: right;
+        }
+
+        section div#score_list>div>div:nth-child(2) h2 {
+            width: 100%;
+            height: 30px;
+
+            padding: 5px;
+
+            font: bold 23px/30px 'san-serif';
+
+            color: #444;
+        }
+
+        section div#score_list>div>div:nth-child(2) span {
+            display: block;
+            width: 100%;
+            height: calc(100% - 30px);
+
+            padding: 5px;
+
+            font: normal 16px 'arial';
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap"> <!-- 전체 페이지를 감싸는 최상위 컨테이너 -->
+
+        <header>
+            <div class="inner"></div> <!-- 추후 로고나 제목 등이 들어갈 수 있는 영역 -->
+        </header>
+
+        <section>
+            <div class="inner"> <!-- 본문 콘텐츠를 감싸는 내부 컨테이너 -->
+
+                <aside> <!-- 왼쪽 입력 영역 -->
+
+                    <!-- 사진 미리보기 공간 -->
+                    <div id="picture" data-role="picture"></div>
+
+                    <!-- 파일 업로드 버튼 영역 -->
+                    <div id="tool">
+                        <label class="btn" for="file">Picture</label> <!-- 사용자가 클릭할 버튼 -->
+                        <span></span> <!-- 업로드한 파일 이름 표시용 -->
+                        <input id="file" btn-role="picture" name="picture" type="file" style="display: none;"
+                            onchange="picture_thumb();" />
+                        <!-- 실제 파일 선택 input (숨겨져 있고 버튼으로 트리거됨) -->
+                    </div>
+
+                    <!-- 입력 폼 시작 -->
+                    <form onsubmit="return false;"> <!-- 실제 제출은 자바스크립트로 처리 -->
+                        <input type="hidden" name="calced" value="0" />
+                        <!-- 점수 계산 여부를 나타내는 숨겨진 필드 -->
+                        <!-- 폼을 다시 제출하거나 새로고침해도 "이미 계산했는지" 상태를 유지하려고 사용 -->
+
+                        <table>
+                            <!-- 이름 입력 -->
+                            <tr>
+                                <th>이 름</th>
+                                <td>
+                                    <input type="text" name="name"
+                                        onkeyup="this.value=this.value.replace(/[\a-z 0-9 !@#$%^&*_ ]/g, '');" />
+                                    <!-- onkeyup 숫자, 영문, 특수문자 제거 → 한글 이름만 허용 -->
+                                </td>
+                            </tr>
+
+                            <!-- 과목 점수 입력: 국어, 영어, 수학, 과학 -->
+                            <tr>
+                                <th>국 어</th>
+                                <td>
+                                    <input data-role="score" type="text" name="kor" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                    <!-- onkeyup 한글, 영문, 특수문자 제거 → 숫자만 허용 -->
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>영 어</th>
+                                <td>
+                                    <input data-role="score" type="text" name="eng" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>수 학</th>
+                                <td>
+                                    <input data-role="score" type="text" name="mat" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>과 학</th>
+                                <td>
+                                    <input data-role="score" type="text" name="sci" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                </td>
+                            </tr>
+
+                            <!-- 빈 줄 (시각적 여백용) -->
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+
+                            <!-- 점수 계산 버튼 -->
+                            <tr>
+                                <td colspan="2">
+                                    <button type="button" class="btn" onclick="score_calc();">계산하기</button>
+                                </td>
+                            </tr>
+
+                            <!-- 총점 표시 -->
+                            <!-- readonly  사용자는 여기에 직접 숫자를 못 적는다. -->
+                            <tr>
+                                <th>총 점</th>
+                                <td><input type="text" name="total" readonly /></td>
+                            </tr>
+
+                            <!-- 평균 표시 -->
+                            <tr>
+                                <th>평 균</th>
+                                <td><input type="text" name="avg" readonly /></td>
+                            </tr>
+
+                            <!-- 빈 줄 (시각적 여백용) -->
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+
+                            <!-- 등록/취소 버튼 -->
+                            <tr>
+                                <td colspan="2">
+                                    <div id="regist_td">
+                                        <button type="button" onclick="regist_go();">등 록</button>
+                                        <button type="button" onclick="reset_go();">취 소</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <!-- 입력 폼 끝 -->
+
+                </aside>
+
+                <!-- 오른쪽 점수 리스트 출력 영역 -->
+                <div id="score_list"></div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+    <script type="text/x-handlebars-template" id="thumb">
+  <div>
+    <img src="./images/{{picture}}">
+  </div>
+  <div>
+    <h2>{{name}}</h2>
+    <span>
+      국어 : {{kor}}, 수학 : {{mat}}, 영어 : {{eng}} <br>
+      총점 : {{total}}, 평균 : {{avg}}
+    </span>
+  </div>
+</script>
+
+    <script>
+        // 학생 정보를 저장할 전역 객체
+        var students = {};
+    </script>
+
+    <script>
+        // 이미지를 썸네일로 보여주는 함수
+        function picture_thumb() {
+            // 'btn-role' 속성이 'picture'인 input 요소에서 첫 번째 파일 선택
+            // 사용자가 업로드한 사진 파일 하나를 가져오는 것
+            let picture = document.querySelector("input[btn-role='picture']").files[0];
+
+            // 파일 확장자 추출 후 대문자로 변환
+            //lastIndexOf("."): 파일 이름에서 마지막 점 .이 있는 위치를 찾아요 (예: "dog.png"에서 .는 3번째
+            let format = picture.name.substring(picture.name.lastIndexOf(".") + 1).toUpperCase();
+
+
+            // jpg/jpeg 외의 형식은 업로드 불가
+            if (!(format == "JPG" || format == "JPEG")) {
+                alert("이미지는 jpg/jpeg 형식만 가능합니다.");
+                return;
+            }
+
+            // 파일 용량이 1MB(1024 * 1024 byte) 초과할 경우 업로드 불가
+            if (picture.size > 1024 * 1024 * 1) {
+                alert("사진 용량은 1MB 이하만 가능합니다.");
+                return;
+            }
+
+            // 파일 이름과 용량이 유효할 경우
+            if (picture.size && picture.name) {
+                // 파일을 읽기 위한 FileReader 객체 생성
+                var reader = new FileReader();
+
+                // 파일 읽기가 완료되면 실행되는 콜백 함수 정의
+                reader.onload = function (event) {
+                    // data-role='picture'인 div에 이미지 배경으로 설정
+                    let el = document.querySelector("div[data-role='picture']");
+                    el.style.backgroundImage = "url('" + event.target.result + "')";
+                    el.style.backgroundPosition = "center";      // 가운데 정렬
+                    el.style.backgroundSize = "cover";           // 영역에 맞게 채우기
+                    el.style.backgroundRepeat = "no-repeat";     // 반복 없음
+
+                    // 파일 이름을 화면에 표시 (div#tool 안의 span)
+                    document.querySelector("div#tool > span").innerText = picture.name;
+                }
+
+                // 파일을 base64 형식의 URL로 읽기 시작
+                reader.readAsDataURL(picture);
+            }
+        }
+    </script>
+
+    <script>
+        // 점수를 계산하는 함수
+        function score_calc() {
+            // data-role='score' 속성이 있는 input 요소들 모두 가져오기
+            let scores = document.querySelectorAll("input[data-role='score']");
+
+            // 총점과 평균 변수 초기화
+            let total = 0;
+            let avg = 0;
+
+            // 각 점수에 대해 반복 처리
+            for (let score of scores) {
+                // 점수가 1 ~ 100 사이가 아니면 경고 후 해당 입력칸으로 포커스 이동
+                if (!(Number(score.value) > 0 && Number(score.value) <= 100)) {
+                    alert(score.name + " 점수가 유효하지 않습니다.");
+                    score.focus(); // 해당 input에 포커스
+                    return; // 계산 중단
+                }
+
+                // 점수를 정수로 변환해 총점에 누적 (parseInt 사용 시 소수점 버림)
+                total += parseInt(score.value);
+
+                // 점수를 숫자(정수 또는 실수)로 변환해 총점에 누적 (Number 사용 시 소수점 포함)
+                // total += Number(score.value);
+            }
+
+            // 평균 계산
+            avg = total / scores.length;
+
+            // 총점과 평균을 각각 해당 input[name="total"], input[name="avg"]에 표시
+            document.querySelector('input[name="total"]').value = total;
+            document.querySelector('input[name="avg"]').value = avg;
+
+            // 점수 입력란은 더 이상 수정할 수 없도록 모두 읽기 전용으로 설정
+            for (let el of scores) {
+                el.readOnly = true;
+            }
+
+            // 계산 완료 표시용 hidden input 값을 1로 설정 (예: 중복 계산 방지 목적)
+            document.querySelector("input[name='calced']").value = 1;
+        }
+    </script>
+
+    <script>
+        // 등록 버튼 클릭 시 실행되는 함수
+        function regist_go() {
+            // 1. 모든 입력 필수값 확인 (결측치 체크)
+            for (let el of document.querySelectorAll("section input")) {
+                // 입력값이 없으면 경고 후 해당 필드로 포커스 이동
+                if (!el.value) {
+                    alert(el.name + "은 필수 입니다.");
+
+                    // 파일 업로드일 경우 클릭 이벤트로 파일 탐색기 열기
+                    if (el.type == "file") {
+                        el.click();
+                    }
+
+                    el.focus(); // 포커스 이동
+                    return; // 함수 중단
+                }
+            }
+
+            // 2. 점수 계산이 완료되지 않았을 경우
+            if (!document.querySelector("input[name='calced']").value) {
+                alert("점수계산은 필수입니다.");
+                return;
+            }
+
+            // 3. 점수 유효성 검사 (0 ~ 100 사이 숫자인지 확인)
+            let judge = false;
+            for (let el of document.querySelectorAll("section input[data-role='score']")) {
+                judge = Number(el.value) && Number(el.value) >= 0 && Number(el.value) <= 100;
+                if (!judge) {
+                    alert(el.name + "은 유효하지 않습니다.\n0부터 100사이의 점수를 입력하세요.");
+                    el.focus(); // 잘못된 점수 입력창에 포커스
+                    return;
+                }
+            }
+
+            // 4. 데이터 저장 (입력값들을 객체에 저장)
+            let score = {}; // 하나의 학생 정보를 저장할 객체
+            for (let el of document.querySelectorAll("section input")) {
+                score[el.name] = el.value; // 각 name을 key로, value를 값으로 저장
+
+                if (el.name == "picture") {
+                    score[el.name] = el.files[0].name;
+                }
+            }
+
+            // 전역 students 객체에 학생 이름을 key로 하여 데이터 저장
+            students[score.name] = score;
+
+
+            // 콘솔에서 결과 확인
+            console.log(students);
+
+            //renderScoreList();
+
+            score_list()
+        }
+
+        // 리셋 버튼 클릭 시 실행되는 함수
+        function reset_go() {
+            // section 안의 form 초기화 (모든 입력값 초기화)
+            document.querySelector("section form").reset();
+
+            // 점수 입력 필드들 다시 수정 가능하게 설정
+            // 원래는 점수칸이 잠겨 있었는데, 이 코드를 실행하면 사용자가 다시 점수를 입력할 수 있게 됨됨. 
+            let scores = document.querySelectorAll("input[data-role='score']");
+            for (let el of scores) {
+                el.readOnly = false;
+            }
+
+            // 점수 계산 완료 상태 초기화
+            document.querySelector("input[name='calced']").value = 0;
+        }
+    </script>
+
+
+
+
+    <script>
+        function score_list() {
+            // score_list를 동적으로 생성하는 코드
+            document.querySelector("div#score_list").innerHTML = "";
+
+            const template = 
+            Handlebars.compile(document.querySelector("script#thumb").innerHTML);
+
+            // 5개의 학생 박스를 생성
+            for (let key in students) {
+                let score = students[key];
+
+                // 최종적으로 이 div를 화면에 보이게 하기 위해 score_list 영역에 추가
+                document.querySelector("div#score_list").insertAdjacentHTML("beforeend", template(score));
+                // beforebegin
+                // <p>
+                //      afterbegin
+                //      ---
+                //      beforeend
+                // </p>
+                // afterend
+                
+            }
+        }
+
+    </script>
+
+
+    <!--
+    <script>
+
+        function renderScoreList() {
+            // id가 'score_list'인 div 요소를 찾아서 container 변수에 저장
+            const container = document.querySelector("div#score_list");
+
+            for (let key in students) { // students 객체의 각 키(key)를 순회하며 
+                let student = students[key]; // 해당 키에 대응하는 student 객체를 가져옴
+
+                // 요소 생성
+                let divWrap = document.createElement("div");           // 전체 wrapper
+                let divImageWrap = document.createElement("div");      // 이미지 wrapper
+                let img = document.createElement("img");               // 이미지 요소
+                let divContentWrap = document.createElement("div");    // 이름 + 점수 영역
+                let h2 = document.createElement("h2");                 // 이름 표시용
+                let span = document.createElement("span");             // 점수 표시용
+
+                // 이미지 src 지정 (student.picture가 있으면 사용, 없으면 기본 이미지)
+                img.src = student.picture || "default_profile.png";
+                img.alt = student.name + " 사진";
+
+                // 이름과 점수 텍스트 설정
+                h2.textContent = student.name || "이름 없음";
+                // 평균 점수 표시 예시: 소수점 2자리까지
+                span.textContent =
+                    `국어: ${student.kor || "-"}, 영어: ${student.eng || "-"}, 수학: ${student.math || "-"}, 과학: ${student.scien || "-"}<br>` +
+                    `총점: ${student.total || "-"}, 평균: ${student.avg || "-"}`;
+
+                // 요소 조립
+                divImageWrap.append(img);
+                divContentWrap.append(h2);
+                divContentWrap.append(span);
+                divWrap.append(divImageWrap);
+                divWrap.append(divContentWrap);
+
+                // 최종적으로 컨테이너에 추가
+                container.append(divWrap);
+            }
+        }
+
+    </script>
+    -->
+
+
+
+</body>
+
+
+</html>
+
+<!--
+=========================================================
+📝 사용된 주요 자바스크립트 문법 설명
+=========================================================
+
+🔹 1. createElement + append
+- document.createElement("div") 등으로 DOM 요소를 생성하고,
+  append() 또는 appendChild()로 부모 요소에 동적으로 삽입
+- 예: 성적 카드(<div>)를 반복 생성하여 화면에 표시
+
+🔹 2. input[onkeyup] + 정규표현식
+- 사용자 입력 시 즉시 유효하지 않은 문자 제거
+- 한글 이름 입력 시 숫자/영문 제거, 점수 입력 시 한글/영문/특수문자 제거
+- 예: this.value = this.value.replace(/[^0-9]/g, '');
+
+🔹 3. querySelectorAll + for...of
+- 여러 input 요소를 한 번에 선택 후 반복 처리
+- 예: 필수 입력 체크, 점수 유효성 검사 등 반복적인 검증 로직
+
+🔹 4. input[type="hidden"]
+- 화면에는 보이지 않지만 내부 상태를 저장하는 데 사용
+- 예: <input name="calced" value="0" /> → 점수 계산 완료 여부를 저장
+
+🔹 5. readonly 속성
+- input 요소의 편집을 막고, 계산 결과(총점, 평균)만 보여줄 때 사용
+- 예: 사용자가 직접 점수를 바꾸지 못하도록 제한
+
+🔹 6. 객체(Object)를 딕셔너리처럼 사용
+- students["이름"] = {...} 형태로 데이터를 저장
+- 각 학생의 정보를 key-value 형식으로 저장하고 관리
+
+🔹 7. calced = 0 처리
+- 점수 계산 전 상태를 '0'으로 초기화
+- 계산 후 '1'로 변경되어 등록 가능 상태로 전환됨
+- 예: 점수 계산하지 않으면 등록(regist_go)이 불가능하도록 제어함
+
+=========================================================
+📌 이 문법들은:
+- 사용자 입력 처리
+- DOM 동적 구성
+- 내부 상태 제어 및 데이터 저장/검증
+에 자주 쓰이며, 실무와 프로젝트에 필수적인 기본기입니다.
+=========================================================
+*/
+-->

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsubmit="return false;">
+        <input type="text" name="input1" placeholder="value1" data-role="require" data-name="아이디"> <br>
+        <input type="text" name="input2" placeholder="value2" data-role="require" data-name="패스워드"> <br>
+        <input type="text" name="input3" placeholder="value3" data-role="require" data-name="이메일"> <br>
+        <input type="text" name="input4" placeholder="value4" data-role="require" data-name="전화번호"> <br>
+        <input type="text" name="input5" placeholder="value5" data-name="주소"> <br>
+        <input type="text" name="input6" placeholder="value6" data-name="성별"> <br>
+        <input type="text" name="input7" placeholder="value7" data-name="결혼여부"> <br>
+        <input type="text" name="input8" placeholder="value8" data-name="나이"> <br>
+        <input type="text" name="input9" placeholder="value9" data-name="종교"> <br>
+
+        <input type="submit" value="전 송" onclick="click_on()">
+    </form>
+    <script>
+        for (let li of document.querySelectorAll("ul > li")) {
+            //alert(li.innerText);
+        }
+
+        function click_on() {
+            for (let input of document.querySelector("form")) {
+           
+
+                if (input.getAttribute("data-role") == "require" && !input.value) {
+                    alert(input.getAttribute("data-name") + "은 필수입니다.");
+                    input.focus();
+                    break;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

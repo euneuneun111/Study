@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+
+    <ul>
+        <li>one</li>
+        <li>two</li>
+        <li>three</li>
+        <li>four</li>
+        <li>five</li>
+    </ul>
+
+     <script>
+        document.querySelectorAll("ul li").forEach(li_func);  // 선택된 태그들만 사용 like - length
+
+        function li_func(item) { // li 의 개수를 item 에 던져줌.
+            alert(item.innerText);
+        }
+
+    </script>
+</body>
+</html>

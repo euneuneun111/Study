@@ -1,0 +1,36 @@
+ * {
+     margin: 0;
+     padding: 0;
+ }
+
+
+ .btn {
+
+     width: 70px;
+     height: 30px;
+
+     text-align: center;
+     font: bold 1em/30px 'arial';
+     color: #fff;
+
+     background-color: #005522;
+
+     cursor: pointer;
+
+
+     border: 1px solid #000;
+
+     transition: all 0.5s;
+ }
+
+ .btn:hover {
+
+     color: #005522;
+     background-color: #fff;
+
+ }
+
+ .btn:active {
+     background-color: #aaffaa;
+
+ }

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #container {
+            width: 700;
+            display: flex;
+            flex-direction: row;
+
+            justify-content: center;
+
+        }
+
+        button {
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin: 16px;
+
+            font: 36px/1 bold #444;
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: all 0.5s;
+        }
+
+        button:hover {
+
+            background-color: #444;
+            color: #fff;
+
+        }
+
+        div#picture {
+            width: 200px;
+            height: 300px;
+
+            position: relative;
+
+            margin: 0 auto;
+
+            background-color: #fff;
+        }
+
+        div#picture::after {
+            display: block;
+            content: "가격";
+
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        div#picture img {
+            width: 80%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+        }
+
+        div#picture span {
+            color: #444;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <div id="container">
+        <button item="c">콜라</button>
+        <button item="s" style="font-size: 12px;">사이다</button>
+        <button item="f">환타</button>
+        <button item="m" style="font-size: 12px;">마운틴듀</button>
+    </div>
+
+    <div id="picture">
+        <img>
+        <span id="price"></span>
+    </div>
+
+    <script>
+        for (let element of document.querySelectorAll("button")) {
+            element.onclick = function (event) {
+                // alert(this.getAttribute("item"));
+                document.querySelector("div#picture img").src =
+                    `./image/${this.getAttribute("item")}.jpg`;
+                let price = 0;
+                switch (this.getAttribute("item")) {
+                    case "c":
+                        price = 1500;
+                        break;
+                    case "s":
+                        price = 1200;
+                        break;
+                    case "f":
+                        price = 1300;
+                        break;
+                    case "m":
+                        price = 1600;
+                        break;
+                }
+
+                let picture_after = document.createElement("style");
+                picture_after.innerHTML =""
+                    + "div#picture::after {"
+                    + "display: block;"
+                    + "content: '가격:"+price+"원';"
+                    + "font-size: 19px;"
+                    + "font-weight: bold;}"
+
+                document.head.appendChild(picture_after);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>

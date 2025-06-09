@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script src="hap.js"></script>
+
+    <button onclick="start_pop()">start</button>&nbsp;&nbsp;
+    <button onclick="stop_pop()">stop</button>
+    <div id="popup"></div>
+
+    <script>
+        let imgs = [];
+
+        let menu = ["", "콜라", "환타", "사이다", "마운틴뉴"];
+
+    </script>
+     <script>
+        let i = 0;
+        let div_pop = document.querySelector("div#popup");
+        
+        let pop = setInterval(() => {
+            document.body.innerHTML="";
+            document.body.append(img[i % imgs.length]);
+            i++;
+        }, 1000);
+     </script>
+
+     <script>
+        function start_pop () {
+
+            pop ??= setInterval(() => {
+                div_pop.innerHTML = "";
+                div_pop.append(imgs[i % imgs.length]);
+                i++;
+            }, 1000);
+        }
+
+        function stop_pop() {
+            clearInterval(pop);
+            pop = null;
+        }
+     </script>
+</body>
+
+</html>

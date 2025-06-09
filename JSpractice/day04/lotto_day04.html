@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsubmit="return false">
+        <button>추첨</button>
+        <input type="text" id="result">
+    </form>
+
+    <script>
+        document.querySelector("button").onclick = function () {
+            lotto(document.querySelector("input#result"));
+        }
+
+        function lotto(output) {
+            let lotto_set = [];
+            let target = 0;
+            let temp = 0;
+            let result = [];
+
+            // 1~45까지 숫자 채우기
+            for (let i = 1; i <= 45; i++) {
+                lotto_set[i - 1] = i;
+            }
+
+            // 배열 셔플
+            for (let i = 0; i < lotto_set.length * 3; i++) {
+                target = Math.floor(Math.random() * lotto_set.length);
+                temp = lotto_set[0];
+                lotto_set[0] = lotto_set[target];
+                lotto_set[target] = temp;
+            }
+
+            // 앞의 6개 숫자 추출
+            for (let i = 0; i < 6; i++) {
+                result[i] = lotto_set[i];
+            }
+
+            // 정렬
+            result.sort((a, b) => a - b);
+
+            // 출력
+            if (output.tagName.toLowerCase() === "input") {
+                output.value = result.toString();  // input창일 경우
+                return;
+            } 
+                
+            output.innerText = result.toString();  // div 등일 경우
+            
+        }
+    </script>
+</body>
+
+</html>

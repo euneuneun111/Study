@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- <script src="./day02.js"></script> -->
+</head>
+<body>
+
+    <form onsubmit="return false;">
+        아이디 : <input type="text"/> <br>
+        패스워디 : <input type="password"/> <br>
+
+        <input type="submit" value="로그인" onclick="submit_go()"/>
+    </form>
+    
+    <script>
+        function submit_go() {
+            let id = document.querySelector("form > input[type='text']");
+            let pwd = document.querySelector("form > input[type='password']");
+          
+            if(!id.value.trim()) {
+                alert('아이디는 필수입니다.');
+                id.value="";
+                id.focus();
+                return;
+            }  
+
+            if(!pwd.value.trim()) {
+                alert("패스워드는 필수입니다.");
+                pwd.value ="";
+                pwd.focus();
+                return;
+            }
+
+            if(id.value == "mimi" && pwd.value == "mimi") {
+                alert("로그인 성공")
+                return;
+            } 
+
+            alert("아이디 혹은 패스워드가 일치하지 않음");
+        }
+    </script>
+
+</body>
+</html>

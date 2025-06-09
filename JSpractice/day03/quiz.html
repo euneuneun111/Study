@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>별 출력 예제</title>
+</head>
+
+<body>
+  <script>
+    console.log("1. 증가 삼각형");
+    for (let i = 1; i <= 8; i++) {
+      let line = "";
+      for (let j = 0; j < i; j++) {
+        line += "*";
+      }
+      console.log(line);
+    }
+
+    console.log("2. 고정 별 9개 x 9줄");
+    for (let b = 0; b < 9; b++) {
+      let stars = "";
+      for (let c = 0; c < 9; c++) {
+        stars += "*";
+      }
+      console.log(stars);
+    }
+
+    console.log("3. 역삼각형");
+    for (let i = 0; i < 9; i++) {
+      let stars = "";
+      for (let j = 9; j > i; j--) {
+        stars += "*";
+      }
+      console.log(stars);
+    }
+  </script>
+</body>
+
+</html>

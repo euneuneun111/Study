@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/score_style.css" />
+    <style>
+        input:read-only {
+            background-color: #eee;
+        }
+
+        div#wrap {
+            width: 1180px;
+            margin: 0 auto;
+        }
+
+        header>div.inner {
+            width: 100%;
+            height: 150px;
+        }
+
+        section>div.inner {
+            width: 100%;
+            height: calc(100vh - 150px);
+        }
+
+        section>div.inner::after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+
+        section>div.inner>aside {
+            width: 48%;
+            margin-top: 10px;
+            float: left;
+        }
+
+        section>div.inner>div#score_list {
+            width: 48%;
+            margin-top: 10px;
+            float: right;
+        }
+
+        section>div.inner>aside>div#picture {
+            width: 150px;
+            height: 200px;
+            margin: 0 auto;
+
+            border: 1px solid #aaa;
+        }
+
+        section>div.inner>aside>div#tool {
+            width: 300px;
+            margin: 0 auto;
+            padding: 5px 35px;
+
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        section>div.inner>aside>div#tool>span {
+            display: block;
+            width: 150px;
+            height: 30px;
+
+            line-height: 30px;
+
+            border: 1px solid #aaa;
+        }
+
+        section>div.inner>aside>form>table {
+            width: 250px;
+            margin: 0 auto;
+        }
+
+        section>div.inner>aside>form>table button {
+            width: 100%;
+        }
+
+        section>div.inner>aside>form>table td div#regist_td {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        section>div.inner>aside>form>table td div#regist_td button {
+            display: block;
+            width: 70px;
+        }
+
+        section div#score_list>div {
+            width: 100%;
+            height: 100px;
+
+            margin-bottom: 5px;
+
+            border: 1px solid #aaa;
+
+            background-color: #0000ff;
+        }
+
+        section div#score_list>div::after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+
+        section div#score_list>div>div:nth-child(1) {
+            width: 100px;
+            height: 100%;
+
+            position: relative;
+
+            float: left;
+
+            background-color: #ff0000;
+        }
+
+        section div#score_list>div>div:nth-child(1) img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        section div#score_list>div>div:nth-child(2) {
+            width: calc(100% - 100px);
+            height: 100%;
+
+            float: right;
+
+            background-color: #0000ff;
+        }
+
+        section div#score_list>div>div:nth-child(2) > h2 {
+            width: 100%;
+            height: 30px;
+
+            font: bold 23px/30px 'arial';
+            background-color: aqua;
+
+        }
+
+        section div#score_list>div>div:nth-child(2) > span {
+            display: block;
+            width: 100px;
+            height: calc(100% - 30px);
+
+            background-color: magenta;
+
+            font: normal 16px 'arial';
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>
+            <div class="inner"></div>
+        </header>
+        <section>
+            <div class="inner">
+                <aside>
+                    <div id="picture" data-role="picture"></div>
+                    <div id="tool">
+                        <label class="btn" for="file">Picture</label>
+                        <span></span>
+                        <input id="file" btn-role="picture" type="file" name="picture" style="display: none;"
+                            onchange="picture_thumb();" />
+                    </div>
+                    <form onsubmit="return false;">
+                        <input type="hidden" name="calced" value="0">
+                        <table>
+                            <!-- 이름, 국어, 영어, 수학, 과학 -->
+                            <tr>
+                                <th>이 름</th>
+                                <td><input type="text" name="name"
+                                        onkeyup="this.value=this.value.replace(/[\a-z 0-9 !@#$%^&*_ ]/g, '');" /></td>
+                            </tr>
+                            <tr>
+                                <th>국 어</th>
+                                <td><input data-role="score" type="text" name="kor" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>영 어</th>
+                                <td><input data-role="score" type="text" name="eng" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>수 학</th>
+                                <td><input data-role="score" type="text" name="math" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>과 학</th>
+                                <td><input data-role="score" type="text" name="scien" maxlength="3"
+                                        onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣 a-z A-Z !@#$%^&*_ ]/g, '');" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button type="button" class="btn" onclick="score_calc();">계산하기</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>총 점</th>
+                                <td><input type="text" name="total" readonly /></td>
+                            </tr>
+                            <tr>
+                                <th>평 균</th>
+                                <td><input type="text" name="avg" readonly /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div id="regist_td">
+                                        <button type="button" onclick="regist_go()">등 록</button>
+                                        <button type="button" onclick="reset_go()">취 소</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </aside>
+                <div id="score_list">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        function picture_thumb() {
+            let picture = document.querySelector("input[btn-role='picture']").files[0];
+            // alert(picture.name);
+            let format = picture.name.substring(picture.name.lastIndexOf(".") + 1).toUpperCase();
+
+            if (!(format == "JPG" || format == "JPEG")) {
+                alert("이미지는 jpg/jpeg 형식만 가능합니다.");
+                return;
+            }
+
+            // alert(picture.size);
+            if (picture.size > 1024 * 1024 * 1) {
+                alert("사진 용량은 1MB 이하만 가능합니다.");
+                return;
+            }
+
+            if (picture.size && picture.name) {
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                    let el = document.querySelector("div[data-role='picture']");
+                    el.style.backgroundImage = "url('" + event.target.result + "')";
+                    el.style.backgroundPosition = "center";
+                    el.style.backgroundSize = "cover";
+                    el.style.backgroundRepeat = "no-repeat";
+
+                    document.querySelector("div#tool > span").innerText = picture.name;
+                }
+
+                reader.readAsDataURL(picture);
+            }
+        }
+    </script>
+
+    <script>
+        function score_calc() {
+            let scores = document.querySelectorAll("input[data-role='score']");
+            let total = 0;
+            let avg = 0;
+            for (let score of scores) {
+                if (!(Number(score.value) > 0 && Number(score.value) <= 100)) {
+                    alert(score.name + " 점수가 유효하지 않습니다.");
+                    score.focus();
+                    return;
+                }
+
+                total += parseInt(score.value);
+            }
+
+            avg = total / scores.length;
+            document.querySelector('input[name="total"]').value = total;
+            document.querySelector('input[name="avg"]').value = avg;
+
+            for (let el of scores) {
+                el.readOnly = true;
+            }
+        }
+    </script>
+
+    <script>
+        function regist_go() {
+            // data 결측치 확인
+            for (let el of document.querySelectorAll("section input")) {
+                if (!el.name) {
+                    alert(el.name + "은 필수 입니다.");
+                    if (el.type == "file") {
+                        el.click();
+                    }
+                    el.focus();
+                    return;
+                }
+            }
+
+            if (!document.querySelector("input[name='calced']").value) {
+                alert("점수 계산은 필수입니다.");
+                return;
+            }
+
+            // 유효성 
+            let judge = false;
+
+            for (let el of document.querySelectorAll("section input[data-role='score']")) {
+                judge = Number(el.value)
+                    && Number(el.value) >= 0
+                    && Number(el.value) <= 100;
+
+                if (!judge) {
+                    alert(el.name + " 점수는 0 이상 100 이하의 숫자여야 합니다.");
+                    el.focus();
+                    return;
+                }
+
+            }
+            let score = {};
+            // 데이터 저장
+            for (let el of document.querySelectorAll("section input")) {
+                score[el.name] = el.value;
+            }
+            students[score.name] = score;
+
+            console.log(students);
+
+            // 서버 & 클라이언트 
+        }
+
+        function reset_go() {
+            document.querySelector("section form").reset();
+
+            let scores = document.querySelectorAll("input[data-role='score']");
+
+            for (let el of scores) {
+                el.readOnly = false;
+            }
+            document.querySelector("input[name='calced']").value = 1;
+        }
+
+    </script>
+
+    <script>
+        var students = {};
+    </script>
+
+    <script> // score_list
+
+        let divWrap = null;
+        let divImageWrap = null;
+        let img = null;
+        let divContentWrap = null;
+        let h2 = null;
+        let span = null;
+
+        for (let i = 0; i < 5; i++) {
+
+            divWrap = document.createElement("div");
+            divImageWrap = document.createElement("div");
+            img = document.createElement("img");
+            divContentWrap = document.createElement("div");
+            h2 = document.createElement("h2");
+            span = document.createElement("span");
+
+            divImageWrap.append(img);
+            divImageWrap.append(h2);
+            divImageWrap.append(span);
+
+            divImageWrap.append(divImageWrap);
+            divImageWrap.append(divContentWrap);
+
+            document.querySelector("div#score_list").append(divWrap);
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsubmit="return false">
+        국어 : <input type="text" name="kor" title="국어" /> <br>
+        수학 : <input type="text" name="mat" title="수학" /> <br>
+        영어 : <input type="text" name="eng" title="영어" /> <br>
+        과학 : <input type="text" name="sci" title="과학" /> <br>
+
+        <input type="submit" value="계산" onclick="submit_go();"> <br>
+
+    </form>
+
+    총점 : <span id="sum"></span> <br>
+
+    평균 : <span id="avg"></span> <br>
+
+    평점 : <span id="grade"></span>
+
+    <script>
+
+        for (let element of document.querySelectorAll("input")) {
+
+            if (element.type == "submit") continue;
+
+            element.maxLength = 3;
+            element.style.width = "50px";
+            // element.style.background = "#ffff00";
+        }
+
+        function submit_go() {
+
+            const SCORE_NUM = 4;
+            let sum = 0;
+            let avg = 0;
+            let grade = 'F';
+
+            for (let element of document.querySelectorAll("input[type='text']")) {
+
+                if (!element.value.trim()) {
+                    alert(`${element.getAttribute("title")} 과목점수는 필수 입니다.`)
+
+
+                    element.value = "";
+                    element.focus();
+                    return;
+                }
+
+                let score = Number(element.value);
+                if (!score || !(score >= 0 && score <= 100)) {
+                    alert(`${element.title} 과목 점수는 유효하지 않습니다.`)
+                    element.focus();
+                    return;
+                }
+
+                sum += score;
+            }
+
+            avg = sum / SCORE_NUM;
+
+            document.querySelector("span#sum").innerText = sum;
+            document.querySelector("span#avg").innerText = avg;
+            document.querySelector("span#grade").innerText = grade;
+
+
+            if (avg >= 90) {
+                grade = "A";
+            } else if (avg >= 80) {
+                grade = "B";
+            } else if (avg >= 70) {
+                grade = "C";
+            } else if (avg >= 60) {
+                grade = "D";
+            } grade;
+
+            // if (avg < 60) {        }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

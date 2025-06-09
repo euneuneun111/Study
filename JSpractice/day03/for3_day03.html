@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div#thumb>ul {
+            width: 500px;
+            height: 50px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            justify-content: space-evenly;
+
+            background-color: beige;
+        }
+
+        div#thumb>ul li {
+            width: 120px;
+            height: 100%;
+
+            padding: 5px 0;
+
+            list-style: none;
+
+            border: 1px solid #aaa;
+
+            display: flex;
+
+            justify-content: space-around;
+
+            opacity: 0.6;
+            
+            transition: all 0.5s;
+        }
+
+        div#thumb>ul li:hover {
+            opacity: 1;
+
+            background-color: #eee;
+        }
+
+        div#thumb>ul li img {
+            width: 50%;
+        }
+
+        div#thumb>ul li span {
+            font: 15px/50px bold "D2coding";
+            color: #444;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="thumb">
+        <ul menu1 = "콜라" menu2 = "환타" menu3 = "사이다" menu4 = "마운틴뉴"> 
+
+        </ul>
+    </div>
+
+    <script>
+
+        let i;
+
+        let ul = document.querySelector("div#thumb ul");
+
+        for (i = 1; i < 5; i++) {
+            let menu = document.querySelector("div#thumb ul").getAttribute("menu"+i);
+
+            let imagePath = "./image/" + i + ".jpg";
+
+            let li = document.createElement("li");
+            let img = document.createElement("img");
+            let span = document.createElement("span");
+
+            img.src = imagePath;
+            span.innerText = menu;
+
+            ul.append(li);
+            li.append(img)
+            li.append(span);
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>
