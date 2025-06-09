@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button>bth</button>
+    <button>bth</button>
+
+    <h1>header</h1>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $('button').on('click', (event) => {
+            alert('click');
+        });
+
+        $('button').click((event) => {
+            alert('click');
+        });
+
+        
+        $('h1').on('click', function (event) {
+
+            var text = $(this).text();
+            alert(text);
+
+        }); 
+
+
+        $('h1').click(function (event) {
+
+            var text = $(this).text();
+            alert(text);
+
+        });
+
+          
+        $('h1').one('click', function (event) {
+
+            var text = $(this).text();
+            alert(text);
+
+        }); 
+
+    </script>
+
+</body>
+
+</html>
